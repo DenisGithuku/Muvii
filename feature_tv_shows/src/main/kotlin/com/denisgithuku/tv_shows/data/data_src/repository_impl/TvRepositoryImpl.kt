@@ -18,4 +18,13 @@ class TvRepositoryImpl @Inject constructor(
         }
         return emptyList()
     }
+
+
+    override suspend fun getShowDetails(tvId: Int): TvDTO? {
+        val res = tvApiInterface.getTvShowDetails(tvId = tvId)
+        return if(res.isSuccessful) {
+            res.body()
+        } else null
+    }
 }
+

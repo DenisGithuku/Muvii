@@ -1,4 +1,6 @@
 com.githukudenis.movies
+drawable ic_baseline_add_24
+drawable ic_baseline_check_24
 drawable ic_broken_image_24
 drawable ic_moon24
 drawable ic_search_24
