@@ -1,5 +1,7 @@
+import java.io.FileInputStream
+
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     id("org.jetbrains.kotlin.android")
     id("kotlin-parcelize")
     id("kotlin-kapt")
@@ -8,21 +10,28 @@ plugins {
 }
 
 android {
-    namespace = "com.githukudenis.muvii"
+    namespace = "com.githukudenis.core"
     compileSdk = 32
 
     defaultConfig {
-        applicationId = "com.githukudenis.muvii"
-        minSdk=  24
-        targetSdk=  32
-        versionCode=  1
-        versionName = "1.0"
+        minSdk = 24
+        targetSdk = 32
 
-        buildConfigField("String", "MOVIES_API_KEY", "MOVIES_API_KEY")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary=  true
+        }
+    }
+
+    kotlin {
+        sourceSets {
+            debug {
+                kotlin.srcDir("build/generated/ksp/debug/kotlin")
+            }
+            release {
+                kotlin.srcDir("build/generated/ksp/release/kotlin")
+            }
         }
     }
 
@@ -54,7 +63,6 @@ android {
 
 dependencies {
 
-    implementation(project(":core"))
     implementation(Deps.core)
     implementation(Deps.lifecycle_runtime)
     implementation(Deps.activity_compose)

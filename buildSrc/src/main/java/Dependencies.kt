@@ -19,6 +19,8 @@ object Versions {
     const val navigation = "2.4.0"
     const val lifecycle_viewmodel = "2.4.0"
     const val moshi = "1.12.0"
+    const val raamcosta_compose_navigation_version = "1.6.17-beta"
+    const val room_version = "2.4.3"
 }
 
 object Deps {
@@ -27,6 +29,9 @@ object Deps {
     const val lifecycle_runtime = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle_runtime}"
     const val activity_compose = "androidx.activity:activity-compose:${Versions.activity_compose}"
     const val core = "androidx.core:core-ktx:${Versions.core}"
+    const val ramcosta_navigation_core = "io.github.raamcosta.compose-destinations:core:${Versions.raamcosta_compose_navigation_version}"
+    const val ramcosta_navigation_ksp = "io.github.raamcosta.compose-destinations:ksp:${Versions.raamcosta_compose_navigation_version}"
+
     const val dagger_hilt = "com.google.dagger:hilt-android:${Versions.dagger_hilt}"
     const val dagger_hilt_compiler = "com.google.dagger:hilt-android-compiler:${Versions.dagger_hilt}"
     const val compose_ui = "androidx.compose.ui:ui:${Versions.compose}"
@@ -77,6 +82,11 @@ object Deps {
 
     // Saved state module for ViewModel
     const val saved_state_viewmodel =  "androidx.lifecycle:lifecycle-viewmodel-savedstate:${Versions.lifecycle_viewmodel}"
+
+    //Room
+    const val room_compiler = "androidx.room:room-ktx:${Versions.room_version}"
+    const val room_runtime = "androidx.room:room-runtime:$${Versions.room_version}"
+    const val room_ktx = "androidx.room:room-ktx:${Versions.room_version}"
 
 }
 
