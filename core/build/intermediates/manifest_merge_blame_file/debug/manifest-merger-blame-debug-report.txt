@@ -3,6 +3,6 @@
 3    package="com.githukudenis.core" >
 4
 5    <uses-sdk android:minSdkVersion="24" />
-5-->/mnt/Cool Stuff/Tech-Center/Code/Android/Muvii/core/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest18438770568591246069.xml
+5-->/mnt/Cool Stuff/Tech-Center/Code/Android/Muvii/core/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest7558438691292142229.xml
 6
 7</manifest>

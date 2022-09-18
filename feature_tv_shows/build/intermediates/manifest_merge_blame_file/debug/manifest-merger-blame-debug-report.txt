@@ -3,6 +3,6 @@
 3    package="com.githukudenis.tv_shows" >
 4
 5    <uses-sdk android:minSdkVersion="24" />
-5-->/mnt/Cool Stuff/Tech-Center/Code/Android/Muvii/feature_tv_shows/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest2486529575448096176.xml
+5-->/mnt/Cool Stuff/Tech-Center/Code/Android/Muvii/feature_tv_shows/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest2533371677940941044.xml
 6
 7</manifest>

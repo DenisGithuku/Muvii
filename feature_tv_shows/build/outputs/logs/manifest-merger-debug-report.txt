@@ -1,25 +1,25 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /mnt/Cool Stuff/Tech-Center/Code/Android/Muvii/feature_tv_shows/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest2486529575448096176.xml:2:13-83
-INJECTED from /mnt/Cool Stuff/Tech-Center/Code/Android/Muvii/feature_tv_shows/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest2486529575448096176.xml:2:13-83
-INJECTED from /mnt/Cool Stuff/Tech-Center/Code/Android/Muvii/feature_tv_shows/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest2486529575448096176.xml:2:13-83
+ADDED from /mnt/Cool Stuff/Tech-Center/Code/Android/Muvii/feature_tv_shows/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest2533371677940941044.xml:2:13-83
+INJECTED from /mnt/Cool Stuff/Tech-Center/Code/Android/Muvii/feature_tv_shows/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest2533371677940941044.xml:2:13-83
+INJECTED from /mnt/Cool Stuff/Tech-Center/Code/Android/Muvii/feature_tv_shows/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest2533371677940941044.xml:2:13-83
 	package
-		INJECTED from /mnt/Cool Stuff/Tech-Center/Code/Android/Muvii/feature_tv_shows/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest2486529575448096176.xml
-		ADDED from /mnt/Cool Stuff/Tech-Center/Code/Android/Muvii/feature_tv_shows/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest2486529575448096176.xml:2:13-83
-		INJECTED from /mnt/Cool Stuff/Tech-Center/Code/Android/Muvii/feature_tv_shows/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest2486529575448096176.xml
+		INJECTED from /mnt/Cool Stuff/Tech-Center/Code/Android/Muvii/feature_tv_shows/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest2533371677940941044.xml
+		ADDED from /mnt/Cool Stuff/Tech-Center/Code/Android/Muvii/feature_tv_shows/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest2533371677940941044.xml:2:13-83
+		INJECTED from /mnt/Cool Stuff/Tech-Center/Code/Android/Muvii/feature_tv_shows/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest2533371677940941044.xml
 	xmlns:android
-		ADDED from /mnt/Cool Stuff/Tech-Center/Code/Android/Muvii/feature_tv_shows/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest2486529575448096176.xml:2:23-81
+		ADDED from /mnt/Cool Stuff/Tech-Center/Code/Android/Muvii/feature_tv_shows/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest2533371677940941044.xml:2:23-81
 uses-sdk
-INJECTED from /mnt/Cool Stuff/Tech-Center/Code/Android/Muvii/feature_tv_shows/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest2486529575448096176.xml reason: use-sdk injection requested
-INJECTED from /mnt/Cool Stuff/Tech-Center/Code/Android/Muvii/feature_tv_shows/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest2486529575448096176.xml
-INJECTED from /mnt/Cool Stuff/Tech-Center/Code/Android/Muvii/feature_tv_shows/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest2486529575448096176.xml
-INJECTED from /mnt/Cool Stuff/Tech-Center/Code/Android/Muvii/feature_tv_shows/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest2486529575448096176.xml
-INJECTED from /mnt/Cool Stuff/Tech-Center/Code/Android/Muvii/feature_tv_shows/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest2486529575448096176.xml
+INJECTED from /mnt/Cool Stuff/Tech-Center/Code/Android/Muvii/feature_tv_shows/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest2533371677940941044.xml reason: use-sdk injection requested
+INJECTED from /mnt/Cool Stuff/Tech-Center/Code/Android/Muvii/feature_tv_shows/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest2533371677940941044.xml
+INJECTED from /mnt/Cool Stuff/Tech-Center/Code/Android/Muvii/feature_tv_shows/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest2533371677940941044.xml
+INJECTED from /mnt/Cool Stuff/Tech-Center/Code/Android/Muvii/feature_tv_shows/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest2533371677940941044.xml
+INJECTED from /mnt/Cool Stuff/Tech-Center/Code/Android/Muvii/feature_tv_shows/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest2533371677940941044.xml
 	android:targetSdkVersion
-		INJECTED from /mnt/Cool Stuff/Tech-Center/Code/Android/Muvii/feature_tv_shows/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest2486529575448096176.xml
-		ADDED from /mnt/Cool Stuff/Tech-Center/Code/Android/Muvii/feature_tv_shows/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest2486529575448096176.xml
-		INJECTED from /mnt/Cool Stuff/Tech-Center/Code/Android/Muvii/feature_tv_shows/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest2486529575448096176.xml
+		INJECTED from /mnt/Cool Stuff/Tech-Center/Code/Android/Muvii/feature_tv_shows/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest2533371677940941044.xml
+		ADDED from /mnt/Cool Stuff/Tech-Center/Code/Android/Muvii/feature_tv_shows/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest2533371677940941044.xml
+		INJECTED from /mnt/Cool Stuff/Tech-Center/Code/Android/Muvii/feature_tv_shows/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest2533371677940941044.xml
 	android:minSdkVersion
-		INJECTED from /mnt/Cool Stuff/Tech-Center/Code/Android/Muvii/feature_tv_shows/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest2486529575448096176.xml
-		ADDED from /mnt/Cool Stuff/Tech-Center/Code/Android/Muvii/feature_tv_shows/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest2486529575448096176.xml
-		INJECTED from /mnt/Cool Stuff/Tech-Center/Code/Android/Muvii/feature_tv_shows/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest2486529575448096176.xml
+		INJECTED from /mnt/Cool Stuff/Tech-Center/Code/Android/Muvii/feature_tv_shows/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest2533371677940941044.xml
+		ADDED from /mnt/Cool Stuff/Tech-Center/Code/Android/Muvii/feature_tv_shows/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest2533371677940941044.xml
+		INJECTED from /mnt/Cool Stuff/Tech-Center/Code/Android/Muvii/feature_tv_shows/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest2533371677940941044.xml

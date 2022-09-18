@@ -6,7 +6,7 @@ object Versions {
     const val junit = "4.13.2"
     const val ext_junit = "1.1.3"
     const val espresso = "3.4.0"
-    const val dagger_hilt = "2.38.1"
+    const val dagger_hilt = "2.42"
     const val appcompat = "1.4.2"
     const val material = "1.6.1"
     const val okhttp = "4.10.0"
