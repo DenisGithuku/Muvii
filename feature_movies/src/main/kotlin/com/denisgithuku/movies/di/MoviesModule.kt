@@ -4,6 +4,10 @@ import com.denisgithuku.core.Constants
 import com.denisgithuku.movies.data.data_src.remote.MoviesApiInterface
 import com.denisgithuku.movies.data.data_src.repository_impl.MoviesRepositoryImpl
 import com.denisgithuku.movies.domain.repository.MoviesRepository
+import com.denisgithuku.movies.domain.use_cases.GetAllMovieGenres
+import com.denisgithuku.movies.domain.use_cases.GetMoviePoster
+import com.denisgithuku.movies.domain.use_cases.GetMoviesByGenre
+import com.denisgithuku.movies.domain.use_cases.MovieUseCases
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -36,5 +40,17 @@ object MoviesModule {
         moviesApiInterface: MoviesApiInterface
     ): MoviesRepository {
         return MoviesRepositoryImpl(moviesApiInterface)
+    }
+
+    @Provides
+    @Singleton
+    fun provideMovieUseCases(
+        moviesRepository: MoviesRepository
+    ): MovieUseCases {
+        return MovieUseCases(
+            getAllMovieGenres = GetAllMovieGenres(moviesRepository),
+            getMoviesByGenre = GetMoviesByGenre(moviesRepository),
+            getMoviePoster = GetMoviePoster(moviesRepository)
+        )
     }
 }

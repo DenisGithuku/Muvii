@@ -96,6 +96,7 @@ dependencies {
     implementation(Deps.retrofit_coroutines)
     implementation(Deps.livedata)
     implementation(Deps.gson)
+    implementation(Deps.coil)
     implementation(Deps.ramcosta_navigation_core)
     ksp(Deps.ramcosta_navigation_ksp)
     implementation(Deps.viewmodel)

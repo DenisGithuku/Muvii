@@ -3,6 +3,6 @@
 3    package="com.githukudenis.movies" >
 4
 5    <uses-sdk android:minSdkVersion="24" />
-5-->/mnt/Cool Stuff/Tech-Center/Code/Android/Muvii/feature_movies/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest10714258731585338537.xml
+5-->/mnt/Cool Stuff/Tech-Center/Code/Android/Muvii/feature_movies/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest16644981127284567802.xml
 6
 7</manifest>

@@ -87,6 +87,7 @@ object Deps {
     const val room_compiler = "androidx.room:room-ktx:${Versions.room_version}"
     const val room_runtime = "androidx.room:room-runtime:$${Versions.room_version}"
     const val room_ktx = "androidx.room:room-ktx:${Versions.room_version}"
+    const val coil = "io.coil-kt:coil-compose:2.2.1"
 
 }
 

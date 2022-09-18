@@ -2,7 +2,8 @@ package com.denisgithuku.movies.data.data_src.repository_impl
 
 import com.denisgithuku.core.Resource
 import com.denisgithuku.movies.data.data_src.remote.MoviesApiInterface
-import com.denisgithuku.movies.data.data_src.remote.dto.AllMoviesByCategoryDTO
+import com.denisgithuku.movies.data.data_src.remote.dto.MovieDTO
+import com.denisgithuku.movies.data.data_src.remote.dto.MovieGenreDTO
 import com.denisgithuku.movies.domain.model.Genre
 import com.denisgithuku.movies.domain.repository.MoviesRepository
 import kotlinx.coroutines.Dispatchers
@@ -17,37 +18,32 @@ import javax.inject.Inject
 class MoviesRepositoryImpl @Inject constructor(
     private val moviesApiInterface: MoviesApiInterface,
 ) : MoviesRepository {
-    override suspend fun getMovieGenres(): Flow<Resource<List<Genre>>> = flow {
-        try {
-            emit(Resource.Loading())
-            val response = moviesApiInterface.getGenres()
+    override suspend fun getMovieGenres(): List<MovieGenreDTO> {
+        val response = moviesApiInterface.getGenres()
+        response.body()?.let {
             if (response.isSuccessful) {
-                emit(Resource.Success(response.body()?.genres?.map {
-                    it.toGenre()
-                } ?: emptyList()))
-                return@flow
+                return it.genres
             }
-        } catch (e: IOException) {
-            emit(Resource.Error(e))
-        } catch (e: HttpException) {
-            emit(Resource.Error(e))
-        } catch (e: Exception) {
-            emit(Resource.Error(e))
         }
+        return emptyList()
+    }
 
-    }.flowOn(Dispatchers.IO)
-
-    override suspend fun getMoviesInCategory(): Flow<Resource<AllMoviesByCategoryDTO>> = flow {
-        try {
-            emit(Resource.Loading())
-            val response = moviesApiInterface
-        } catch (e: IOException) {
-            emit(Resource.Error(e))
-        } catch (e: HttpException) {
-            emit(Resource.Error(e))
-        } catch (e: Exception) {
-            emit(Resource.Error(e))
+    override suspend fun getMoviesByGenre(genre: String): List<MovieDTO> {
+       val response = moviesApiInterface.getMoviesByGenre(with_genre = genre)
+        response.body()?.let {
+            if (response.isSuccessful) {
+                return it.results
+            }
         }
+        return emptyList()
+    }
+
+    override suspend fun getImagePoster(path: String): String? {
+        val response = moviesApiInterface.getImagePoster(path)
+        response.body()?.let {
+            return it
+        }
+        return null
     }
 
 

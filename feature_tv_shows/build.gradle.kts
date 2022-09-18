@@ -83,6 +83,7 @@ dependencies {
     implementation(Deps.lifecycle_viewmodel)
     implementation(Deps.navigation)
     implementation(Deps.okhttp)
+    implementation(Deps.coil)
     implementation(Deps.saved_state)
     implementation(Deps.saved_state_viewmodel)
     implementation(Deps.hilt_navigation_compose)
