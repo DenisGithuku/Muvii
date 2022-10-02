@@ -1,17 +1,11 @@
 package com.denisgithuku.movies.data.data_src.repository_impl
 
-import com.denisgithuku.core.Resource
+import android.util.Log
 import com.denisgithuku.movies.data.data_src.remote.MoviesApiInterface
 import com.denisgithuku.movies.data.data_src.remote.dto.MovieDTO
 import com.denisgithuku.movies.data.data_src.remote.dto.MovieGenreDTO
-import com.denisgithuku.movies.domain.model.Genre
+import com.denisgithuku.movies.data.data_src.remote.dto.TrendingMovieDTO
 import com.denisgithuku.movies.domain.repository.MoviesRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
-import retrofit2.HttpException
-import java.io.IOException
 import javax.inject.Inject
 
 
@@ -28,8 +22,8 @@ class MoviesRepositoryImpl @Inject constructor(
         return emptyList()
     }
 
-    override suspend fun getMoviesByGenre(genre: String): List<MovieDTO> {
-       val response = moviesApiInterface.getMoviesByGenre(with_genre = genre)
+    override suspend fun getMoviesByGenre(sort_by: String, genreId: Int): List<MovieDTO> {
+        val response = moviesApiInterface.getMoviesByGenre(sort_by = sort_by, genre_id = genreId)
         response.body()?.let {
             if (response.isSuccessful) {
                 return it.results
@@ -38,13 +32,22 @@ class MoviesRepositoryImpl @Inject constructor(
         return emptyList()
     }
 
-    override suspend fun getImagePoster(path: String): String? {
-        val response = moviesApiInterface.getImagePoster(path)
-        response.body()?.let {
-            return it
-        }
-        return null
-    }
+    override suspend fun getTrendingMovies(): List<TrendingMovieDTO> {
+        val response =
+            moviesApiInterface.getTrendingMovies()
 
+
+        response.body()?.let {
+            if (response.isSuccessful) {
+                Log.d("trending", response.body()?.results.toString())
+
+                return it.results
+            } else {
+                Log.d("trending", response.message())
+            }
+
+        }
+        return emptyList()
+    }
 
 }

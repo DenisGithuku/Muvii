@@ -1,15 +1,18 @@
 package com.denisgithuku.movies.presentation.screens.home
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.denisgithuku.core.Constants
 import com.denisgithuku.core.Resource
 import com.denisgithuku.core.UserMessage
+import com.denisgithuku.movies.domain.common.SortType
 import com.denisgithuku.movies.domain.use_cases.MovieUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -24,10 +27,13 @@ class HomeViewModel @Inject constructor(
 
     private var genresJob: Job? = null
     private var moviesByGenreJob: Job? = null
-    private var moviePosterJob: Job? = null
+    private var trendingMoviesJob: Job? = null
 
     init {
+        readUiThemePrefs()
+        readAdultContentEnabledPrefs()
         getGenres()
+        getTrending()
     }
 
     private fun getGenres() {
@@ -48,14 +54,12 @@ class HomeViewModel @Inject constructor(
                     }
                     is Resource.Success -> {
                         _uiState.update {
-                            it.copy(
-                                genresLoading = false,
-                                selectedGenre = result.data?.first()!!,
-                                genres = result.data ?: emptyList()
-                            )
-                        }.also {
-                            getMoviesByGenre(_uiState.value.selectedGenre.name)
+                            it.copy(genresLoading = false,
+                                selectedGenre = result.data?.first()?.id ?: Math.random().toInt(),
+                                genres = result.data ?: emptyList())
                         }
+                        getMoviesByGenre(sort_by = _uiState.value.selectedSortType,
+                            genreId = _uiState.value.selectedGenre)
                     }
                 }
             }
@@ -64,31 +68,158 @@ class HomeViewModel @Inject constructor(
 
     private fun getUserMessagesFromException(throwable: Throwable?): List<UserMessage> {
         val userMessages = mutableListOf<UserMessage>()
-        userMessages.add(
-            UserMessage(
-                message = throwable?.localizedMessage
-                    ?: Throwable(message = "Something went wrong.").localizedMessage
-            )
-        )
+        userMessages.add(UserMessage(id = 0,
+            message = throwable?.localizedMessage
+                ?: Throwable(message = "Something went wrong.").localizedMessage))
         return userMessages
     }
 
-    fun onEvent(event: HomeEvent) {
-        when(event) {
-            is HomeEvent.ChangeMovieGenre -> {
-                _uiState.update {
-                    it.copy(selectedGenre = event.genre)
+    private fun getTrending() {
+        trendingMoviesJob?.cancel()
+        trendingMoviesJob = viewModelScope.launch {
+            movieUseCases.getTrendingMovies().collect { result ->
+                when (result) {
+                    is Resource.Error -> {
+                        _uiState.update {
+                            val userMessages = getUserMessagesFromException(result.throwable)
+                            it.copy(trendingMovieLoading = false, userMessages = userMessages)
+                        }
+                        getMoviesByGenre(sort_by = _uiState.value.selectedSortType,
+                            genreId = _uiState.value.selectedGenre)
+
+                    }
+                    is Resource.Loading -> {
+                        _uiState.update {
+                            it.copy(trendingMovieLoading = true)
+                        }
+                    }
+                    is Resource.Success -> {
+                        _uiState.update {
+                            it.copy(trendingMovieLoading = false,
+                                trending = result.data ?: emptyList())
+                        }
+                    }
                 }
-                getMoviesByGenre(event.genre.name)
             }
         }
     }
 
-    private fun getMoviesByGenre(genre: String) {
+    fun onEvent(event: HomeEvent) {
+        when (event) {
+            is HomeEvent.ChangeMovieGenre -> {
+                _uiState.update {
+                    it.copy(selectedGenre = event.genreId)
+                }
+                getMoviesByGenre(sort_by = _uiState.value.selectedSortType,
+                    genreId = _uiState.value.selectedGenre)
+
+            }
+            is HomeEvent.ErrorMessageDismissed -> {
+                _uiState.update {
+                    val userMessages = _uiState.value.userMessages.filterNot { error ->
+                        error.id == event.messageId
+                    }
+                    it.copy(userMessages = userMessages)
+                }
+            }
+            is HomeEvent.ChangeSortType -> {
+                when (event.sortType) {
+                    SortType.Popularity -> {
+                        _uiState.update {
+                            it.copy(selectedSortType = SortType.Popularity)
+                        }
+                        getMoviesByGenre(sort_by = _uiState.value.selectedSortType,
+                            genreId = _uiState.value.selectedGenre)
+                    }
+                    SortType.ReleaseDate -> {
+                        _uiState.update {
+                            it.copy(selectedSortType = SortType.ReleaseDate)
+                        }
+                        getMoviesByGenre(sort_by = _uiState.value.selectedSortType,
+                            genreId = _uiState.value.selectedGenre)
+                    }
+                    SortType.Revenue -> {
+                        _uiState.update {
+                            it.copy(selectedSortType = SortType.Revenue)
+                        }
+                        getMoviesByGenre(sort_by = _uiState.value.selectedSortType,
+                            genreId = _uiState.value.selectedGenre)
+                    }
+                    SortType.VoteAverage -> {
+                        _uiState.update {
+                            it.copy(selectedSortType = SortType.VoteAverage)
+                        }
+                        getMoviesByGenre(sort_by = _uiState.value.selectedSortType,
+                            genreId = _uiState.value.selectedGenre)
+                    }
+                    SortType.VoteCount -> {
+                        _uiState.update {
+                            it.copy(selectedSortType = SortType.VoteCount)
+                        }
+                        getMoviesByGenre(sort_by = _uiState.value.selectedSortType,
+                            genreId = _uiState.value.selectedGenre)
+                    }
+                }
+            }
+            HomeEvent.ToggleAdultContentEnable -> {
+                _uiState.update {
+                    val adultContentEnabled = !it.adultContentEnabled
+                    it.copy(
+                        adultContentEnabled = adultContentEnabled
+                    )
+                }
+                enableAdultContent()
+            }
+            HomeEvent.ToggleDarkTheme -> {
+                _uiState.update {
+                    val systemInDarkTheme = !it.isSystemInDarkTheme
+                    it.copy(isSystemInDarkTheme = systemInDarkTheme)
+                }
+                changeUiTheme()
+            }
+        }
+    }
+
+    private fun readAdultContentEnabledPrefs() {
+        viewModelScope.launch {
+            movieUseCases.readAdultContentPreferences(Constants.ADULT_CONTENT_ENABLED_KEY, viewModelScope)
+                .collect { adult_content_enabled ->
+                    _uiState.update {
+                        it.copy(adultContentEnabled = adult_content_enabled)
+                    }
+                }
+        }
+    }
+
+    private fun readUiThemePrefs() {
+        viewModelScope.launch {
+            movieUseCases.readAdultContentPreferences(Constants.UI_THEME_KEY, viewModelScope)
+                .collectLatest { isInDarkTheme ->
+                    _uiState.update {
+                        it.copy(isSystemInDarkTheme = isInDarkTheme)
+                    }
+                }
+        }
+    }
+
+    private fun changeUiTheme() {
+        viewModelScope.launch {
+            movieUseCases.changeUiTheme(_uiState.value.isSystemInDarkTheme, viewModelScope)
+        }
+    }
+
+    private fun enableAdultContent() {
+        viewModelScope.launch {
+            movieUseCases.enableAdultContent(_uiState.value.adultContentEnabled)
+        }
+    }
+
+
+    private fun getMoviesByGenre(sort_by: SortType, genreId: Int) {
         moviesByGenreJob?.cancel()
         moviesByGenreJob = viewModelScope.launch {
-            movieUseCases.getMoviesByGenre(genre).collect { result ->
-                when(result) {
+            movieUseCases.getMoviesByGenre(sort_by, genreId).collect { result ->
+                when (result) {
                     is Resource.Error -> {
                         val messages = getUserMessagesFromException(result.throwable)
                         _uiState.update {
@@ -98,34 +229,19 @@ class HomeViewModel @Inject constructor(
                     }
                     is Resource.Loading -> {
                         _uiState.update {
-                            it.copy(
-                                moviesLoading = true
-                            )
+                            it.copy(moviesLoading = true)
                         }
                     }
                     is Resource.Success -> {
                         _uiState.update {
-                            it.copy(
-                                moviesLoading = false,
-                                movies = result.data ?: emptyList()
-                            )
+                            it.copy(moviesLoading = false, movies = result.data ?: emptyList())
                         }
+                        Log.d("genre", _uiState.value.selectedGenre.toString())
+                        Log.d("movies", result.data.toString())
                     }
                 }
             }
         }
     }
 
-    private fun getImagePoster(path: String): String? {
-        var poster: String? = null
-        moviePosterJob?.cancel()
-        moviePosterJob = viewModelScope.launch {
-          _uiState.map {
-              it.movies.forEach {
-                  getImagePoster(path)
-              }
-          }
-        }
-        return poster
-    }
 }

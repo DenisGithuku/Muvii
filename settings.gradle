@@ -18,3 +18,4 @@ include ":app"
 include ":core"
 include ":feature_movies"
 include ':feature_tv_shows'
+include ':design'

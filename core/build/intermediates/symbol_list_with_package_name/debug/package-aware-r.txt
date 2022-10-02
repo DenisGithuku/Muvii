@@ -1,1 +1,2 @@
 com.githukudenis.core
+drawable sliders1_svgrepo_com

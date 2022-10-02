@@ -67,6 +67,7 @@ android {
 
 dependencies {
 
+    implementation(project(":design"))
     implementation(project(":core"))
     implementation(Deps.core)
     implementation(Deps.lifecycle_runtime)

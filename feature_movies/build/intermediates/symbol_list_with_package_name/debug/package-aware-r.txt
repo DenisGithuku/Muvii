@@ -1,1 +1,7 @@
 com.githukudenis.movies
+drawable ic_broken_image_24
+drawable ic_moon24
+drawable ic_search_24
+drawable ic_star_24
+drawable ic_sun_24
+string error_message_text

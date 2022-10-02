@@ -2,6 +2,7 @@ package com.denisgithuku.movies.data.data_src.remote.dto
 
 import com.denisgithuku.movies.domain.model.Movie
 
+
 data class MovieDTO(
     val adult: Boolean,
     val backdrop_path: String,

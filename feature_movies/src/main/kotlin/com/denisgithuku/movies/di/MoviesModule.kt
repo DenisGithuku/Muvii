@@ -1,13 +1,11 @@
 package com.denisgithuku.movies.di
 
 import com.denisgithuku.core.Constants
+import com.denisgithuku.core.providers.UserPreferences
 import com.denisgithuku.movies.data.data_src.remote.MoviesApiInterface
 import com.denisgithuku.movies.data.data_src.repository_impl.MoviesRepositoryImpl
 import com.denisgithuku.movies.domain.repository.MoviesRepository
-import com.denisgithuku.movies.domain.use_cases.GetAllMovieGenres
-import com.denisgithuku.movies.domain.use_cases.GetMoviePoster
-import com.denisgithuku.movies.domain.use_cases.GetMoviesByGenre
-import com.denisgithuku.movies.domain.use_cases.MovieUseCases
+import com.denisgithuku.movies.domain.use_cases.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -45,12 +43,16 @@ object MoviesModule {
     @Provides
     @Singleton
     fun provideMovieUseCases(
-        moviesRepository: MoviesRepository
+        moviesRepository: MoviesRepository,
+        userPreferences: UserPreferences
     ): MovieUseCases {
         return MovieUseCases(
             getAllMovieGenres = GetAllMovieGenres(moviesRepository),
             getMoviesByGenre = GetMoviesByGenre(moviesRepository),
-            getMoviePoster = GetMoviePoster(moviesRepository)
+            getTrendingMovies = GetTrendingMovies(moviesRepository),
+            readAdultContentPreferences = ReadAdultContentPrefences(userPreferences),
+            changeUiTheme = ChangeUiTheme(userPreferences),
+            enableAdultContent = EnableAdultContent(userPreferences)
         )
     }
 }

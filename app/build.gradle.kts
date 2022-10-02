@@ -1,5 +1,3 @@
-import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
-
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -63,6 +61,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":design"))
     implementation(project(":core"))
     implementation(project(":feature_movies"))
     implementation(project(":feature_tv_shows"))

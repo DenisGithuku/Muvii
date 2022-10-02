@@ -1,1 +1,1 @@
-{"hilt-android-compiler-2.42.jar (com.google.dagger:hilt-android-compiler:2.42)":"INCREMENTAL_AP","dagger-compiler-2.42.jar (com.google.dagger:dagger-compiler:2.42)":"INCREMENTAL_AP","ksp-1.6.17-beta.jar (io.github.raamcosta.compose-destinations:ksp:1.6.17-beta)":"KSP_PROCESSOR"}
+{"hilt-android-compiler-2.42.jar (com.google.dagger:hilt-android-compiler:2.42)":true,"dagger-compiler-2.42.jar (com.google.dagger:dagger-compiler:2.42)":true}
