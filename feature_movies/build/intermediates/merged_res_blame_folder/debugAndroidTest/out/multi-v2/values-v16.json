@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.githukudenis.movies.test.feature_movies-mergeDebugAndroidTestResources-61:/values-v16/values-v16.xml",
+            "map": [
+                {
+                    "source": "/home/denisgithuku/.gradle/caches/transforms-3/76e82cc1b7e79654bddddd144847eeac/transformed/core-1.8.0/res/values-v16/values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "65",
+                        "endOffsets": "116"
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -20,9 +20,9 @@ class GetTrendingMovies @Inject constructor(
             val movies = moviesRepository.getTrendingMovies()
             emit(Resource.Success(movies.map { it.toTrendingMovie() }))
         } catch (e: IOException) {
-            emit(Resource.Error(e))
+            emit(Resource.Error(Throwable(message = "Cannot reach the server. Check your interncet conecton")))
         } catch (e: HttpException) {
-            emit(Resource.Error(e))
+            emit(Resource.Error(Throwable("Unknown error occurred")))
         } catch (e: Exception) {
             emit(Resource.Error(e))
         }

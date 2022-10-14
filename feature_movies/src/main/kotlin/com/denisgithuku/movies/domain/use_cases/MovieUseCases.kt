@@ -4,7 +4,7 @@ data class MovieUseCases(
     val getAllMovieGenres: GetAllMovieGenres,
     val getMoviesByGenre: GetMoviesByGenre,
     val getTrendingMovies: GetTrendingMovies,
-    val readAdultContentPreferences: ReadAdultContentPrefences,
+    val readAdultContentPreferences: GetAdultContentPreferences,
     val changeUiTheme: ChangeUiTheme,
     val enableAdultContent: EnableAdultContent
 

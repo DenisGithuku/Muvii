@@ -20,9 +20,9 @@ class GetAllMovieGenres @Inject constructor(
             val genres = moviesRepository.getMovieGenres()
             emit(Resource.Success(genres.map { it.toGenre() }))
         } catch (e: IOException) {
-            emit(Resource.Error(e))
+            emit(Resource.Error(Throwable(message = "Could not reach server. Check internet connection")))
         } catch (e: HttpException) {
-            emit(Resource.Error(e))
+            emit(Resource.Error(Throwable(message = "Unknown error occurred")))
         } catch (e: Exception) {
             emit(Resource.Error(e))
         }

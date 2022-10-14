@@ -19,6 +19,7 @@ class GetMoviesByGenre @Inject constructor(
     suspend operator fun invoke(
         sortType: SortType,
         genreId: Int,
+        include_adult: Boolean
     ): Flow<Resource<List<Movie>>> = flow {
         try {
             emit(Resource.Loading())
@@ -28,31 +29,31 @@ class GetMoviesByGenre @Inject constructor(
                         is SortType.Popularity -> {
                             val movies =
                                 moviesRepository.getMoviesByGenre(sort_by = "popularity.desc",
-                                    genreId = genreId)
+                                    genreId = genreId, include_adult = include_adult)
                             emit(Resource.Success(movies.map { it.toMovie() }))
                         }
                         is SortType.ReleaseDate -> {
                             val movies =
                                 moviesRepository.getMoviesByGenre(sort_by = "release_date.desc",
-                                    genreId = genreId)
+                                    genreId = genreId, include_adult = include_adult)
                             emit(Resource.Success(movies.map { it.toMovie() }))
                         }
                         is SortType.Revenue -> {
                             val movies = moviesRepository.getMoviesByGenre(sort_by = "revenue.desc",
-                                genreId = genreId)
+                                genreId = genreId, include_adult = include_adult)
                             emit(Resource.Success(movies.map { it.toMovie() }))
                         }
                         is SortType.VoteAverage -> {
 
                             val movies =
                                 moviesRepository.getMoviesByGenre(sort_by = "vote_average.desc",
-                                    genreId = genreId)
+                                    genreId = genreId, include_adult = include_adult)
                             emit(Resource.Success(movies.map { it.toMovie() }))
                         }
                         is SortType.VoteCount -> {
                             val movies =
                                 moviesRepository.getMoviesByGenre(sort_by = "vote_count.desc",
-                                    genreId = genreId)
+                                    genreId = genreId, include_adult = include_adult)
                             emit(Resource.Success(movies.map { it.toMovie() }))
                         }
                     }
@@ -62,40 +63,40 @@ class GetMoviesByGenre @Inject constructor(
                         is SortType.Popularity -> {
                             val movies =
                                 moviesRepository.getMoviesByGenre(sort_by = "popularity.asc",
-                                    genreId = genreId)
+                                    genreId = genreId, include_adult = include_adult)
                             emit(Resource.Success(movies.map { it.toMovie() }))
                         }
                         is SortType.ReleaseDate -> {
                             val movies =
                                 moviesRepository.getMoviesByGenre(sort_by = "release_date.asc",
-                                    genreId = genreId)
+                                    genreId = genreId, include_adult = include_adult)
                             emit(Resource.Success(movies.map { it.toMovie() }))
                         }
                         is SortType.Revenue -> {
                             val movies = moviesRepository.getMoviesByGenre(sort_by = "revenue.asc",
-                                genreId = genreId)
+                                genreId = genreId, include_adult = include_adult)
                             emit(Resource.Success(movies.map { it.toMovie() }))
                         }
                         is SortType.VoteAverage -> {
 
                             val movies =
                                 moviesRepository.getMoviesByGenre(sort_by = "vote_average.asc",
-                                    genreId = genreId)
+                                    genreId = genreId, include_adult = include_adult)
                             emit(Resource.Success(movies.map { it.toMovie() }))
                         }
                         is SortType.VoteCount -> {
                             val movies =
                                 moviesRepository.getMoviesByGenre(sort_by = "vote_count.asc",
-                                    genreId = genreId)
+                                    genreId = genreId, include_adult = include_adult)
                             emit(Resource.Success(movies.map { it.toMovie() }))
                         }
                     }
                 }
             }
         } catch (e: IOException) {
-            emit(Resource.Error(e))
+            emit(Resource.Error(Throwable(message = "Cannot reach the server. Check your interncet conecton")))
         } catch (e: HttpException) {
-            emit(Resource.Error(e))
+            emit(Resource.Error(Throwable(message = "Unknown error occurred")))
         } catch (e: Exception) {
             emit(Resource.Error(e))
         }

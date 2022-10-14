@@ -11,6 +11,7 @@ interface MoviesRepository {
     suspend fun getMoviesByGenre(
         sort_by: String,
         genreId: Int,
+        include_adult: Boolean
     ): List<MovieDTO>
 
     suspend fun getTrendingMovies(): List<TrendingMovieDTO>

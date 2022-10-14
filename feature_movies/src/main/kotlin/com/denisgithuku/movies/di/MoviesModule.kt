@@ -50,7 +50,7 @@ object MoviesModule {
             getAllMovieGenres = GetAllMovieGenres(moviesRepository),
             getMoviesByGenre = GetMoviesByGenre(moviesRepository),
             getTrendingMovies = GetTrendingMovies(moviesRepository),
-            readAdultContentPreferences = ReadAdultContentPrefences(userPreferences),
+            readAdultContentPreferences = GetAdultContentPreferences(userPreferences),
             changeUiTheme = ChangeUiTheme(userPreferences),
             enableAdultContent = EnableAdultContent(userPreferences)
         )

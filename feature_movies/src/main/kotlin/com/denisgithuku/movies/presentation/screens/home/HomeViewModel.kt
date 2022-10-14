@@ -3,9 +3,9 @@ package com.denisgithuku.movies.presentation.screens.home
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.denisgithuku.core.Constants
 import com.denisgithuku.core.Resource
 import com.denisgithuku.core.UserMessage
+import com.denisgithuku.core.providers.AppThemeProvider
 import com.denisgithuku.movies.domain.common.SortType
 import com.denisgithuku.movies.domain.use_cases.MovieUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,6 +20,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val movieUseCases: MovieUseCases,
+    private val appThemeProvider: AppThemeProvider,
 ) : ViewModel() {
 
     private val _uiState: MutableStateFlow<HomeUiState> = MutableStateFlow(HomeUiState())
@@ -31,7 +32,7 @@ class HomeViewModel @Inject constructor(
 
     init {
         readUiThemePrefs()
-        readAdultContentEnabledPrefs()
+        readUserPrefs()
         getGenres()
         getTrending()
     }
@@ -59,7 +60,7 @@ class HomeViewModel @Inject constructor(
                                 genres = result.data ?: emptyList())
                         }
                         getMoviesByGenre(sort_by = _uiState.value.selectedSortType,
-                            genreId = _uiState.value.selectedGenre)
+                            genreId = _uiState.value.selectedGenre, include_adult = _uiState.value.adultContentEnabled)
                     }
                 }
             }
@@ -85,7 +86,7 @@ class HomeViewModel @Inject constructor(
                             it.copy(trendingMovieLoading = false, userMessages = userMessages)
                         }
                         getMoviesByGenre(sort_by = _uiState.value.selectedSortType,
-                            genreId = _uiState.value.selectedGenre)
+                            genreId = _uiState.value.selectedGenre, include_adult = _uiState.value.adultContentEnabled)
 
                     }
                     is Resource.Loading -> {
@@ -111,7 +112,7 @@ class HomeViewModel @Inject constructor(
                     it.copy(selectedGenre = event.genreId)
                 }
                 getMoviesByGenre(sort_by = _uiState.value.selectedSortType,
-                    genreId = _uiState.value.selectedGenre)
+                    genreId = _uiState.value.selectedGenre, include_adult = _uiState.value.adultContentEnabled)
 
             }
             is HomeEvent.ErrorMessageDismissed -> {
@@ -129,61 +130,52 @@ class HomeViewModel @Inject constructor(
                             it.copy(selectedSortType = SortType.Popularity)
                         }
                         getMoviesByGenre(sort_by = _uiState.value.selectedSortType,
-                            genreId = _uiState.value.selectedGenre)
+                            genreId = _uiState.value.selectedGenre, include_adult = _uiState.value.adultContentEnabled)
                     }
                     SortType.ReleaseDate -> {
                         _uiState.update {
                             it.copy(selectedSortType = SortType.ReleaseDate)
                         }
                         getMoviesByGenre(sort_by = _uiState.value.selectedSortType,
-                            genreId = _uiState.value.selectedGenre)
+                            genreId = _uiState.value.selectedGenre, include_adult = _uiState.value.adultContentEnabled)
                     }
                     SortType.Revenue -> {
                         _uiState.update {
                             it.copy(selectedSortType = SortType.Revenue)
                         }
                         getMoviesByGenre(sort_by = _uiState.value.selectedSortType,
-                            genreId = _uiState.value.selectedGenre)
+                            genreId = _uiState.value.selectedGenre, include_adult = _uiState.value.adultContentEnabled)
                     }
                     SortType.VoteAverage -> {
                         _uiState.update {
                             it.copy(selectedSortType = SortType.VoteAverage)
                         }
                         getMoviesByGenre(sort_by = _uiState.value.selectedSortType,
-                            genreId = _uiState.value.selectedGenre)
+                            genreId = _uiState.value.selectedGenre, include_adult = _uiState.value.adultContentEnabled)
                     }
                     SortType.VoteCount -> {
                         _uiState.update {
                             it.copy(selectedSortType = SortType.VoteCount)
                         }
                         getMoviesByGenre(sort_by = _uiState.value.selectedSortType,
-                            genreId = _uiState.value.selectedGenre)
+                            genreId = _uiState.value.selectedGenre, include_adult = _uiState.value.adultContentEnabled)
                     }
                 }
             }
             HomeEvent.ToggleAdultContentEnable -> {
-                _uiState.update {
-                    val adultContentEnabled = !it.adultContentEnabled
-                    it.copy(
-                        adultContentEnabled = adultContentEnabled
-                    )
-                }
                 enableAdultContent()
             }
             HomeEvent.ToggleDarkTheme -> {
-                _uiState.update {
-                    val systemInDarkTheme = !it.isSystemInDarkTheme
-                    it.copy(isSystemInDarkTheme = systemInDarkTheme)
-                }
                 changeUiTheme()
             }
+
         }
     }
 
-    private fun readAdultContentEnabledPrefs() {
+    private fun readUserPrefs() {
         viewModelScope.launch {
-            movieUseCases.readAdultContentPreferences(Constants.ADULT_CONTENT_ENABLED_KEY, viewModelScope)
-                .collect { adult_content_enabled ->
+            movieUseCases.readAdultContentPreferences(viewModelScope).collectLatest { adult_content_enabled ->
+                    Log.d("user_prefs", adult_content_enabled.toString())
                     _uiState.update {
                         it.copy(adultContentEnabled = adult_content_enabled)
                     }
@@ -193,8 +185,8 @@ class HomeViewModel @Inject constructor(
 
     private fun readUiThemePrefs() {
         viewModelScope.launch {
-            movieUseCases.readAdultContentPreferences(Constants.UI_THEME_KEY, viewModelScope)
-                .collectLatest { isInDarkTheme ->
+            appThemeProvider.getUserTheme(viewModelScope).collectLatest { isInDarkTheme ->
+                    Log.d("user_prefs", isInDarkTheme.toString())
                     _uiState.update {
                         it.copy(isSystemInDarkTheme = isInDarkTheme)
                     }
@@ -204,21 +196,29 @@ class HomeViewModel @Inject constructor(
 
     private fun changeUiTheme() {
         viewModelScope.launch {
-            movieUseCases.changeUiTheme(_uiState.value.isSystemInDarkTheme, viewModelScope)
+            appThemeProvider.changeUserTheme(!_uiState.value.isSystemInDarkTheme)
+            val isInDarkTheme = !_uiState.value.isSystemInDarkTheme
+            _uiState.update {
+                it.copy(isSystemInDarkTheme = isInDarkTheme)
+            }
         }
     }
 
     private fun enableAdultContent() {
         viewModelScope.launch {
-            movieUseCases.enableAdultContent(_uiState.value.adultContentEnabled)
+            movieUseCases.enableAdultContent(!_uiState.value.adultContentEnabled)
+            val adultContentEnabled = !_uiState.value.adultContentEnabled
+            _uiState.update {
+                it.copy(adultContentEnabled = adultContentEnabled)
+            }
         }
     }
 
 
-    private fun getMoviesByGenre(sort_by: SortType, genreId: Int) {
+    private fun getMoviesByGenre(sort_by: SortType, genreId: Int, include_adult: Boolean) {
         moviesByGenreJob?.cancel()
         moviesByGenreJob = viewModelScope.launch {
-            movieUseCases.getMoviesByGenre(sort_by, genreId).collect { result ->
+            movieUseCases.getMoviesByGenre(sort_by, genreId, include_adult = include_adult).collect { result ->
                 when (result) {
                     is Resource.Error -> {
                         val messages = getUserMessagesFromException(result.throwable)

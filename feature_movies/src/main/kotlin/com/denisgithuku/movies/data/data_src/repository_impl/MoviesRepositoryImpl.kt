@@ -22,8 +22,8 @@ class MoviesRepositoryImpl @Inject constructor(
         return emptyList()
     }
 
-    override suspend fun getMoviesByGenre(sort_by: String, genreId: Int): List<MovieDTO> {
-        val response = moviesApiInterface.getMoviesByGenre(sort_by = sort_by, genre_id = genreId)
+    override suspend fun getMoviesByGenre(sort_by: String, genreId: Int, include_adult: Boolean): List<MovieDTO> {
+        val response = moviesApiInterface.getMoviesByGenre(sort_by = sort_by, genre_id = genreId, include_adult = include_adult)
         response.body()?.let {
             if (response.isSuccessful) {
                 return it.results

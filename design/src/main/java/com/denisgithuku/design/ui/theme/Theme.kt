@@ -1,6 +1,5 @@
 package com.denisgithuku.design.ui.theme
 
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
@@ -51,7 +50,7 @@ val LocalAppDimens = compositionLocalOf { smallDimens }
 
 
 @Composable
-fun MuviiTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
+fun MuviiTheme(darkTheme: Boolean, content: @Composable () -> Unit) {
     val colors = if (darkTheme) {
         DarkColorPalette
     } else {

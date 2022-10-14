@@ -1,6 +1,7 @@
 package com.denisgithuku.core.di
 
 import android.content.Context
+import com.denisgithuku.core.providers.AppThemeProvider
 import com.denisgithuku.core.providers.UserPreferences
 import dagger.Module
 import dagger.Provides
@@ -33,11 +34,16 @@ object CoreModule {
     @Singleton
     fun provideUserPrefs(
         @ApplicationContext
-        context: Context
+        context: Context,
     ): UserPreferences {
         return UserPreferences(
             context = context
         )
     }
+
+    @Provides
+    @Singleton
+    fun provideUserTheme(userPreferences: UserPreferences): AppThemeProvider =
+        AppThemeProvider(userPreferences = userPreferences)
 
 }

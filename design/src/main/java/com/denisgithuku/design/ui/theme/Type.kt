@@ -15,19 +15,23 @@ val Fonts = FontFamily(Font(R.font.open_sans_italic),
     Font(R.font.open_sans_regular, weight = FontWeight.Normal),
     Font(R.font.open_sans_medium, FontWeight.Medium),
     Font(R.font.open_sans_bold, weight = FontWeight.Bold),
-    Font(R.font.open_sans_italic))
+)
 
 
-val Typography = Typography(body1 = TextStyle(fontFamily = Fonts,
-    fontWeight = FontWeight.Normal,
-    fontSize = 16.sp),
+val Typography = Typography(
+    body1 = TextStyle(
+        fontFamily = Fonts,
+        fontWeight = FontWeight.Normal,
+        fontSize = 16.sp),
     body2 = TextStyle(
         fontFamily = Fonts,
+        fontStyle = FontStyle.Normal,
         fontWeight = FontWeight.Normal,
         fontSize = 14.sp
     ),
     h1 = TextStyle(
         fontFamily = Fonts,
+        fontStyle = FontStyle.Normal,
         fontWeight = FontWeight.Bold,
         fontSize = 24.sp
     ),
@@ -58,6 +62,7 @@ val Typography = Typography(body1 = TextStyle(fontFamily = Fonts,
     ),
     subtitle1 = TextStyle(
         fontFamily = Fonts,
+        fontStyle = FontStyle.Normal,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp
     ),

@@ -24,10 +24,10 @@ import com.denisgithuku.design.ui.theme.LocalAppDimens
 @Composable
 fun CustomSwitch(
     modifier: Modifier = Modifier.padding(LocalAppDimens.current.medium),
-    gapBetweenIndicatorAndThumb: Dp = 4.dp,
+    gapBetweenIndicatorAndThumb: Dp = 2.dp,
     strokeWidth: Dp = 2.dp,
-    width: Dp = 36.dp,
-    height: Dp = 20.dp,
+    width: Dp = 40.dp,
+    height: Dp = 22.dp,
     isToggleOn: Boolean = false,
     selectedColor: Color,
     unSelectedColor: Color,

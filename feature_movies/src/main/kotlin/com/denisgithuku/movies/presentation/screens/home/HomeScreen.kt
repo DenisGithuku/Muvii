@@ -3,7 +3,6 @@ package com.denisgithuku.movies.presentation.screens.home
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
@@ -20,6 +19,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
@@ -42,6 +43,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun HomeScreen(
     homeViewModel: HomeViewModel = hiltViewModel(),
+    onToggleTheme: () -> Unit
 ) {
     val uiState = homeViewModel.uiState.collectAsState().value
     val scaffoldState =
@@ -52,16 +54,14 @@ fun HomeScreen(
 
     BottomSheetScaffold(scaffoldState = scaffoldState,
         sheetContent = {
-            BottomSheetColumnContent(isLightTheme = !isSystemInDarkTheme(),
+            BottomSheetColumnContent(isLightTheme = !uiState.isSystemInDarkTheme,
                 sortTypes = uiState.sortTypes,
                 onChangeSortType = {
                     if (it != uiState.selectedSortType) {
                         homeViewModel.onEvent(HomeEvent.ChangeSortType(it))
                     }
                 },
-                onToggleTheme = {
-                                homeViewModel.onEvent(HomeEvent.ToggleDarkTheme)
-                },
+                onToggleTheme = onToggleTheme,
                 selectedSortType = uiState.selectedSortType,
                 adultContentEnabled = uiState.adultContentEnabled,
                 onToggleEnableAdultContent = { homeViewModel.onEvent(HomeEvent.ToggleAdultContentEnable) })
@@ -140,7 +140,7 @@ private fun HomeScreen(
         item {
             SearchBar(modifier = modifier
                 .fillMaxWidth()
-                .padding(LocalAppDimens.current.medium))
+                .padding(LocalAppDimens.current.small))
         }
         item {
             LazyRow(state = rememberLazyListState(),
@@ -202,19 +202,28 @@ fun BottomSheetColumnContent(
         horizontalAlignment = Alignment.CenterHorizontally) {
 
         BottomSheetColumnItem {
-            Text("App Theme", style = MaterialTheme.typography.subtitle2)
+            Text("App Theme", style = MaterialTheme.typography.subtitle1)
             Surface(onClick = {
                 onToggleTheme()
             },
-                shape = MaterialTheme.shapes.large,
-                color = MaterialTheme.colors.onSurface.copy(alpha = 0.1f)) {
-                Icon(modifier = modifier.padding(LocalAppDimens.current.medium),
+                shape = MaterialTheme.shapes.medium,
+                color = MaterialTheme.colors.onSurface.copy(alpha = 0.1f),
+            ) {
+                Icon(
+                    modifier = modifier
+                        .sizeIn(
+                            minHeight = 32.dp,
+                            minWidth = 32.dp,
+                            maxWidth = 32.dp,
+                            maxHeight = 32.dp
+                        )
+                        .padding(LocalAppDimens.current.large),
                     painter = painterResource(id = if (isLightTheme) R.drawable.ic_moon24 else R.drawable.ic_sun_24),
                     contentDescription = "Toggle app theme icon")
             }
         }
         BottomSheetColumnItem {
-            Text(text = "Sort by", style = MaterialTheme.typography.subtitle2)
+            Text(text = "Sort by", style = MaterialTheme.typography.subtitle1)
             Box(modifier = modifier
                 .sizeIn(
                     minWidth = LocalAppDimens.current.button_width,
@@ -232,39 +241,30 @@ fun BottomSheetColumnContent(
                     shape = MaterialTheme.shapes.medium), contentAlignment = Alignment.Center) {
                 Row(modifier = modifier
                     .fillMaxWidth()
-                    .padding(LocalAppDimens.current.medium),
+                    .padding(LocalAppDimens.current.small),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceBetween) {
 
                     Text(text = getSortType(selectedSortType),
-                        style = MaterialTheme.typography.overline)
+                        style = MaterialTheme.typography.overline,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        modifier = modifier.weight(0.7f)
+
+                    )
                     Icon(
                         imageVector = Icons.Default.ArrowDropDown,
                         contentDescription = "Category",
+                        modifier.weight(0.3f)
+
                     )
                 }
             }
         }
 
-        BottomSheetColumnItem {
-            Text(text = "Trending", style = MaterialTheme.typography.subtitle2)
-            Row(modifier = modifier
-                .fillMaxWidth()
-                .padding(LocalAppDimens.current.medium),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween) {
-
-                Text(text = getSortType(selectedSortType),
-                    style = MaterialTheme.typography.overline)
-                Icon(
-                    imageVector = Icons.Default.ArrowDropDown,
-                    contentDescription = "Category",
-                )
-            }
-        }
 
         BottomSheetColumnItem {
-            Text(text = "Include adult content", style = MaterialTheme.typography.subtitle2)
+            Text(text = "Include adult content", style = MaterialTheme.typography.subtitle1)
             CustomSwitch(isToggleOn = adultContentEnabled,
                 selectedColor = MaterialTheme.colors.secondary,
                 unSelectedColor = MaterialTheme.colors.onSurface.copy(alpha = 0.3f),
@@ -282,14 +282,31 @@ fun BottomSheetColumnContent(
             }) {
                 Box(
                     modifier = modifier
-                        .sizeIn(minWidth = 150.dp, minHeight = 300.dp)
+                        .sizeIn(
+                            minWidth = 250.dp,
+                            minHeight = 250.dp,
+                            maxWidth = 250.dp,
+                        )
+
                         .background(color = MaterialTheme.colors.surface,
                             shape = MaterialTheme.shapes.large),
                     contentAlignment = Alignment.Center,
                 ) {
                     Column(modifier = modifier.padding(LocalAppDimens.current.large)) {
+                        Text(
+                            text = "Sort By",
+                            style = MaterialTheme.typography.h3.copy(
+                                textAlign = TextAlign.Center
+                            ),
+                            modifier = modifier
+                                .padding(vertical = LocalAppDimens.current.medium)
+                                .align(Alignment.CenterHorizontally)
+                        )
+
                         sortTypes.forEach { sortType ->
-                            Row(horizontalArrangement = Arrangement.SpaceBetween,
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.SpaceBetween,
                                 modifier = modifier
                                     .fillMaxWidth()
                                     .padding(LocalAppDimens.current.extra_small)
@@ -298,14 +315,11 @@ fun BottomSheetColumnContent(
                                         onChangeSortType(sortType)
                                     }) {
                                 Text(getSortType(sortType),
-                                    style = MaterialTheme.typography.subtitle2)
+                                    style = MaterialTheme.typography.subtitle1)
                                 RadioButton(selected = selectedSortType == sortType, onClick = {
                                     dialogOpen.value = !dialogOpen.value
                                     onChangeSortType(sortType)
                                 })
-                            }
-                            if (sortTypes.indexOf(sortType) < sortTypes.size - 1) {
-                                Divider()
                             }
                         }
                     }
@@ -323,7 +337,7 @@ fun BottomSheetColumnItem(
 ) {
     Row(modifier = modifier
         .fillMaxWidth()
-        .padding(LocalAppDimens.current.medium),
+        .padding(vertical = LocalAppDimens.current.medium),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
         content = content)
@@ -339,20 +353,28 @@ fun TopBar(
 
     Row(modifier = modifier
         .fillMaxWidth()
-        .padding(LocalAppDimens.current.medium),
+        .padding(LocalAppDimens.current.large),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween) {
         Text(text = "Discover", style = MaterialTheme.typography.subtitle1)
         Surface(
             color = MaterialTheme.colors.onBackground.copy(alpha = 0.1f),
-            shape = MaterialTheme.shapes.large,
+            shape = MaterialTheme.shapes.medium,
             onClick = {
                 onSelectSortAndFilter()
             },
         ) {
-            Icon(modifier = modifier.padding(LocalAppDimens.current.large),
+            Icon(
                 painter = painterResource(id = com.githukudenis.core.R.drawable.sliders1_svgrepo_com),
-                contentDescription = "Filter and Sort")
+                contentDescription = "Filter and Sort",
+                modifier = modifier
+                    .sizeIn(
+                        minHeight = 32.dp,
+                        minWidth = 32.dp,
+                        maxWidth = 32.dp,
+                        maxHeight = 32.dp
+                    )
+                    .padding(LocalAppDimens.current.large))
         }
     }
 }
@@ -376,7 +398,7 @@ fun SearchBar(
             unfocusedIndicatorColor = Color.Transparent,
             backgroundColor = Color.Black.copy(alpha = 0.1f)),
         shape = MaterialTheme.shapes.medium,
-        modifier = modifier.fillMaxWidth(0.9f),
+        modifier = modifier.fillMaxWidth(0.8f),
     )
 }
 
