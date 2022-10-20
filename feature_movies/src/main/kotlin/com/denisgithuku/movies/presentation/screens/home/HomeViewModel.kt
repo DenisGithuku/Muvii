@@ -31,7 +31,6 @@ class HomeViewModel @Inject constructor(
     private var trendingMoviesJob: Job? = null
 
     init {
-        readUiThemePrefs()
         readUserPrefs()
         getGenres()
         getTrending()
@@ -163,12 +162,14 @@ class HomeViewModel @Inject constructor(
                 }
             }
             HomeEvent.ToggleAdultContentEnable -> {
-                enableAdultContent()
+                enableAdultContent().also {
+                    getMoviesByGenre(
+                        sort_by = _uiState.value.selectedSortType,
+                        genreId = _uiState.value.selectedGenre,
+                        include_adult = _uiState.value.adultContentEnabled
+                    )
+                }
             }
-            HomeEvent.ToggleDarkTheme -> {
-                changeUiTheme()
-            }
-
         }
     }
 
@@ -183,33 +184,10 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    private fun readUiThemePrefs() {
-        viewModelScope.launch {
-            appThemeProvider.getUserTheme(viewModelScope).collectLatest { isInDarkTheme ->
-                    Log.d("user_prefs", isInDarkTheme.toString())
-                    _uiState.update {
-                        it.copy(isSystemInDarkTheme = isInDarkTheme)
-                    }
-                }
-        }
-    }
-
-    private fun changeUiTheme() {
-        viewModelScope.launch {
-            appThemeProvider.changeUserTheme(!_uiState.value.isSystemInDarkTheme)
-            val isInDarkTheme = !_uiState.value.isSystemInDarkTheme
-            _uiState.update {
-                it.copy(isSystemInDarkTheme = isInDarkTheme)
-            }
-        }
-    }
-
     private fun enableAdultContent() {
         viewModelScope.launch {
-            movieUseCases.enableAdultContent(!_uiState.value.adultContentEnabled)
-            val adultContentEnabled = !_uiState.value.adultContentEnabled
-            _uiState.update {
-                it.copy(adultContentEnabled = adultContentEnabled)
+            movieUseCases.enableAdultContent(!_uiState.value.adultContentEnabled).also {
+                readUserPrefs()
             }
         }
     }

@@ -68,7 +68,7 @@ android {
 
 dependencies {
 
-    implementation(project(":core"))
+    implementation(project(":core_data"))
     implementation(Deps.core)
     implementation(Deps.lifecycle_runtime)
     implementation(Deps.activity_compose)

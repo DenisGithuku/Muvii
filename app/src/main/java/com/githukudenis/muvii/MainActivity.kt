@@ -4,11 +4,13 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.material.rememberScaffoldState
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.compose.rememberNavController
 import com.denisgithuku.design.ui.theme.MuviiTheme
-import com.denisgithuku.movies.presentation.screens.home.HomeScreen
+import com.githukudenis.core_navigation.MuviiNavigator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -29,9 +31,13 @@ class MainActivity : ComponentActivity() {
                     it.isSystemInDarkTheme
                 }.distinctUntilChanged().collectLatest { darkTheme ->
                     setContent {
+                        val navHostController = rememberNavController()
+                        val scaffoldState = rememberScaffoldState()
                         MuviiTheme(darkTheme = darkTheme) {
-                            HomeScreen(
-                                onToggleTheme = { mainViewModel.changeUiTheme() }
+                            MuviiNavigator(
+                                scaffoldState = scaffoldState,
+                                navHostController = navHostController,
+                                onToggleTheme = mainViewModel::changeUiTheme
                             )
                         }
                     }

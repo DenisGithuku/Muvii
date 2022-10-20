@@ -43,7 +43,8 @@ import kotlinx.coroutines.launch
 @Composable
 fun HomeScreen(
     homeViewModel: HomeViewModel = hiltViewModel(),
-    onToggleTheme: () -> Unit
+    onToggleTheme: () -> Unit,
+    onOpenDetails: (Int) -> Unit
 ) {
     val uiState = homeViewModel.uiState.collectAsState().value
     val scaffoldState =
@@ -116,7 +117,7 @@ fun HomeScreen(
 
         HomeScreen(selectedGenre = uiState.selectedGenre, onChangeGenre = { genreId: Int ->
             homeViewModel.onEvent(HomeEvent.ChangeMovieGenre(genreId))
-        }, genres = uiState.genres, movies = uiState.movies, trending_movies = uiState.trending)
+        }, genres = uiState.genres, movies = uiState.movies, trending_movies = uiState.trending, onOpenDetails = onOpenDetails)
     }
 }
 
@@ -128,6 +129,7 @@ private fun HomeScreen(
     genres: List<Genre>,
     movies: List<Movie>,
     trending_movies: List<TrendingMovie>,
+    onOpenDetails: (Int) -> Unit
 ) {
 
 
@@ -173,7 +175,7 @@ private fun HomeScreen(
                 rating = movie.vote_average,
                 poster = movie.poster_path,
                 movieId = movie.id,
-                onClick = {})
+                onOpen = onOpenDetails)
         }
 
 
@@ -365,7 +367,7 @@ fun TopBar(
             },
         ) {
             Icon(
-                painter = painterResource(id = com.githukudenis.core.R.drawable.sliders1_svgrepo_com),
+                painter = painterResource(id = com.githukudenis.core_data.R.drawable.sliders1_svgrepo_com),
                 contentDescription = "Filter and Sort",
                 modifier = modifier
                     .sizeIn(

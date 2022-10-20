@@ -4,8 +4,8 @@
 4
 5    <uses-sdk
 6        android:minSdkVersion="24"
-6-->/media/denisgithuku/Cool Stuff/Tech-Center/Code/Android/Muvii/feature_tv_shows/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest16513278031376356946.xml
+6-->/media/denisgithuku/Cool Stuff/Tech-Center/Code/Android/Muvii/feature_tv_shows/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest9572245191724538823.xml
 7        android:targetSdkVersion="32" />
-7-->/media/denisgithuku/Cool Stuff/Tech-Center/Code/Android/Muvii/feature_tv_shows/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest16513278031376356946.xml
+7-->/media/denisgithuku/Cool Stuff/Tech-Center/Code/Android/Muvii/feature_tv_shows/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest9572245191724538823.xml
 8
 9</manifest>

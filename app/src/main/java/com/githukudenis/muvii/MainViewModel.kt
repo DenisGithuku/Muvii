@@ -37,10 +37,7 @@ class MainViewModel @Inject constructor(
     fun changeUiTheme() {
         viewModelScope.launch {
             appThemeProvider.changeUserTheme(!_uiState.value.isSystemInDarkTheme).also {
-                val isInDarkTheme = !_uiState.value.isSystemInDarkTheme
-                _uiState.update {
-                    it.copy(isSystemInDarkTheme = isInDarkTheme)
-                }
+                getAppTheme()
             }
         }
     }

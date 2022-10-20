@@ -7,5 +7,4 @@ sealed interface HomeEvent {
     data class ErrorMessageDismissed(val messageId: Int): HomeEvent
     data class ChangeSortType(val sortType: SortType): HomeEvent
     object ToggleAdultContentEnable: HomeEvent
-    object ToggleDarkTheme: HomeEvent
 }

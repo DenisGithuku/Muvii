@@ -61,8 +61,9 @@ android {
 }
 
 dependencies {
-    implementation(project(":design"))
-    implementation(project(":core"))
+    implementation(project(":core_design"))
+    implementation(project(":core_data"))
+    implementation(project(":core_navigation"))
     implementation(project(":feature_movies"))
     implementation(project(":feature_tv_shows"))
     implementation(Deps.core)

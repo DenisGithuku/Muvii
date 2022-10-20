@@ -33,10 +33,10 @@ fun MovieItem(
     rating: Double,
     poster: String,
     movieId: Int,
-    onClick: (Int) -> Unit,
+    onOpen: (Int) -> Unit,
 ) {
     Surface(
-        onClick = { onClick(movieId) },
+        onClick = { onOpen(movieId) },
         shape = RoundedCornerShape(16.dp),
         color = MaterialTheme.colors.surface,
         modifier = modifier.padding(horizontal = LocalAppDimens.current.large, vertical = LocalAppDimens.current.small)
@@ -115,5 +115,5 @@ private fun InfoItem(rating: Double, modifier: Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun MovieItemPreview() {
-    MovieItem(title = "StarTrek", rating = 4.5, poster = "", movieId = 123, onClick = {})
+    MovieItem(title = "StarTrek", rating = 4.5, poster = "", movieId = 123, onOpen = {})
 }

@@ -16,4 +16,6 @@ interface MoviesRepository {
 
     suspend fun getTrendingMovies(): List<TrendingMovieDTO>
 
+    suspend fun getMovieDetails(movieId: String): MovieDTO?
+
 }

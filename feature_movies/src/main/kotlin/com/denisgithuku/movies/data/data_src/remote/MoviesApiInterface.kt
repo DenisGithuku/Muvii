@@ -3,6 +3,7 @@ package com.denisgithuku.movies.data.data_src.remote
 import com.denisgithuku.movies.data.data_src.remote.dto.AllMovieGenresDTO
 import com.denisgithuku.movies.data.data_src.remote.dto.AllMoviesByGenreDTO
 import com.denisgithuku.movies.data.data_src.remote.dto.AllTrendingMoviesDTO
+import com.denisgithuku.movies.data.data_src.remote.dto.MovieDTO
 import com.githukudenis.movies.BuildConfig
 import retrofit2.Response
 import retrofit2.http.GET
@@ -25,7 +26,7 @@ interface MoviesApiInterface {
         @Query("with_genres") genre_id: Int,
         @Query("page") page: Int = 1,
         @Query("include_video") include_video: Boolean = false,
-        @Query("include_adult") include_adult: Boolean = false
+        @Query("include_adult") include_adult: Boolean
     ): Response<AllMoviesByGenreDTO>
 
     @GET("trending/{media_type}/{time_window}")
@@ -35,4 +36,11 @@ interface MoviesApiInterface {
         @Query("api_key") api_key: String = BuildConfig.TMDB_API_KEY,
         @Query("language") language: String = "en-US",
         ): Response<AllTrendingMoviesDTO>
+
+    @GET("/{movieId}")
+    suspend fun getMovieDetails(
+        @Path("movieId") movieId: String,
+        @Query("api_key") api_key: String = BuildConfig.TMDB_API_KEY,
+        @Query("language") language: String = "en-US"
+    ): Response<MovieDTO>
 }

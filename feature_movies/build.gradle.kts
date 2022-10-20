@@ -67,8 +67,8 @@ android {
 
 dependencies {
 
-    implementation(project(":design"))
-    implementation(project(":core"))
+    implementation(project(":core_design"))
+    implementation(project(":core_data"))
     implementation(Deps.core)
     implementation(Deps.lifecycle_runtime)
     implementation(Deps.activity_compose)
@@ -101,6 +101,7 @@ dependencies {
     implementation(Deps.ramcosta_navigation_core)
     ksp(Deps.ramcosta_navigation_ksp)
     implementation(Deps.viewmodel)
+    implementation(Deps.lifecycle_aware_state)
     kapt(Deps.dagger_hilt_compiler)
     testImplementation(Deps.junit_testImplementation)
     androidTestImplementation(Deps.junit_androidTestImplementation)

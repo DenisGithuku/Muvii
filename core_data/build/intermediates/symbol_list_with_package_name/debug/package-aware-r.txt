@@ -1,0 +1,2 @@
+com.githukudenis.core_data
+drawable sliders1_svgrepo_com

@@ -1,6 +1,5 @@
 package com.denisgithuku.movies.data.data_src.repository_impl
 
-import android.util.Log
 import com.denisgithuku.movies.data.data_src.remote.MoviesApiInterface
 import com.denisgithuku.movies.data.data_src.remote.dto.MovieDTO
 import com.denisgithuku.movies.data.data_src.remote.dto.MovieGenreDTO
@@ -39,15 +38,22 @@ class MoviesRepositoryImpl @Inject constructor(
 
         response.body()?.let {
             if (response.isSuccessful) {
-                Log.d("trending", response.body()?.results.toString())
 
                 return it.results
-            } else {
-                Log.d("trending", response.message())
             }
 
         }
         return emptyList()
+    }
+
+    override suspend fun getMovieDetails(movieId: String): MovieDTO? {
+        val response = moviesApiInterface.getMovieDetails(movieId)
+        response.body()?.let {
+            if (response.isSuccessful) {
+                return it
+            }
+        }
+        return null
     }
 
 }
