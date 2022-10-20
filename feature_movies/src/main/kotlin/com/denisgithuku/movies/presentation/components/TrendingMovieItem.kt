@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
@@ -19,18 +20,23 @@ fun TrendingMovieItem(
     context: Context,
     modifier: Modifier = Modifier,
     onSelect: (Int) -> Unit,
+    minWidth: Dp = 200.dp,
+    minHeight: Dp = 120.dp,
+    maxWidth: Dp = 200.dp,
+    maxHeight: Dp = 120.dp
 ) {
 
-    AsyncImage(
-        model = ImageRequest.Builder(
-            context = context).data(
-            "https://image.tmdb.org/t/p/w342/${poster_path}")
-            .crossfade(1000)
-            .build(),
+    AsyncImage(model = ImageRequest.Builder(
+        context = context
+    ).data(
+        "https://image.tmdb.org/t/p/w342/${poster_path}"
+    ).crossfade(1000).build(),
         contentScale = ContentScale.Crop,
-        contentDescription = "Trending movie",
+        contentDescription = "Trending movieDetails",
         modifier = modifier
-            .sizeIn(minWidth = 200.dp, minHeight = 120.dp, maxWidth = 200.dp, maxHeight = 120.dp)
+            .sizeIn(
+                minWidth, minHeight, maxWidth, maxHeight
+            )
             .clip(MaterialTheme.shapes.large)
             .clickable {
                 onSelect(movieId)

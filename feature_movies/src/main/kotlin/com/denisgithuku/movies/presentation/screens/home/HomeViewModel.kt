@@ -215,7 +215,7 @@ class HomeViewModel @Inject constructor(
                             it.copy(moviesLoading = false, movies = result.data ?: emptyList())
                         }
                         Log.d("genre", _uiState.value.selectedGenre.toString())
-                        Log.d("movies", result.data.toString())
+                        Log.d("movieDetails", result.data.toString())
                     }
                 }
             }

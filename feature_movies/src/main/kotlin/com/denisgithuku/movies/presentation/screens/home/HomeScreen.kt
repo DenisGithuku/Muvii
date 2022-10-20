@@ -89,7 +89,9 @@ fun HomeScreen(
             Row(modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center) {
-                CircularProgressIndicator()
+                CircularProgressIndicator(
+                    color = MaterialTheme.colors.secondary
+                )
             }
         }
 
@@ -97,13 +99,17 @@ fun HomeScreen(
             Row(modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center) {
-                CircularProgressIndicator()
+                CircularProgressIndicator(
+                    color = MaterialTheme.colors.secondary
+                )
             }
         }
 
         if (uiState.moviesLoading) {
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                CircularProgressIndicator()
+                CircularProgressIndicator(
+                    color = MaterialTheme.colors.secondary
+                )
             }
         }
 
@@ -151,8 +157,10 @@ private fun HomeScreen(
                     TrendingMovieItem(poster_path = trending_movie_item.poster_path,
                         movieId = trending_movie_item.id,
                         context = context,
-                        onSelect = {},
-                        modifier = modifier.padding(horizontal = LocalAppDimens.current.medium)
+                        onSelect = { movieId ->
+                                   onOpenDetails(movieId)
+                        },
+                        modifier = modifier.padding(horizontal = LocalAppDimens.current.large)
                     )
                 }
             }

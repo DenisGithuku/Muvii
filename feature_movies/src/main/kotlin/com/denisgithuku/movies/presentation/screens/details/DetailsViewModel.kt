@@ -27,38 +27,56 @@ class DetailsViewModel @Inject constructor(
     private var moviesJob: Job? = null
 
     init {
-        savedStateHandle.get<String>(Constants.movieId)?.let {
-            getMovieDetails(it)
+        savedStateHandle.get<String>(Constants.movieId)?.let { movieId ->
+            getMovieDetails(movieId.toInt()).also {
+                getSimilarMovies(movieId.toInt())
+            }
         }
     }
 
-    private fun getMovieDetails(movieId: String) {
+    fun onEvent(event: DetailsUiEvent) {
+        when (event) {
+            is DetailsUiEvent.ErrorMessageDismiss -> {
+                _uiState.update {
+                    val userMessages = _uiState.value.userMessages.filterNot { userMessage ->
+                        userMessage.id == event.messageId
+                    }
+                    it.copy(
+                        userMessages = userMessages
+                    )
+                }
+            }
+        }
+    }
+
+    private fun getMovieDetails(movieId: Int) {
         moviesJob?.cancel()
         moviesJob = viewModelScope.launch {
             movieUseCases.getMovieDetails(movieId).collect { result ->
                 when (result) {
                     is Resource.Loading -> {
                         _uiState.update {
-                            it.copy(isLoading = true)
+                            it.copy(movieDetailsLoading = true)
                         }
                     }
                     is Resource.Success -> {
                         _uiState.update {
                             it.copy(
-                                isLoading = false, movie = result.data
+                                movieDetailsLoading = false, movieDetails = result.data
                             )
                         }
                     }
                     is Resource.Error -> {
                         _uiState.update {
                             val error = result.throwable?.message
-                            val userMessages = listOf<UserMessage>(
+                            val userMessages = mutableListOf<UserMessage>()
+                            userMessages.add(
                                 UserMessage(
                                     id = 0, message = error ?: "An unexpected error occurred"
                                 )
                             )
                             it.copy(
-                                isLoading = false, userMessages = userMessages
+                                movieDetailsLoading = false, userMessages = userMessages
                             )
                         }
                     }
@@ -67,16 +85,41 @@ class DetailsViewModel @Inject constructor(
         }
     }
 
-    fun onEvent(event: DetailsUiEvent) {
-        when (event) {
-           is DetailsUiEvent.ErrorMessageDismiss -> {
-                _uiState.update {
-                    val userMessages = _uiState.value.userMessages.filterNot { userMessage ->
-                        userMessage.id == event.messageId
+    private fun getSimilarMovies(
+        movieId: Int
+    ) {
+        viewModelScope.launch {
+            movieUseCases.getSimilarMoviesById(movieId).collect { result ->
+                when (result) {
+                    is Resource.Loading ->  {
+                        _uiState.update {
+                            it.copy(
+                                similarMoviesLoading = true
+                            )
+                        }
                     }
-                    it.copy(
-                        userMessages = userMessages
-                    )
+                    is Resource.Success ->  {
+                        _uiState.update {
+                            it.copy(
+                                similarMoviesLoading = false,
+                                similarMovies = result.data ?: emptyList()
+                            )
+                        }
+                    }
+                    is Resource.Error -> {
+                        _uiState.update {
+                            val error = result.throwable?.message
+                            val userMessages = mutableListOf<UserMessage>()
+                            userMessages.add(
+                                UserMessage(
+                                    id = 0, message = error ?: "An unexpected error occurred"
+                                )
+                            )
+                            it.copy(
+                                movieDetailsLoading = false, userMessages = userMessages
+                            )
+                        }
+                    }
                 }
             }
         }

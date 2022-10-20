@@ -2,17 +2,22 @@ package com.denisgithuku.movies.presentation.screens.details;
 
 import java.lang.System;
 
-@kotlin.Metadata(mv = {1, 7, 1}, k = 1, d1 = {"\u0000.\n\u0002\u0018\u0002\n\u0002\u0010\u0000\n\u0000\n\u0002\u0010\u000b\n\u0000\n\u0002\u0018\u0002\n\u0000\n\u0002\u0010 \n\u0002\u0018\u0002\n\u0002\b\r\n\u0002\u0010\b\n\u0000\n\u0002\u0010\u000e\n\u0000\b\u0086\b\u0018\u00002\u00020\u0001B+\u0012\b\b\u0002\u0010\u0002\u001a\u00020\u0003\u0012\n\b\u0002\u0010\u0004\u001a\u0004\u0018\u00010\u0005\u0012\u000e\b\u0002\u0010\u0006\u001a\b\u0012\u0004\u0012\u00020\b0\u0007\u00a2\u0006\u0002\u0010\tJ\t\u0010\u000f\u001a\u00020\u0003H\u00c6\u0003J\u000b\u0010\u0010\u001a\u0004\u0018\u00010\u0005H\u00c6\u0003J\u000f\u0010\u0011\u001a\b\u0012\u0004\u0012\u00020\b0\u0007H\u00c6\u0003J/\u0010\u0012\u001a\u00020\u00002\b\b\u0002\u0010\u0002\u001a\u00020\u00032\n\b\u0002\u0010\u0004\u001a\u0004\u0018\u00010\u00052\u000e\b\u0002\u0010\u0006\u001a\b\u0012\u0004\u0012\u00020\b0\u0007H\u00c6\u0001J\u0013\u0010\u0013\u001a\u00020\u00032\b\u0010\u0014\u001a\u0004\u0018\u00010\u0001H\u00d6\u0003J\t\u0010\u0015\u001a\u00020\u0016H\u00d6\u0001J\t\u0010\u0017\u001a\u00020\u0018H\u00d6\u0001R\u0011\u0010\u0002\u001a\u00020\u0003\u00a2\u0006\b\n\u0000\u001a\u0004\b\u0002\u0010\nR\u0013\u0010\u0004\u001a\u0004\u0018\u00010\u0005\u00a2\u0006\b\n\u0000\u001a\u0004\b\u000b\u0010\fR\u0017\u0010\u0006\u001a\b\u0012\u0004\u0012\u00020\b0\u0007\u00a2\u0006\b\n\u0000\u001a\u0004\b\r\u0010\u000e\u00a8\u0006\u0019"}, d2 = {"Lcom/denisgithuku/movies/presentation/screens/details/DetailsUiState;", "", "isLoading", "", "movie", "Lcom/denisgithuku/movies/domain/model/Movie;", "userMessages", "", "Lcom/denisgithuku/core/UserMessage;", "(ZLcom/denisgithuku/movies/domain/model/Movie;Ljava/util/List;)V", "()Z", "getMovie", "()Lcom/denisgithuku/movies/domain/model/Movie;", "getUserMessages", "()Ljava/util/List;", "component1", "component2", "component3", "copy", "equals", "other", "hashCode", "", "toString", "", "feature_movies_debug"})
+@kotlin.Metadata(mv = {1, 7, 1}, k = 1, d1 = {"\u00006\n\u0002\u0018\u0002\n\u0002\u0010\u0000\n\u0000\n\u0002\u0010\u000b\n\u0002\b\u0003\n\u0002\u0018\u0002\n\u0000\n\u0002\u0010 \n\u0002\u0018\u0002\n\u0000\n\u0002\u0018\u0002\n\u0002\b\u0014\n\u0002\u0010\b\n\u0000\n\u0002\u0010\u000e\n\u0000\b\u0086\b\u0018\u00002\u00020\u0001BO\u0012\b\b\u0002\u0010\u0002\u001a\u00020\u0003\u0012\b\b\u0002\u0010\u0004\u001a\u00020\u0003\u0012\b\b\u0002\u0010\u0005\u001a\u00020\u0003\u0012\n\b\u0002\u0010\u0006\u001a\u0004\u0018\u00010\u0007\u0012\u000e\b\u0002\u0010\b\u001a\b\u0012\u0004\u0012\u00020\n0\t\u0012\u000e\b\u0002\u0010\u000b\u001a\b\u0012\u0004\u0012\u00020\f0\t\u00a2\u0006\u0002\u0010\rJ\t\u0010\u0017\u001a\u00020\u0003H\u00c6\u0003J\t\u0010\u0018\u001a\u00020\u0003H\u00c6\u0003J\t\u0010\u0019\u001a\u00020\u0003H\u00c6\u0003J\u000b\u0010\u001a\u001a\u0004\u0018\u00010\u0007H\u00c6\u0003J\u000f\u0010\u001b\u001a\b\u0012\u0004\u0012\u00020\n0\tH\u00c6\u0003J\u000f\u0010\u001c\u001a\b\u0012\u0004\u0012\u00020\f0\tH\u00c6\u0003JS\u0010\u001d\u001a\u00020\u00002\b\b\u0002\u0010\u0002\u001a\u00020\u00032\b\b\u0002\u0010\u0004\u001a\u00020\u00032\b\b\u0002\u0010\u0005\u001a\u00020\u00032\n\b\u0002\u0010\u0006\u001a\u0004\u0018\u00010\u00072\u000e\b\u0002\u0010\b\u001a\b\u0012\u0004\u0012\u00020\n0\t2\u000e\b\u0002\u0010\u000b\u001a\b\u0012\u0004\u0012\u00020\f0\tH\u00c6\u0001J\u0013\u0010\u001e\u001a\u00020\u00032\b\u0010\u001f\u001a\u0004\u0018\u00010\u0001H\u00d6\u0003J\t\u0010 \u001a\u00020!H\u00d6\u0001J\t\u0010\"\u001a\u00020#H\u00d6\u0001R\u0013\u0010\u0006\u001a\u0004\u0018\u00010\u0007\u00a2\u0006\b\n\u0000\u001a\u0004\b\u000e\u0010\u000fR\u0011\u0010\u0004\u001a\u00020\u0003\u00a2\u0006\b\n\u0000\u001a\u0004\b\u0010\u0010\u0011R\u0011\u0010\u0002\u001a\u00020\u0003\u00a2\u0006\b\n\u0000\u001a\u0004\b\u0012\u0010\u0011R\u0017\u0010\b\u001a\b\u0012\u0004\u0012\u00020\n0\t\u00a2\u0006\b\n\u0000\u001a\u0004\b\u0013\u0010\u0014R\u0011\u0010\u0005\u001a\u00020\u0003\u00a2\u0006\b\n\u0000\u001a\u0004\b\u0015\u0010\u0011R\u0017\u0010\u000b\u001a\b\u0012\u0004\u0012\u00020\f0\t\u00a2\u0006\b\n\u0000\u001a\u0004\b\u0016\u0010\u0014\u00a8\u0006$"}, d2 = {"Lcom/denisgithuku/movies/presentation/screens/details/DetailsUiState;", "", "moviePosterLoading", "", "movieDetailsLoading", "similarMoviesLoading", "movieDetails", "Lcom/denisgithuku/movies/domain/model/MovieDetails;", "similarMovies", "", "Lcom/denisgithuku/movies/domain/model/Movie;", "userMessages", "Lcom/denisgithuku/core/UserMessage;", "(ZZZLcom/denisgithuku/movies/domain/model/MovieDetails;Ljava/util/List;Ljava/util/List;)V", "getMovieDetails", "()Lcom/denisgithuku/movies/domain/model/MovieDetails;", "getMovieDetailsLoading", "()Z", "getMoviePosterLoading", "getSimilarMovies", "()Ljava/util/List;", "getSimilarMoviesLoading", "getUserMessages", "component1", "component2", "component3", "component4", "component5", "component6", "copy", "equals", "other", "hashCode", "", "toString", "", "feature_movies_debug"})
 public final class DetailsUiState {
-    private final boolean isLoading = false;
+    private final boolean moviePosterLoading = false;
+    private final boolean movieDetailsLoading = false;
+    private final boolean similarMoviesLoading = false;
     @org.jetbrains.annotations.Nullable()
-    private final com.denisgithuku.movies.domain.model.Movie movie = null;
+    private final com.denisgithuku.movies.domain.model.MovieDetails movieDetails = null;
+    @org.jetbrains.annotations.NotNull()
+    private final java.util.List<com.denisgithuku.movies.domain.model.Movie> similarMovies = null;
     @org.jetbrains.annotations.NotNull()
     private final java.util.List<com.denisgithuku.core.UserMessage> userMessages = null;
     
     @org.jetbrains.annotations.NotNull()
-    public final com.denisgithuku.movies.presentation.screens.details.DetailsUiState copy(boolean isLoading, @org.jetbrains.annotations.Nullable()
-    com.denisgithuku.movies.domain.model.Movie movie, @org.jetbrains.annotations.NotNull()
+    public final com.denisgithuku.movies.presentation.screens.details.DetailsUiState copy(boolean moviePosterLoading, boolean movieDetailsLoading, boolean similarMoviesLoading, @org.jetbrains.annotations.Nullable()
+    com.denisgithuku.movies.domain.model.MovieDetails movieDetails, @org.jetbrains.annotations.NotNull()
+    java.util.List<com.denisgithuku.movies.domain.model.Movie> similarMovies, @org.jetbrains.annotations.NotNull()
     java.util.List<com.denisgithuku.core.UserMessage> userMessages) {
         return null;
     }
@@ -38,8 +43,9 @@ public final class DetailsUiState {
         super();
     }
     
-    public DetailsUiState(boolean isLoading, @org.jetbrains.annotations.Nullable()
-    com.denisgithuku.movies.domain.model.Movie movie, @org.jetbrains.annotations.NotNull()
+    public DetailsUiState(boolean moviePosterLoading, boolean movieDetailsLoading, boolean similarMoviesLoading, @org.jetbrains.annotations.Nullable()
+    com.denisgithuku.movies.domain.model.MovieDetails movieDetails, @org.jetbrains.annotations.NotNull()
+    java.util.List<com.denisgithuku.movies.domain.model.Movie> similarMovies, @org.jetbrains.annotations.NotNull()
     java.util.List<com.denisgithuku.core.UserMessage> userMessages) {
         super();
     }
@@ -48,22 +54,48 @@ public final class DetailsUiState {
         return false;
     }
     
-    public final boolean isLoading() {
+    public final boolean getMoviePosterLoading() {
+        return false;
+    }
+    
+    public final boolean component2() {
+        return false;
+    }
+    
+    public final boolean getMovieDetailsLoading() {
+        return false;
+    }
+    
+    public final boolean component3() {
+        return false;
+    }
+    
+    public final boolean getSimilarMoviesLoading() {
         return false;
     }
     
     @org.jetbrains.annotations.Nullable()
-    public final com.denisgithuku.movies.domain.model.Movie component2() {
+    public final com.denisgithuku.movies.domain.model.MovieDetails component4() {
         return null;
     }
     
     @org.jetbrains.annotations.Nullable()
-    public final com.denisgithuku.movies.domain.model.Movie getMovie() {
+    public final com.denisgithuku.movies.domain.model.MovieDetails getMovieDetails() {
         return null;
     }
     
     @org.jetbrains.annotations.NotNull()
-    public final java.util.List<com.denisgithuku.core.UserMessage> component3() {
+    public final java.util.List<com.denisgithuku.movies.domain.model.Movie> component5() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.NotNull()
+    public final java.util.List<com.denisgithuku.movies.domain.model.Movie> getSimilarMovies() {
+        return null;
+    }
+    
+    @org.jetbrains.annotations.NotNull()
+    public final java.util.List<com.denisgithuku.core.UserMessage> component6() {
         return null;
     }
     

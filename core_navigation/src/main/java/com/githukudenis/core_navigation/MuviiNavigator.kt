@@ -5,7 +5,6 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.denisgithuku.core.Constants
 import com.denisgithuku.movies.presentation.screens.details.DetailsScreen
 import com.denisgithuku.movies.presentation.screens.home.HomeScreen
 
@@ -16,12 +15,31 @@ fun MuviiNavigator(
     NavHost(navController = navHostController, startDestination = Home.route) {
         composable(route = Home.route) {
             HomeScreen(onToggleTheme = onToggleTheme, onOpenDetails = { movieId ->
-                navHostController.navigate(Details.route + "/$movieId")
+                navHostController.navigate(route = Details.route + "/${movieId}") {
+//                    launchSingleTop = true
+                    popUpTo(route = Details.route) {
+                        inclusive = true
+                        saveState = true
+                    }
+                    restoreState = true
+                }
             })
         }
 
-        composable(route = Details.route + "/{${Constants.movieId}}") {
-            DetailsScreen()
+        composable(route = Details.route + "/{movieId}") {
+            DetailsScreen(
+                onOpenMovieDetails = { movieId ->
+                navHostController.navigate(route = Details.route + "/${movieId}") {
+//                    launchSingleTop = true
+                    popUpTo(route = Details.route) {
+                        inclusive = true
+                        saveState = true
+                    }
+                    restoreState = true
+                }
+            }, onNavigateUp = {
+                navHostController.navigateUp()
+            })
         }
     }
 }

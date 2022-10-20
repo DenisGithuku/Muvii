@@ -53,7 +53,8 @@ object MoviesModule {
             readAdultContentPreferences = GetAdultContentPreferences(userPreferences),
             changeUiTheme = ChangeUiTheme(userPreferences),
             enableAdultContent = EnableAdultContent(userPreferences),
-            getMovieDetails = GetMovieDetails(moviesRepository)
+            getMovieDetails = GetMovieDetails(moviesRepository),
+            getSimilarMoviesById = GetSimilarMoviesById(moviesRepository)
         )
     }
 }

@@ -7,5 +7,6 @@ data class MovieUseCases(
     val readAdultContentPreferences: GetAdultContentPreferences,
     val changeUiTheme: ChangeUiTheme,
     val enableAdultContent: EnableAdultContent,
-    val getMovieDetails: GetMovieDetails
+    val getMovieDetails: GetMovieDetails,
+    val getSimilarMoviesById: GetSimilarMoviesById
 )

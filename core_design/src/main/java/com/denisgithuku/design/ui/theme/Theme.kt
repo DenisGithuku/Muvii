@@ -5,8 +5,8 @@ import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 
@@ -15,7 +15,7 @@ private val DarkColorPalette = darkColors(
     primaryVariant = Pink900,
     secondary = Orange900,
     background = Blue900,
-    surface = Blue900,
+    surface = Blue700,
     onPrimary = White,
     onSecondary = Color.White,
     onBackground = White,
@@ -24,15 +24,16 @@ private val DarkColorPalette = darkColors(
     )
 
 private val LightColorPalette = lightColors(
-    primary = Color.White,
+    primary = Blue500,
     primaryVariant = Pink900,
     secondary = Orange500,
-    background = Pink900.copy(alpha = 0.07f),
+    background = Color.White,
     surface = Color.White,
-    onPrimary = Color.Black,
+    onPrimary = Color.White,
     onSecondary = Color.White,
-    onBackground = Color.Black,
-    onSurface = Color.Black,
+    onBackground = Color.Black.copy(alpha = 0.8f),
+    secondaryVariant = Orange200,
+    error = Color.White,
 )
 
 @Composable
@@ -46,7 +47,7 @@ fun ProvideDimens(
     CompositionLocalProvider(LocalAppDimens provides dimensionSet, content = content)
 }
 
-val LocalAppDimens = compositionLocalOf { smallDimens }
+val LocalAppDimens = staticCompositionLocalOf { swDimens }
 
 
 @Composable

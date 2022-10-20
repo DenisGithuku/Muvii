@@ -3,7 +3,8 @@ package com.denisgithuku.movies.data.data_src.remote
 import com.denisgithuku.movies.data.data_src.remote.dto.AllMovieGenresDTO
 import com.denisgithuku.movies.data.data_src.remote.dto.AllMoviesByGenreDTO
 import com.denisgithuku.movies.data.data_src.remote.dto.AllTrendingMoviesDTO
-import com.denisgithuku.movies.data.data_src.remote.dto.MovieDTO
+import com.denisgithuku.movies.data.data_src.remote.dto.movie_details.MovieDetailsDTO
+import com.denisgithuku.movies.data.data_src.remote.dto.movie_details.SimilarMoviesDTO
 import com.githukudenis.movies.BuildConfig
 import retrofit2.Response
 import retrofit2.http.GET
@@ -37,10 +38,17 @@ interface MoviesApiInterface {
         @Query("language") language: String = "en-US",
         ): Response<AllTrendingMoviesDTO>
 
-    @GET("/{movieId}")
+    @GET("movie/{movieId}")
     suspend fun getMovieDetails(
-        @Path("movieId") movieId: String,
+        @Path("movieId") movieId: Int,
         @Query("api_key") api_key: String = BuildConfig.TMDB_API_KEY,
         @Query("language") language: String = "en-US"
-    ): Response<MovieDTO>
+    ): Response<MovieDetailsDTO>
+
+    @GET("movie/{movieId}/similar")
+    suspend fun getSimilarMovies(
+        @Path("movieId") movieId: Int,
+        @Query("api_key") api_key: String = BuildConfig.TMDB_API_KEY,
+        @Query("language") language: String = "en-US"
+    ): Response<SimilarMoviesDTO>
 }

@@ -1,8 +1,9 @@
 package com.denisgithuku.movies.domain.repository
 
-import com.denisgithuku.movies.data.data_src.remote.dto.MovieDTO
 import com.denisgithuku.movies.data.data_src.remote.dto.MovieGenreDTO
 import com.denisgithuku.movies.data.data_src.remote.dto.TrendingMovieDTO
+import com.denisgithuku.movies.data.data_src.remote.dto.movie.MovieDTO
+import com.denisgithuku.movies.data.data_src.remote.dto.movie_details.MovieDetailsDTO
 
 interface MoviesRepository {
 
@@ -16,6 +17,8 @@ interface MoviesRepository {
 
     suspend fun getTrendingMovies(): List<TrendingMovieDTO>
 
-    suspend fun getMovieDetails(movieId: String): MovieDTO?
+    suspend fun getMovieDetails(movieId: Int): MovieDetailsDTO?
+
+    suspend fun getSimilarMovies(movieId: Int): List<MovieDTO>
 
 }

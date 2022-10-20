@@ -1,7 +1,7 @@
 package com.denisgithuku.movies.domain.use_cases
 
 import com.denisgithuku.core.Resource
-import com.denisgithuku.movies.domain.model.Movie
+import com.denisgithuku.movies.domain.model.MovieDetails
 import com.denisgithuku.movies.domain.repository.MoviesRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -13,7 +13,7 @@ class GetMovieDetails @Inject constructor(
     private val movieRepository: MoviesRepository
 ) {
 
-    suspend operator fun invoke(movieId: String): Flow<Resource<Movie>> = flow {
+    suspend operator fun invoke(movieId: Int): Flow<Resource<MovieDetails>> = flow {
         try {
             emit(Resource.Loading())
             val res = movieRepository.getMovieDetails(movieId)

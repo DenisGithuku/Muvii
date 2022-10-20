@@ -1,9 +1,10 @@
 package com.denisgithuku.movies.data.data_src.repository_impl
 
 import com.denisgithuku.movies.data.data_src.remote.MoviesApiInterface
-import com.denisgithuku.movies.data.data_src.remote.dto.MovieDTO
 import com.denisgithuku.movies.data.data_src.remote.dto.MovieGenreDTO
 import com.denisgithuku.movies.data.data_src.remote.dto.TrendingMovieDTO
+import com.denisgithuku.movies.data.data_src.remote.dto.movie.MovieDTO
+import com.denisgithuku.movies.data.data_src.remote.dto.movie_details.MovieDetailsDTO
 import com.denisgithuku.movies.domain.repository.MoviesRepository
 import javax.inject.Inject
 
@@ -21,8 +22,16 @@ class MoviesRepositoryImpl @Inject constructor(
         return emptyList()
     }
 
-    override suspend fun getMoviesByGenre(sort_by: String, genreId: Int, include_adult: Boolean): List<MovieDTO> {
-        val response = moviesApiInterface.getMoviesByGenre(sort_by = sort_by, genre_id = genreId, include_adult = include_adult)
+    override suspend fun getMoviesByGenre(
+        sort_by: String,
+        genreId: Int,
+        include_adult: Boolean
+    ): List<MovieDTO> {
+        val response = moviesApiInterface.getMoviesByGenre(
+            sort_by = sort_by,
+            genre_id = genreId,
+            include_adult = include_adult
+        )
         response.body()?.let {
             if (response.isSuccessful) {
                 return it.results
@@ -32,8 +41,7 @@ class MoviesRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getTrendingMovies(): List<TrendingMovieDTO> {
-        val response =
-            moviesApiInterface.getTrendingMovies()
+        val response = moviesApiInterface.getTrendingMovies()
 
 
         response.body()?.let {
@@ -46,7 +54,7 @@ class MoviesRepositoryImpl @Inject constructor(
         return emptyList()
     }
 
-    override suspend fun getMovieDetails(movieId: String): MovieDTO? {
+    override suspend fun getMovieDetails(movieId: Int): MovieDetailsDTO? {
         val response = moviesApiInterface.getMovieDetails(movieId)
         response.body()?.let {
             if (response.isSuccessful) {
@@ -54,6 +62,16 @@ class MoviesRepositoryImpl @Inject constructor(
             }
         }
         return null
+    }
+
+    override suspend fun getSimilarMovies(movieId: Int): List<MovieDTO> {
+        val response = moviesApiInterface.getSimilarMovies(movieId)
+        response.body()?.let {
+            if (response.isSuccessful)  {
+                return it.results
+            }
+        }
+        return emptyList()
     }
 
 }

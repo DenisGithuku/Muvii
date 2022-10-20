@@ -94,7 +94,7 @@ class GetMoviesByGenre @Inject constructor(
                 }
             }
         } catch (e: IOException) {
-            emit(Resource.Error(Throwable(message = "Cannot reach the server. Check your interncet conecton")))
+            emit(Resource.Error(Throwable(message = "Cannot reach the server. Check your internet connection")))
         } catch (e: HttpException) {
             emit(Resource.Error(Throwable(message = "Unknown error occurred")))
         } catch (e: Exception) {
