@@ -16,7 +16,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
@@ -26,15 +25,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.denisgithuku.design.ui.components.MuviiIconButton
 import com.denisgithuku.design.ui.theme.LocalAppDimens
 import com.denisgithuku.movies.domain.common.SortType
 import com.denisgithuku.movies.domain.model.Genre
 import com.denisgithuku.movies.domain.model.Movie
 import com.denisgithuku.movies.domain.model.TrendingMovie
-import com.denisgithuku.movies.presentation.components.CustomSwitch
-import com.denisgithuku.movies.presentation.components.GenreItem
-import com.denisgithuku.movies.presentation.components.MovieItem
-import com.denisgithuku.movies.presentation.components.TrendingMovieItem
+import com.denisgithuku.movies.presentation.components.*
 import com.githukudenis.movies.R
 import kotlinx.coroutines.launch
 
@@ -70,8 +67,9 @@ fun HomeScreen(
         sheetBackgroundColor = MaterialTheme.colors.surface,
         sheetPeekHeight = LocalAppDimens.current.default,
         sheetElevation = LocalAppDimens.current.large,
-        sheetShape = MaterialTheme.shapes.large.copy(topEnd = CornerSize(18.dp),
-            topStart = CornerSize(18.dp)),
+        sheetShape = MaterialTheme.shapes.large.copy(
+            topEnd = CornerSize(18.dp), topStart = CornerSize(18.dp)
+        ),
 
         topBar = {
             TopBar {
@@ -86,9 +84,11 @@ fun HomeScreen(
         }) {
 
         if (uiState.genresLoading) {
-            Row(modifier = Modifier.fillMaxWidth(),
+            Row(
+                modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center) {
+                horizontalArrangement = Arrangement.Center
+            ) {
                 CircularProgressIndicator(
                     color = MaterialTheme.colors.secondary
                 )
@@ -96,9 +96,11 @@ fun HomeScreen(
         }
 
         if (uiState.trendingMovieLoading) {
-            Row(modifier = Modifier.fillMaxWidth(),
+            Row(
+                modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center) {
+                horizontalArrangement = Arrangement.Center
+            ) {
                 CircularProgressIndicator(
                     color = MaterialTheme.colors.secondary
                 )
@@ -121,9 +123,16 @@ fun HomeScreen(
             }
         }
 
-        HomeScreen(selectedGenre = uiState.selectedGenre, onChangeGenre = { genreId: Int ->
-            homeViewModel.onEvent(HomeEvent.ChangeMovieGenre(genreId))
-        }, genres = uiState.genres, movies = uiState.movies, trending_movies = uiState.trending, onOpenDetails = onOpenDetails)
+        HomeScreen(
+            selectedGenre = uiState.selectedGenre,
+            onChangeGenre = { genreId: Int ->
+                homeViewModel.onEvent(HomeEvent.ChangeMovieGenre(genreId))
+            },
+            genres = uiState.genres,
+            movies = uiState.movies,
+            trending_movies = uiState.trending,
+            onOpenDetails = onOpenDetails
+        )
     }
 }
 
@@ -141,24 +150,31 @@ private fun HomeScreen(
 
     val context = LocalContext.current
 
-    LazyColumn(modifier = modifier.fillMaxSize(),
+    LazyColumn(
+        modifier = modifier.fillMaxSize(),
         verticalArrangement = Arrangement.SpaceBetween,
-        horizontalAlignment = Alignment.CenterHorizontally) {
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
 
         item {
-            SearchBar(modifier = modifier
-                .fillMaxWidth()
-                .padding(LocalAppDimens.current.small))
+            SearchBar(
+                modifier = modifier
+                    .fillMaxWidth()
+                    .padding(LocalAppDimens.current.small)
+            )
         }
         item {
-            LazyRow(state = rememberLazyListState(),
-                modifier = modifier.padding(LocalAppDimens.current.medium)) {
+            LazyRow(
+                state = rememberLazyListState(),
+                modifier = modifier.padding(LocalAppDimens.current.medium)
+            ) {
                 items(items = trending_movies, key = { it.id }) { trending_movie_item ->
-                    TrendingMovieItem(poster_path = trending_movie_item.poster_path,
+                    TrendingMovieItem(
+                        poster_path = trending_movie_item.poster_path,
                         movieId = trending_movie_item.id,
                         context = context,
                         onSelect = { movieId ->
-                                   onOpenDetails(movieId)
+                            onOpenDetails(movieId)
                         },
                         modifier = modifier.padding(horizontal = LocalAppDimens.current.large)
                     )
@@ -168,22 +184,26 @@ private fun HomeScreen(
         item {
             LazyRow(modifier = modifier.padding(vertical = LocalAppDimens.current.medium)) {
                 items(items = genres) { item: Genre ->
-                    GenreItem(name = item.name,
+                    GenreItem(
+                        name = item.name,
                         genreId = item.id,
                         isSelected = selectedGenre == item.id,
                         onSelect = { genre ->
                             onChangeGenre(genre)
                         },
-                        modifier = modifier)
+                        modifier = modifier
+                    )
                 }
             }
         }
         items(items = movies, key = { it.id }) { movie ->
-            MovieItem(title = movie.title,
+            MovieItem(
+                title = movie.title,
                 rating = movie.vote_average,
                 poster = movie.poster_path,
                 movieId = movie.id,
-                onOpen = onOpenDetails)
+                onOpen = onOpenDetails
+            )
         }
 
 
@@ -205,31 +225,27 @@ fun BottomSheetColumnContent(
     val dialogOpen = remember {
         mutableStateOf(false)
     }
-    Column(modifier = modifier
-        .fillMaxWidth()
-        .padding(LocalAppDimens.current.large),
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(LocalAppDimens.current.large),
         verticalArrangement = Arrangement.SpaceBetween,
-        horizontalAlignment = Alignment.CenterHorizontally) {
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
 
         BottomSheetColumnItem {
             Text("App Theme", style = MaterialTheme.typography.subtitle1)
-            Surface(onClick = {
-                onToggleTheme()
-            },
-                shape = MaterialTheme.shapes.medium,
-                color = MaterialTheme.colors.onSurface.copy(alpha = 0.1f),
-            ) {
+
+            MuviiIconButton(onClick = { onToggleTheme() }) {
                 Icon(
                     modifier = modifier
                         .sizeIn(
-                            minHeight = 32.dp,
-                            minWidth = 32.dp,
-                            maxWidth = 32.dp,
-                            maxHeight = 32.dp
+                            minHeight = 32.dp, minWidth = 32.dp, maxWidth = 32.dp, maxHeight = 32.dp
                         )
                         .padding(LocalAppDimens.current.large),
                     painter = painterResource(id = if (isLightTheme) R.drawable.ic_moon24 else R.drawable.ic_sun_24),
-                    contentDescription = "Toggle app theme icon")
+                    contentDescription = "Toggle app theme icon"
+                )
             }
         }
         BottomSheetColumnItem {
@@ -246,16 +262,21 @@ fun BottomSheetColumnContent(
                 .clickable {
                     dialogOpen.value = !dialogOpen.value
                 }
-                .border(width = 1.dp,
+                .border(
+                    width = 1.dp,
                     color = MaterialTheme.colors.onPrimary.copy(alpha = 0.3f),
-                    shape = MaterialTheme.shapes.medium), contentAlignment = Alignment.Center) {
-                Row(modifier = modifier
-                    .fillMaxWidth()
-                    .padding(LocalAppDimens.current.small),
+                    shape = MaterialTheme.shapes.medium
+                ), contentAlignment = Alignment.Center) {
+                Row(
+                    modifier = modifier
+                        .fillMaxWidth()
+                        .padding(LocalAppDimens.current.small),
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween) {
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
 
-                    Text(text = getSortType(selectedSortType),
+                    Text(
+                        text = getSortType(selectedSortType),
                         style = MaterialTheme.typography.overline,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
@@ -285,8 +306,9 @@ fun BottomSheetColumnContent(
 
 
         if (dialogOpen.value) {
-            Dialog(properties = DialogProperties(dismissOnBackPress = true,
-                dismissOnClickOutside = true), onDismissRequest = {
+            Dialog(properties = DialogProperties(
+                dismissOnBackPress = true, dismissOnClickOutside = true
+            ), onDismissRequest = {
                 onChangeSortType(selectedSortType)
                 dialogOpen.value = !dialogOpen.value
             }) {
@@ -298,8 +320,9 @@ fun BottomSheetColumnContent(
                             maxWidth = 250.dp,
                         )
 
-                        .background(color = MaterialTheme.colors.surface,
-                            shape = MaterialTheme.shapes.large),
+                        .background(
+                            color = MaterialTheme.colors.surface, shape = MaterialTheme.shapes.large
+                        ),
                     contentAlignment = Alignment.Center,
                 ) {
                     Column(modifier = modifier.padding(LocalAppDimens.current.large)) {
@@ -314,8 +337,7 @@ fun BottomSheetColumnContent(
                         )
 
                         sortTypes.forEach { sortType ->
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,
+                            Row(verticalAlignment = Alignment.CenterVertically,
                                 horizontalArrangement = Arrangement.SpaceBetween,
                                 modifier = modifier
                                     .fillMaxWidth()
@@ -324,8 +346,10 @@ fun BottomSheetColumnContent(
                                         dialogOpen.value = !dialogOpen.value
                                         onChangeSortType(sortType)
                                     }) {
-                                Text(getSortType(sortType),
-                                    style = MaterialTheme.typography.subtitle1)
+                                Text(
+                                    getSortType(sortType),
+                                    style = MaterialTheme.typography.subtitle1
+                                )
                                 RadioButton(selected = selectedSortType == sortType, onClick = {
                                     dialogOpen.value = !dialogOpen.value
                                     onChangeSortType(sortType)
@@ -340,19 +364,6 @@ fun BottomSheetColumnContent(
     }
 }
 
-@Composable
-fun BottomSheetColumnItem(
-    modifier: Modifier = Modifier,
-    content: @Composable (RowScope.() -> Unit),
-) {
-    Row(modifier = modifier
-        .fillMaxWidth()
-        .padding(vertical = LocalAppDimens.current.medium),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween,
-        content = content)
-}
-
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -361,56 +372,28 @@ fun TopBar(
     onSelectSortAndFilter: () -> Unit,
 ) {
 
-    Row(modifier = modifier
-        .fillMaxWidth()
-        .padding(LocalAppDimens.current.large),
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(LocalAppDimens.current.large),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween) {
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
         Text(text = "Discover", style = MaterialTheme.typography.subtitle1)
-        Surface(
-            color = MaterialTheme.colors.onBackground.copy(alpha = 0.1f),
-            shape = MaterialTheme.shapes.medium,
-            onClick = {
-                onSelectSortAndFilter()
-            },
-        ) {
+        MuviiIconButton(onClick = { onSelectSortAndFilter() }) {
             Icon(
                 painter = painterResource(id = com.githukudenis.core_data.R.drawable.sliders1_svgrepo_com),
                 contentDescription = "Filter and Sort",
                 modifier = modifier
                     .sizeIn(
-                        minHeight = 32.dp,
-                        minWidth = 32.dp,
-                        maxWidth = 32.dp,
-                        maxHeight = 32.dp
+                        minHeight = 32.dp, minWidth = 32.dp, maxWidth = 32.dp, maxHeight = 32.dp
                     )
-                    .padding(LocalAppDimens.current.large))
+                    .padding(LocalAppDimens.current.large)
+            )
         }
     }
 }
 
-
-@Composable
-fun SearchBar(
-    modifier: Modifier = Modifier,
-) {
-    val query = remember {
-        mutableStateOf("")
-    }
-    TextField(
-        value = query.value, onValueChange = { query.value = it },
-        placeholder = {
-            Text("Search by keyword", style = MaterialTheme.typography.caption)
-        },
-        singleLine = true,
-        maxLines = 1,
-        colors = TextFieldDefaults.textFieldColors(focusedIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent,
-            backgroundColor = Color.Black.copy(alpha = 0.1f)),
-        shape = MaterialTheme.shapes.medium,
-        modifier = modifier.fillMaxWidth(0.8f),
-    )
-}
 
 private fun getSortType(sortType: SortType): String {
     return when (sortType) {

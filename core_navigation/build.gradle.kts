@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
 }
 
 android {
@@ -8,7 +9,7 @@ android {
     compileSdk = 32
 
     defaultConfig {
-        minSdk = 21
+        minSdk = 24
         targetSdk = 32
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -50,6 +51,9 @@ dependencies {
     implementation(Deps.lifecycle_aware_state)
     implementation(Deps.nav_animation)
     implementation(Deps.material)
+    implementation(Deps.room_ktx)
+    kapt(Deps.room_runtime)
+    implementation(Deps.room_runtime)
     implementation(Deps.compose_material)
     implementation(Deps.hilt_navigation_compose)
     implementation(Deps.junit_testImplementation)

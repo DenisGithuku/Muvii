@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<incidents format="6" by="lint 7.3.0" type="conditional_incidents">
+
+    <incident
+        id="VectorRaster"
+        severity="warning"
+        message="">
+        <location
+            file="${:core_data*debug*sourceProvider*0*resDir*0}/drawable/sliders1_svgrepo_com.xml"
+            line="1"
+            column="9"
+            startOffset="8"
+            endLine="1"
+            endColumn="29"
+            endOffset="28"/>
+        <map>
+            <entry
+                name="folderVersion"
+                int="-1"/>
+            <entry
+                name="containsFillType"
+                boolean="true"/>
+            <entry
+                name="message"
+                string="This attribute is not supported in images generated from this vector icon for API &lt; %1$d; check generated icon to make sure it looks acceptable"/>
+            <entry
+                name="containsGradient"
+                boolean="false"/>
+        </map>
+    </incident>
+
+    <incident
+        id="VectorRaster"
+        severity="warning"
+        message="">
+        <location
+            file="${:core_data*debug*sourceProvider*0*resDir*0}/drawable/sliders1_svgrepo_com.xml"
+            line="4"
+            column="30"
+            startOffset="231"
+            endLine="4"
+            endColumn="50"
+            endOffset="251"/>
+        <map>
+            <entry
+                name="folderVersion"
+                int="-1"/>
+            <entry
+                name="containsFillType"
+                boolean="true"/>
+            <entry
+                name="message"
+                string="Resource references will not work correctly in images generated for this vector icon for API &lt; %1$d; check generated icon to make sure it looks acceptable"/>
+            <entry
+                name="containsGradient"
+                boolean="false"/>
+        </map>
+    </incident>
+
+</incidents>

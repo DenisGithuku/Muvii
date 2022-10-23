@@ -1,5 +1,6 @@
 package com.denisgithuku.movies.domain.repository
 
+import com.denisgithuku.core.data.local.MovieDBO
 import com.denisgithuku.movies.data.data_src.remote.dto.MovieGenreDTO
 import com.denisgithuku.movies.data.data_src.remote.dto.TrendingMovieDTO
 import com.denisgithuku.movies.data.data_src.remote.dto.movie.MovieDTO
@@ -20,5 +21,18 @@ interface MoviesRepository {
     suspend fun getMovieDetails(movieId: Int): MovieDetailsDTO?
 
     suspend fun getSimilarMovies(movieId: Int): List<MovieDTO>
+
+    suspend fun markMovieAsFavourite(movie: MovieDBO)
+
+    suspend fun getFavouriteMovieIdsFromDB(): List<MovieDBO>
+
+    suspend fun deleteFromFavourites(movie: MovieDBO)
+
+    suspend fun deleteAllFromFavourites()
+
+    suspend fun getFavouriteMoviesFromNetwork(): List<MovieDTO>
+
+
+
 
 }

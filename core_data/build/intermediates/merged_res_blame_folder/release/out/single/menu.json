@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "com.githukudenis.core_data-merged_res-56:/menu/example_menu.xml",
+        "source": "com.githukudenis.core_data-core-1.7.0-40:/menu/example_menu.xml"
+    },
+    {
+        "merged": "com.githukudenis.core_data-merged_res-56:/menu/example_menu2.xml",
+        "source": "com.githukudenis.core_data-core-1.7.0-40:/menu/example_menu2.xml"
+    }
+]

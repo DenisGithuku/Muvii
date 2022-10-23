@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "com.githukudenis.core_data-merged_res-56:/layout/notification_template_part_time.xml",
+        "source": "com.githukudenis.core_data-core-1.7.0-40:/layout/notification_template_part_time.xml"
+    },
+    {
+        "merged": "com.githukudenis.core_data-merged_res-56:/layout/notification_template_part_chronometer.xml",
+        "source": "com.githukudenis.core_data-core-1.7.0-40:/layout/notification_template_part_chronometer.xml"
+    },
+    {
+        "merged": "com.githukudenis.core_data-merged_res-56:/layout/custom_dialog.xml",
+        "source": "com.githukudenis.core_data-core-1.7.0-40:/layout/custom_dialog.xml"
+    }
+]

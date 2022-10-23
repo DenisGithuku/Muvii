@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "com.githukudenis.core_data-merged_res-56:/animator/fragment_fade_exit.xml",
+        "source": "com.githukudenis.core_data-fragment-1.3.6-35:/animator/fragment_fade_exit.xml"
+    },
+    {
+        "merged": "com.githukudenis.core_data-merged_res-56:/animator/fragment_close_enter.xml",
+        "source": "com.githukudenis.core_data-fragment-1.3.6-35:/animator/fragment_close_enter.xml"
+    },
+    {
+        "merged": "com.githukudenis.core_data-merged_res-56:/animator/fragment_fade_enter.xml",
+        "source": "com.githukudenis.core_data-fragment-1.3.6-35:/animator/fragment_fade_enter.xml"
+    },
+    {
+        "merged": "com.githukudenis.core_data-merged_res-56:/animator/fragment_open_enter.xml",
+        "source": "com.githukudenis.core_data-fragment-1.3.6-35:/animator/fragment_open_enter.xml"
+    },
+    {
+        "merged": "com.githukudenis.core_data-merged_res-56:/animator/fragment_close_exit.xml",
+        "source": "com.githukudenis.core_data-fragment-1.3.6-35:/animator/fragment_close_exit.xml"
+    },
+    {
+        "merged": "com.githukudenis.core_data-merged_res-56:/animator/fragment_open_exit.xml",
+        "source": "com.githukudenis.core_data-fragment-1.3.6-35:/animator/fragment_open_exit.xml"
+    }
+]

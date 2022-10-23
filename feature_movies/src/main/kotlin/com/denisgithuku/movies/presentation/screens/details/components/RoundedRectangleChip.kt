@@ -35,7 +35,7 @@ fun RoundedRectangleChip(
         ) {
             Text(
                 text = label,
-                style = MaterialTheme.typography.subtitle1,
+                style = MaterialTheme.typography.caption,
                 modifier = modifier.padding(
                     horizontal = LocalAppDimens.current.large,
                     vertical = LocalAppDimens.current.medium

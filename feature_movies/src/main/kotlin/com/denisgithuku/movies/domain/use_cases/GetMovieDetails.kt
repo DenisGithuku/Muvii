@@ -10,7 +10,8 @@ import retrofit2.HttpException
 import javax.inject.Inject
 
 class GetMovieDetails @Inject constructor(
-    private val movieRepository: MoviesRepository
+    private val movieRepository: MoviesRepository,
+    private val formatDateUseCase: FormatDateUseCase
 ) {
 
     suspend operator fun invoke(movieId: Int): Flow<Resource<MovieDetails>> = flow {
@@ -18,7 +19,9 @@ class GetMovieDetails @Inject constructor(
             emit(Resource.Loading())
             val res = movieRepository.getMovieDetails(movieId)
             res?.let {
-                emit(Resource.Success(it.toMovie()))
+                emit(Resource.Success(it.toMovie().copy(
+                    release_date = formatDateUseCase(it.release_date)
+                )))
             }
 
         } catch (e: HttpException) {

@@ -1,13 +1,18 @@
 package com.denisgithuku.core.di
 
 import android.content.Context
+import androidx.room.Room
+import com.denisgithuku.core.data.local.FavouriteMoviesDao
+import com.denisgithuku.core.data.local.MoviesDatabase
 import com.denisgithuku.core.providers.AppThemeProvider
+import com.denisgithuku.core.providers.DispatcherProvider
 import com.denisgithuku.core.providers.UserPreferences
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import java.util.concurrent.TimeUnit
@@ -32,6 +37,26 @@ object CoreModule {
 
     @Provides
     @Singleton
+    fun provideMoviesDatabase(
+        @ApplicationContext
+        context: Context
+    ): MoviesDatabase {
+        return Room
+            .databaseBuilder(
+            context,
+            MoviesDatabase::class.java,
+            "movies_database"
+        ).build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideFavouriteMoviesDao(
+        moviesDatabase: MoviesDatabase
+    ): FavouriteMoviesDao = moviesDatabase.favouriteMoviesDao()
+
+    @Provides
+    @Singleton
     fun provideUserPrefs(
         @ApplicationContext
         context: Context,
@@ -40,6 +65,15 @@ object CoreModule {
             context = context
         )
     }
+
+    @Provides
+    @Singleton
+    fun provideCoroutineDispatchers(): DispatcherProvider = DispatcherProvider(
+        defaultDispatcher = Dispatchers.Default,
+        ioDispatcher = Dispatchers.IO,
+        unconfinedDispatcher = Dispatchers.Unconfined,
+        mainDispatcher = Dispatchers.Main,
+        )
 
     @Provides
     @Singleton

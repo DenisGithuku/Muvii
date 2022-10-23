@@ -44,4 +44,5 @@ dependencies {
     implementation(Deps.compose_ui)
     implementation(Deps.compose_tooling_preview)
     implementation(Deps.compose_material)
+    testImplementation("junit:junit:4.12")
 }

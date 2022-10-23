@@ -8,5 +8,9 @@ data class MovieUseCases(
     val changeUiTheme: ChangeUiTheme,
     val enableAdultContent: EnableAdultContent,
     val getMovieDetails: GetMovieDetails,
-    val getSimilarMoviesById: GetSimilarMoviesById
+    val getSimilarMoviesById: GetSimilarMoviesById,
+    val insertIntoFavourites: InsertIntoFavourites,
+    val deleteAllFavourites: DeleteAllFavourites,
+    val deleteFromFavouritesById: DeleteFromFavouritesById,
+    val getAllFavourites: GetAllFavourites,
 )

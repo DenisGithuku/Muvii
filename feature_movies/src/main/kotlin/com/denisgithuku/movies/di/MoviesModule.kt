@@ -1,6 +1,8 @@
 package com.denisgithuku.movies.di
 
 import com.denisgithuku.core.Constants
+import com.denisgithuku.core.data.local.FavouriteMoviesDao
+import com.denisgithuku.core.providers.DispatcherProvider
 import com.denisgithuku.core.providers.UserPreferences
 import com.denisgithuku.movies.data.data_src.remote.MoviesApiInterface
 import com.denisgithuku.movies.data.data_src.repository_impl.MoviesRepositoryImpl
@@ -35,16 +37,24 @@ object MoviesModule {
     @Provides
     @Singleton
     fun provideMoviesRepository(
-        moviesApiInterface: MoviesApiInterface
+        moviesApiInterface: MoviesApiInterface,
+        favouriteMoviesDao: FavouriteMoviesDao
     ): MoviesRepository {
-        return MoviesRepositoryImpl(moviesApiInterface)
+        return MoviesRepositoryImpl(moviesApiInterface, favouriteMoviesDao)
     }
+
+    @Provides
+    @Singleton
+    fun provideDateFormatterUseCase(): FormatDateUseCase = FormatDateUseCase()
+
 
     @Provides
     @Singleton
     fun provideMovieUseCases(
         moviesRepository: MoviesRepository,
-        userPreferences: UserPreferences
+        userPreferences: UserPreferences,
+        formatDateUseCase: FormatDateUseCase,
+        dispatcherProvider: DispatcherProvider
     ): MovieUseCases {
         return MovieUseCases(
             getAllMovieGenres = GetAllMovieGenres(moviesRepository),
@@ -53,8 +63,12 @@ object MoviesModule {
             readAdultContentPreferences = GetAdultContentPreferences(userPreferences),
             changeUiTheme = ChangeUiTheme(userPreferences),
             enableAdultContent = EnableAdultContent(userPreferences),
-            getMovieDetails = GetMovieDetails(moviesRepository),
-            getSimilarMoviesById = GetSimilarMoviesById(moviesRepository)
+            getMovieDetails = GetMovieDetails(moviesRepository, formatDateUseCase),
+            getSimilarMoviesById = GetSimilarMoviesById(moviesRepository),
+            insertIntoFavourites = InsertIntoFavourites(moviesRepository),
+            deleteAllFavourites = DeleteAllFavourites(moviesRepository),
+            deleteFromFavouritesById = DeleteFromFavouritesById(moviesRepository),
+            getAllFavourites = GetAllFavourites(moviesRepository, dispatcherProvider)
         )
     }
 }

@@ -51,4 +51,10 @@ interface MoviesApiInterface {
         @Query("api_key") api_key: String = BuildConfig.TMDB_API_KEY,
         @Query("language") language: String = "en-US"
     ): Response<SimilarMoviesDTO>
+
+    @GET("discover/movie")
+    suspend fun getFavouriteMovies(
+        @Query("api_key") api_key: String = BuildConfig.TMDB_API_KEY,
+        @Query("language") language: String = "en-US"
+    ): Response<AllMoviesByGenreDTO>
 }

@@ -23,7 +23,7 @@ fun MovieInfo(
         ),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = label, style = MaterialTheme.typography.subtitle1)
+        Text(text = label, style = MaterialTheme.typography.subtitle2)
         Text(
             text = value, style = MaterialTheme.typography.body2
         )

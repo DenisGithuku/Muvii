@@ -8,6 +8,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -26,6 +27,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.denisgithuku.core.Constants
+import com.denisgithuku.design.ui.components.ConfirmationDialog
+import com.denisgithuku.design.ui.components.MuviiIconButton
 import com.denisgithuku.design.ui.theme.LocalAppDimens
 import com.denisgithuku.movies.domain.model.Movie
 import com.denisgithuku.movies.domain.model.MovieDetails
@@ -50,7 +53,6 @@ fun DetailsScreen(
             initialValue = BottomSheetValue.Collapsed
         )
     )
-    val context = LocalContext.current
 
     BottomSheetScaffold(
         scaffoldState = scaffoldState,
@@ -70,18 +72,39 @@ fun DetailsScreen(
         if (uiState.userMessages.isNotEmpty()) {
             LaunchedEffect(uiState.userMessages, scaffoldState.snackbarHostState) {
                 scaffoldState.snackbarHostState.showSnackbar(uiState.userMessages[0].message)
-                detailsViewModel.onEvent(DetailsUiEvent.ErrorMessageDismiss(uiState.userMessages[0].id))
+                detailsViewModel.onEvent(DetailsUiEvent.UserMessageDismiss(uiState.userMessages[0].id))
             }
         }
 
+        if (uiState.showConfirmationDialog) {
+            ConfirmationDialog(
+                dialogTitleId = com.denisgithuku.core_design.R.string.delete_from_favourites_title,
+                dialogDescriptionId = com.denisgithuku.core_design.R.string.delete_from_favourites_desc,
+                confirmButtonTextId = com.denisgithuku.core_design.R.string.confirm_button_text,
+                cancelButtonTextId = com.denisgithuku.core_design.R.string.cancel_button_text,
+                onConfirm = {
+                    detailsViewModel.onEvent(DetailsUiEvent.DeleteFromFavourites)
+                    detailsViewModel.onEvent(DetailsUiEvent.UserDialogDismiss)
+                },
+                onCancel = {
+                    detailsViewModel.onEvent(DetailsUiEvent.UserDialogDismiss)
+                },
+                dismissable = true
+            )
+
+        }
+
         uiState.movieDetails?.let { movieDetails ->
-            DetailsScreenWithState(
-                movieDetails = movieDetails,
+            DetailsScreenWithState(movieDetails = movieDetails,
                 similarMoviesLoading = uiState.similarMoviesLoading,
                 similarMovies = uiState.similarMovies,
-                onOpenMovieDetails = onOpenMovieDetails,
-                onNavigateUp = onNavigateUp
-            )
+                onOpenSimilarMovie = onOpenMovieDetails,
+                onNavigateUp = onNavigateUp,
+                onMarkFavourite = {
+                    detailsViewModel.onEvent(
+                        DetailsUiEvent.MarkFavourite
+                    )
+                })
         }
     }
 
@@ -93,10 +116,12 @@ fun DetailsScreenWithState(
     movieDetails: MovieDetails,
     similarMoviesLoading: Boolean,
     similarMovies: List<Movie>,
-    onOpenMovieDetails: (Int) -> Unit,
-    onNavigateUp: () -> Unit
+    onOpenSimilarMovie: (Int) -> Unit,
+    onMarkFavourite: () -> Unit,
+    onNavigateUp: () -> Unit,
 ) {
     val context = LocalContext.current
+
     LazyColumn(
         modifier = Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(LocalAppDimens.current.medium),
@@ -110,7 +135,7 @@ fun DetailsScreenWithState(
             ) {
                 AsyncImage(
                     model = ImageRequest.Builder(context)
-                        .data("https://image.tmdb.org/t/p/${Constants.imageSize}/${movieDetails.backdrop_path}")
+                        .data("https://image.tmdb.org/t/p/${Constants.imageSize}/${movieDetails.backdrop_path ?: movieDetails.poster_path}")
                         .crossfade(enable = true).build(),
                     contentDescription = "Poster",
                     contentScale = ContentScale.Crop,
@@ -138,19 +163,29 @@ fun DetailsScreenWithState(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    IconButton(onClick = onNavigateUp) {
+                    MuviiIconButton(onClick = onNavigateUp) {
                         Icon(
                             imageVector = Icons.Default.ArrowBack,
                             contentDescription = "Back",
                             tint = MaterialTheme.colors.secondary
                         )
                     }
-                    IconButton(onClick = {}) {
-                        Icon(
-                            imageVector = Icons.Default.FavoriteBorder,
-                            contentDescription = "Mark favourite",
-                            tint = MaterialTheme.colors.secondary
-                        )
+                    MuviiIconButton(onClick = {
+                        onMarkFavourite()
+                    }) {
+                        if (movieDetails.favourite) {
+                            Icon(
+                                imageVector = Icons.Filled.Favorite,
+                                tint = MaterialTheme.colors.secondary,
+                                contentDescription = "Favourite",
+                            )
+                        } else {
+                            Icon(
+                                imageVector = Icons.Default.FavoriteBorder,
+                                tint = MaterialTheme.colors.secondary,
+                                contentDescription = "Favourite",
+                            )
+                        }
                     }
                 }
             }
@@ -162,7 +197,10 @@ fun DetailsScreenWithState(
                 style = MaterialTheme.typography.h4,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.padding(
-                    LocalAppDimens.current.medium
+                    top = LocalAppDimens.current.medium,
+                    start = LocalAppDimens.current.medium,
+                    end = LocalAppDimens.current.medium
+
                 )
             )
         }
@@ -171,7 +209,13 @@ fun DetailsScreenWithState(
             FlowRow(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(LocalAppDimens.current.extra_large),
+                    .padding(
+                        top = LocalAppDimens.current.extra_large,
+                        start = LocalAppDimens.current.extra_large,
+                        end = LocalAppDimens.current.extra_large,
+
+
+                        ),
                 mainAxisAlignment = FlowMainAxisAlignment.Center,
                 crossAxisAlignment = FlowCrossAxisAlignment.Center,
                 mainAxisSpacing = LocalAppDimens.current.medium,
@@ -186,12 +230,26 @@ fun DetailsScreenWithState(
         item {
             Text(
                 text = movieDetails.overview,
-                style = MaterialTheme.typography.body1,
-                modifier = Modifier.padding(LocalAppDimens.current.extra_large),
+                style = MaterialTheme.typography.body2,
+                modifier = Modifier.padding(
+                    top = LocalAppDimens.current.extra_large,
+                    start = LocalAppDimens.current.extra_large,
+                    end = LocalAppDimens.current.extra_large,
+                ),
                 textAlign = TextAlign.Justify
             )
         }
-
+        item {
+            Divider(
+                modifier = Modifier
+                    .background(color = MaterialTheme.colors.onPrimary.copy(alpha = 0.4f))
+                    .padding(
+                        top = LocalAppDimens.current.extra_large,
+                        start = LocalAppDimens.current.extra_large,
+                        end = LocalAppDimens.current.extra_large,
+                    ),
+            )
+        }
         item {
             Row(
                 modifier = Modifier
@@ -202,7 +260,8 @@ fun DetailsScreenWithState(
             ) {
                 MovieInfo(label = "Release Date", value = movieDetails.release_date)
                 MovieInfo(
-                    label = "Votes", value = movieDetails.vote_average.toString().trimSubstring(
+                    label = "Rating",
+                    value = movieDetails.vote_average.toString().trimSubstring(
                         startIndex = 0, endIndex = 3
                     )
                 )
@@ -233,7 +292,7 @@ fun DetailsScreenWithState(
                             poster_path = movie.poster_path,
                             movieId = movie.id,
                             context = context,
-                            onSelect = onOpenMovieDetails,
+                            onSelect = onOpenSimilarMovie,
                             modifier = Modifier.padding(horizontal = LocalAppDimens.current.large)
                         )
                     }
@@ -272,6 +331,7 @@ fun DetailsScreenWithStatePreview() {
     ),
         similarMoviesLoading = false,
         similarMovies = emptyList(),
-        onOpenMovieDetails = {},
+        onOpenSimilarMovie = {},
+        onMarkFavourite = {},
         onNavigateUp = {})
 }
