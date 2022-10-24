@@ -1,7 +1,7 @@
 
 # Muvii - Android app showing an aggregate list of trending and latest movies and TV shows
-#Disclaimer
-##### This app is still in development. Ideas are welcome and contributions are open. 
+⚠️ Disclaimer
+##### This app is still in development. 👷🏾‍♀ Ideas are welcome and contributions are open. 
 
 ##### Discover movies
 ![movies](https://user-images.githubusercontent.com/47632042/197456275-83d9d057-fb30-427e-9d1b-1b8f37763d5d.png)
@@ -14,7 +14,7 @@
 
 
 
-#Overview
+## Overview
 The app is online with an offline first strategy. 
 
 ## Use 
