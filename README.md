@@ -26,6 +26,7 @@ The app employs the highly opinionated [Clean Architecture](https://blog.cleanco
 ##### Multi-modular architecture
 The app being heavily divided has the following modules:-
 *  App - the entry point of the application. Serves as the glue to the other parts of the app.
+* :buildSrc - manages all the dependencies from a central point
 * :core_design: - takes care of the design system of the whole app i.e. theming, styles, and the overall accent of the app. This follows the material design guidelines to the core.
 * :core_navigation:  - handles all navigation related code.
 * :core_data: - takes care of data shared in between feature modules.
@@ -35,6 +36,8 @@ The app being heavily divided has the following modules:-
 ## Patterns used
 * [Model-View-ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - aims to achieve a clear separation of concerns with each layer not aware of the implementation of the other to achieve a layer agnostic approach. The Model manages the data through repositories and use cases, the View Model manages the business logic and state holding while the View is only concerned with the UI logic implementation.
 * [Unidirectional Data Flow](https://developer.android.com/jetpack/compose/architecture) - allows easier management of state. State flows up while events flow down to the View Model.
+* Concurrency design - Offloading heavy tasks to a background thread
+* [SOLID](https://en.wikipedia.org/wiki/SOLID) principles - to achieve a clear abstraction among modules, segregation, single responsibility and Dependecy inversion
 
 ![](https://developer.android.com/static/images/jetpack/compose/state-unidirectional-flow.png)
 
@@ -44,5 +47,8 @@ The app being heavily divided has the following modules:-
 * [Preferences Datastore](https://developer.android.com/topic/libraries/architecture/datastore) - Store data asynchronously, consistently, and transactionally, overcoming some of the drawbacks of SharedPreferences.
 * [Retrofit](https://square.github.io/retrofit/) - REST API library for simplifying network calls in Android.
 * [GSON](https://github.com/google/gson) -  allows easier parsing and serializing of JSON into POJOs that Android can understand.
-* [Logging Interceptor](https://github.com/square/okhttp/tree/master/okhttp-logging-interceptor) - for easier logging of HTTP requests and responses during development.
+* [OkHttp Logging Interceptor](https://github.com/square/okhttp/tree/master/okhttp-logging-interceptor) - for easier logging of HTTP requests and responses during development.
 * [Paging 3](https://developer.android.com/topic/libraries/architecture/paging/v3-overview) - allows efficient querying of data in pages to minimize user bandwidth and save on system resources.
+* [Kotlin Coroutines](https://developer.android.com/kotlin/coroutines) - Concurrency design pattern in Android to simplify asynchronous code execution
+* [Flows](https://developer.android.com/kotlin/flow) - synchronous data stream functionality built on top of coroutines
+* [Hilt](https://developer.android.com/training/dependency-injection/hilt-android) - dependency injection that reduces the need for manual dependency injection
