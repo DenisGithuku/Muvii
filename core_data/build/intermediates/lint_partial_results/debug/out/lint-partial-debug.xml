@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<incidents format="6" by="lint 7.3.0" type="partial_results">
+    <map id="UnusedResources">
+        <location id="R.drawable.sliders1_svgrepo_com"
+            file="${:core_data*debug*sourceProvider*0*resDir*0}/drawable/sliders1_svgrepo_com.xml"
+            line="1"
+            column="1"
+            startOffset="0"
+            endLine="6"
+            endColumn="10"
+            endOffset="682"/>
+        <entry
+            name="model"
+            string="drawable[sliders1_svgrepo_com(D)];;;;"/>
+    </map>
+
+</incidents>

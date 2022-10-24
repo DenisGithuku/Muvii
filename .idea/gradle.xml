@@ -12,9 +12,11 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/buildSrc" />
-            <option value="$PROJECT_DIR$/core" />
-            <option value="$PROJECT_DIR$/movies" />
-            <option value="$PROJECT_DIR$/tv_shows" />
+            <option value="$PROJECT_DIR$/core_data" />
+            <option value="$PROJECT_DIR$/core_design" />
+            <option value="$PROJECT_DIR$/core_navigation" />
+            <option value="$PROJECT_DIR$/feature_movies" />
+            <option value="$PROJECT_DIR$/feature_tv_shows" />
           </set>
         </option>
       </GradleProjectSettings>

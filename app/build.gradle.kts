@@ -7,22 +7,30 @@ plugins {
     id("com.google.devtools.ksp") version "1.7.0-1.0.6"
 }
 
+
 android {
     namespace = "com.githukudenis.muvii"
     compileSdk = 32
 
     defaultConfig {
-        applicationId = "com.githukudenis.muvii"
         minSdk=  24
         targetSdk=  32
-        versionCode=  1
-        versionName = "1.0"
 
-        buildConfigField("String", "MOVIES_API_KEY", "MOVIES_API_KEY")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary=  true
+        }
+    }
+
+    kotlin {
+        sourceSets {
+            debug {
+                kotlin.srcDir("build/generated/ksp/debug/kotlin")
+            }
+            release {
+                kotlin.srcDir("build/generated/ksp/release/kotlin")
+            }
         }
     }
 
@@ -53,7 +61,11 @@ android {
 }
 
 dependencies {
-    implementation(project(":core"))
+    implementation(project(":core_design"))
+    implementation(project(":core_data"))
+    implementation(project(":core_navigation"))
+    implementation(project(":feature_movies"))
+    implementation(project(":feature_tv_shows"))
     implementation(Deps.core)
     implementation(Deps.lifecycle_runtime)
     implementation(Deps.activity_compose)
@@ -79,8 +91,13 @@ dependencies {
     implementation(Deps.retrofit_coroutines)
     implementation(Deps.livedata)
     implementation(Deps.gson)
+    implementation(Deps.ramcosta_navigation_core)
+    ksp(Deps.ramcosta_navigation_ksp)
     implementation(Deps.viewmodel)
     kapt(Deps.dagger_hilt_compiler)
+    implementation(Deps.room_ktx)
+    implementation(Deps.room_runtime)
+    kapt(Deps.room_compiler)
     testImplementation(Deps.junit_testImplementation)
     androidTestImplementation(Deps.junit_androidTestImplementation)
     androidTestImplementation(Deps.espresso_androidTestImplementation)

@@ -15,6 +15,8 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Muvii"
 include ":app"
-include ":core"
-include ":movies"
-include ":tv_shows"
+include ':core_data'
+include ":feature_movies"
+include ':feature_tv_shows'
+include ':core_design'
+include ':core_navigation'

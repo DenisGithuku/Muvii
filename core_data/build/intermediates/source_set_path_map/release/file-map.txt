@@ -1,0 +1,59 @@
+com.githukudenis.core_data-lifecycle-livedata-core-ktx-2.4.0-0 /home/denisgithuku/.gradle/caches/transforms-3/01aee6869663a551c0b1c399f91cccbf/transformed/lifecycle-livedata-core-ktx-2.4.0/res
+com.githukudenis.core_data-ui-geometry-1.2.0-1 /home/denisgithuku/.gradle/caches/transforms-3/01b7288d1beafd0249005c81281eacc7/transformed/ui-geometry-1.2.0/res
+com.githukudenis.core_data-lifecycle-viewmodel-ktx-2.4.0-2 /home/denisgithuku/.gradle/caches/transforms-3/07f0d5c627652c3a65a133feeeeb01ee/transformed/lifecycle-viewmodel-ktx-2.4.0/res
+com.githukudenis.core_data-room-runtime-2.4.3-3 /home/denisgithuku/.gradle/caches/transforms-3/09651fa56f1123041a0e08a7f6801a7b/transformed/room-runtime-2.4.3/res
+com.githukudenis.core_data-navigation-common-ktx-2.4.0-4 /home/denisgithuku/.gradle/caches/transforms-3/10605c6e634687f7c9931dc2701ed308/transformed/navigation-common-ktx-2.4.0/res
+com.githukudenis.core_data-startup-runtime-1.1.1-5 /home/denisgithuku/.gradle/caches/transforms-3/1d3475b0039f40615a863d9227d18b6f/transformed/startup-runtime-1.1.1/res
+com.githukudenis.core_data-activity-compose-1.3.1-6 /home/denisgithuku/.gradle/caches/transforms-3/209793f365ad2ceecba97bd81c2fd49b/transformed/activity-compose-1.3.1/res
+com.githukudenis.core_data-lifecycle-viewmodel-savedstate-2.4.0-7 /home/denisgithuku/.gradle/caches/transforms-3/2572e840215623c19963a7f9f0bc8643/transformed/lifecycle-viewmodel-savedstate-2.4.0/res
+com.githukudenis.core_data-ui-unit-1.2.0-8 /home/denisgithuku/.gradle/caches/transforms-3/2656ab82af463f8830292c71cabec8a3/transformed/ui-unit-1.2.0/res
+com.githukudenis.core_data-hilt-navigation-compose-1.0.0-alpha03-9 /home/denisgithuku/.gradle/caches/transforms-3/28157bb93440f0f02643cef20d15e288/transformed/hilt-navigation-compose-1.0.0-alpha03/res
+com.githukudenis.core_data-material-1.2.0-10 /home/denisgithuku/.gradle/caches/transforms-3/2832e6a87091c3b147521db981a8f76d/transformed/material-1.2.0/res
+com.githukudenis.core_data-sqlite-framework-2.2.0-11 /home/denisgithuku/.gradle/caches/transforms-3/2a7ff102a91cf5a9a207e124a86b9e30/transformed/sqlite-framework-2.2.0/res
+com.githukudenis.core_data-foundation-layout-1.2.0-12 /home/denisgithuku/.gradle/caches/transforms-3/2c46866d6d776eaf132f22c4ed60a2bc/transformed/foundation-layout-1.2.0/res
+com.githukudenis.core_data-datastore-preferences-1.0.0-13 /home/denisgithuku/.gradle/caches/transforms-3/2db0d0f567c9038868278d346f5ecde9/transformed/datastore-preferences-1.0.0/res
+com.githukudenis.core_data-lifecycle-viewmodel-compose-2.4.0-14 /home/denisgithuku/.gradle/caches/transforms-3/32bd654048d9d48ec21a2d21197d7453/transformed/lifecycle-viewmodel-compose-2.4.0/res
+com.githukudenis.core_data-lifecycle-livedata-2.4.0-15 /home/denisgithuku/.gradle/caches/transforms-3/3fbd59232e081b2e231a8bacb2a6e1a4/transformed/lifecycle-livedata-2.4.0/res
+com.githukudenis.core_data-activity-1.3.1-16 /home/denisgithuku/.gradle/caches/transforms-3/43f53240e1c5703f485ec5e1a822a1fc/transformed/activity-1.3.1/res
+com.githukudenis.core_data-animation-1.1.1-17 /home/denisgithuku/.gradle/caches/transforms-3/475e3fdf8af61e55a5e58b37a181503f/transformed/animation-1.1.1/res
+com.githukudenis.core_data-material-ripple-1.2.0-18 /home/denisgithuku/.gradle/caches/transforms-3/4a96f040c30f0bf3c1410d630b87db38/transformed/material-ripple-1.2.0/res
+com.githukudenis.core_data-lifecycle-runtime-2.6.0-alpha01-19 /home/denisgithuku/.gradle/caches/transforms-3/4b4e422e0965ec50eaa78440f19f23dd/transformed/lifecycle-runtime-2.6.0-alpha01/res
+com.githukudenis.core_data-navigation-common-2.4.0-20 /home/denisgithuku/.gradle/caches/transforms-3/5230b0e11d0cc26e987960aedaef0cf4/transformed/navigation-common-2.4.0/res
+com.githukudenis.core_data-lifecycle-runtime-compose-2.6.0-alpha01-21 /home/denisgithuku/.gradle/caches/transforms-3/5d5102a3406a9fc952d4355e75b75883/transformed/lifecycle-runtime-compose-2.6.0-alpha01/res
+com.githukudenis.core_data-lifecycle-runtime-ktx-2.6.0-alpha01-22 /home/denisgithuku/.gradle/caches/transforms-3/5e298b008e9d3de55f6d6f3c718b2511/transformed/lifecycle-runtime-ktx-2.6.0-alpha01/res
+com.githukudenis.core_data-navigation-runtime-2.4.0-23 /home/denisgithuku/.gradle/caches/transforms-3/643c636b421a66e92fa8ba64c6d64948/transformed/navigation-runtime-2.4.0/res
+com.githukudenis.core_data-navigation-compose-2.4.0-24 /home/denisgithuku/.gradle/caches/transforms-3/666a057bb35d9447d70670ec4da4bc51/transformed/navigation-compose-2.4.0/res
+com.githukudenis.core_data-customview-poolingcontainer-1.0.0-25 /home/denisgithuku/.gradle/caches/transforms-3/69c0cebe0643d9008541b249e6382c3b/transformed/customview-poolingcontainer-1.0.0/res
+com.githukudenis.core_data-navigation-runtime-ktx-2.4.0-26 /home/denisgithuku/.gradle/caches/transforms-3/6b53c3f882b643ed341f101e6e5436ce/transformed/navigation-runtime-ktx-2.4.0/res
+com.githukudenis.core_data-lifecycle-viewmodel-2.4.0-27 /home/denisgithuku/.gradle/caches/transforms-3/7229f4a11518f747a116e6d436fee349/transformed/lifecycle-viewmodel-2.4.0/res
+com.githukudenis.core_data-ui-1.2.0-28 /home/denisgithuku/.gradle/caches/transforms-3/77cd11fa6e03a01f9960dc513f78104c/transformed/ui-1.2.0/res
+com.githukudenis.core_data-hilt-navigation-1.0.0-29 /home/denisgithuku/.gradle/caches/transforms-3/79689077e9bf38a5ff1f55ef156656a4/transformed/hilt-navigation-1.0.0/res
+com.githukudenis.core_data-datastore-1.0.0-30 /home/denisgithuku/.gradle/caches/transforms-3/7bf7730898e823c86f9b64d737086834/transformed/datastore-1.0.0/res
+com.githukudenis.core_data-ui-util-1.2.0-31 /home/denisgithuku/.gradle/caches/transforms-3/8611434d9f448477907286e3911818d2/transformed/ui-util-1.2.0/res
+com.githukudenis.core_data-annotation-experimental-1.1.0-32 /home/denisgithuku/.gradle/caches/transforms-3/86daf1015f082a01b471949147228a17/transformed/annotation-experimental-1.1.0/res
+com.githukudenis.core_data-foundation-1.2.0-33 /home/denisgithuku/.gradle/caches/transforms-3/8e01e07b42b26f3714201b735177ba97/transformed/foundation-1.2.0/res
+com.githukudenis.core_data-lifecycle-livedata-core-2.4.0-34 /home/denisgithuku/.gradle/caches/transforms-3/94cae62bc5e9173e2351325d9f782272/transformed/lifecycle-livedata-core-2.4.0/res
+com.githukudenis.core_data-fragment-1.3.6-35 /home/denisgithuku/.gradle/caches/transforms-3/9526dd2863ebeacc56519ec3468c0b0b/transformed/fragment-1.3.6/res
+com.githukudenis.core_data-animation-core-1.1.1-36 /home/denisgithuku/.gradle/caches/transforms-3/956b57bf702f3a7abeb8f8644c234cbf/transformed/animation-core-1.1.1/res
+com.githukudenis.core_data-runtime-1.2.0-37 /home/denisgithuku/.gradle/caches/transforms-3/987cb1380f612410f0a0046fbdec33c9/transformed/runtime-1.2.0/res
+com.githukudenis.core_data-material-icons-core-1.2.0-38 /home/denisgithuku/.gradle/caches/transforms-3/af57f6a5f42054f32ccaa71f48cb4043/transformed/material-icons-core-1.2.0/res
+com.githukudenis.core_data-sqlite-2.2.0-39 /home/denisgithuku/.gradle/caches/transforms-3/b4c703ea442e0f9daf5015503400487b/transformed/sqlite-2.2.0/res
+com.githukudenis.core_data-core-1.7.0-40 /home/denisgithuku/.gradle/caches/transforms-3/b89d296195c28b5a3678ec63b92cb6cb/transformed/core-1.7.0/res
+com.githukudenis.core_data-profileinstaller-1.2.0-41 /home/denisgithuku/.gradle/caches/transforms-3/b96ddc60d669c2dc362c891fdd30d921/transformed/profileinstaller-1.2.0/res
+com.githukudenis.core_data-ui-text-1.2.0-42 /home/denisgithuku/.gradle/caches/transforms-3/bd0dc672ffc90d6bb73bb23e992e50ff/transformed/ui-text-1.2.0/res
+com.githukudenis.core_data-room-ktx-2.4.3-43 /home/denisgithuku/.gradle/caches/transforms-3/bfe13d7c3f372ac1c68ba41ae933c82d/transformed/room-ktx-2.4.3/res
+com.githukudenis.core_data-runtime-saveable-1.2.0-44 /home/denisgithuku/.gradle/caches/transforms-3/c096ecb391af522ffd946dd6d95f7f54/transformed/runtime-saveable-1.2.0/res
+com.githukudenis.core_data-savedstate-1.2.0-45 /home/denisgithuku/.gradle/caches/transforms-3/c5358d124af4d33be554ac603fd262d3/transformed/savedstate-1.2.0/res
+com.githukudenis.core_data-activity-ktx-1.3.1-46 /home/denisgithuku/.gradle/caches/transforms-3/cb2750825eb3287e48c9434ebce4ba28/transformed/activity-ktx-1.3.1/res
+com.githukudenis.core_data-lifecycle-livedata-ktx-2.4.0-47 /home/denisgithuku/.gradle/caches/transforms-3/ef94d088c2a6ad7f09179a43c2b2e341/transformed/lifecycle-livedata-ktx-2.4.0/res
+com.githukudenis.core_data-ui-graphics-1.2.0-48 /home/denisgithuku/.gradle/caches/transforms-3/f450af59437457707ea20a9a61b8cb30/transformed/ui-graphics-1.2.0/res
+com.githukudenis.core_data-ui-tooling-preview-1.2.0-49 /home/denisgithuku/.gradle/caches/transforms-3/f61fcc6742cc7a976604cea4109bb40d/transformed/ui-tooling-preview-1.2.0/res
+com.githukudenis.core_data-core-ktx-1.7.0-50 /home/denisgithuku/.gradle/caches/transforms-3/fdc54f2f3f2711aa195d2ad82248e15b/transformed/core-ktx-1.7.0/res
+com.githukudenis.core_data-savedstate-ktx-1.2.0-51 /home/denisgithuku/.gradle/caches/transforms-3/ff5a19b70247289d052417347dfa0b32/transformed/savedstate-ktx-1.2.0/res
+com.githukudenis.core_data-resValues-52 /media/denisgithuku/Cool Stuff/Tech-Center/Code/Android/Muvii/core_data/build/generated/res/resValues/release
+com.githukudenis.core_data-rs-53 /media/denisgithuku/Cool Stuff/Tech-Center/Code/Android/Muvii/core_data/build/generated/res/rs/release
+com.githukudenis.core_data-mergeReleaseResources-54 /media/denisgithuku/Cool Stuff/Tech-Center/Code/Android/Muvii/core_data/build/intermediates/incremental/release/mergeReleaseResources/merged.dir
+com.githukudenis.core_data-mergeReleaseResources-55 /media/denisgithuku/Cool Stuff/Tech-Center/Code/Android/Muvii/core_data/build/intermediates/incremental/release/mergeReleaseResources/stripped.dir
+com.githukudenis.core_data-merged_res-56 /media/denisgithuku/Cool Stuff/Tech-Center/Code/Android/Muvii/core_data/build/intermediates/merged_res/release
+com.githukudenis.core_data-main-57 /media/denisgithuku/Cool Stuff/Tech-Center/Code/Android/Muvii/core_data/src/main/res
+com.githukudenis.core_data-release-58 /media/denisgithuku/Cool Stuff/Tech-Center/Code/Android/Muvii/core_data/src/release/res

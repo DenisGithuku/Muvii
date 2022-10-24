@@ -1,0 +1,1 @@
+int drawable sliders1_svgrepo_com 0x0

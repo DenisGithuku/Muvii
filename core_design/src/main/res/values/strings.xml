@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="confirm_button_text">Ok</string>
+    <string name="cancel_button_text">Cancel</string>
+    <string name="delete_from_favourites_title">Confirm</string>
+    <string name="delete_from_favourites_desc">Confirm delete from favourites?</string>
+</resources>

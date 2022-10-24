@@ -6,7 +6,7 @@ object Versions {
     const val junit = "4.13.2"
     const val ext_junit = "1.1.3"
     const val espresso = "3.4.0"
-    const val dagger_hilt = "2.38.1"
+    const val dagger_hilt = "2.42"
     const val appcompat = "1.4.2"
     const val material = "1.6.1"
     const val okhttp = "4.10.0"
@@ -18,7 +18,11 @@ object Versions {
     const val accompanist = "0.21.0-beta"
     const val navigation = "2.4.0"
     const val lifecycle_viewmodel = "2.4.0"
+    const val lifecycle_aware_state_dep = "2.6.0-alpha01"
     const val moshi = "1.12.0"
+    const val raamcosta_compose_navigation_version = "1.6.17-beta"
+    const val room_version = "2.4.3"
+
 }
 
 object Deps {
@@ -27,6 +31,9 @@ object Deps {
     const val lifecycle_runtime = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle_runtime}"
     const val activity_compose = "androidx.activity:activity-compose:${Versions.activity_compose}"
     const val core = "androidx.core:core-ktx:${Versions.core}"
+    const val ramcosta_navigation_core = "io.github.raamcosta.compose-destinations:core:${Versions.raamcosta_compose_navigation_version}"
+    const val ramcosta_navigation_ksp = "io.github.raamcosta.compose-destinations:ksp:${Versions.raamcosta_compose_navigation_version}"
+    const val lifecycle_aware_state = "androidx.lifecycle:lifecycle-runtime-compose:${Versions.lifecycle_aware_state_dep}"
     const val dagger_hilt = "com.google.dagger:hilt-android:${Versions.dagger_hilt}"
     const val dagger_hilt_compiler = "com.google.dagger:hilt-android-compiler:${Versions.dagger_hilt}"
     const val compose_ui = "androidx.compose.ui:ui:${Versions.compose}"
@@ -78,12 +85,18 @@ object Deps {
     // Saved state module for ViewModel
     const val saved_state_viewmodel =  "androidx.lifecycle:lifecycle-viewmodel-savedstate:${Versions.lifecycle_viewmodel}"
 
+    //Room
+    const val room_compiler = "androidx.room:room-compiler:${Versions.room_version}"
+    const val room_runtime = "androidx.room:room-runtime:${Versions.room_version}"
+    const val room_ktx = "androidx.room:room-ktx:${Versions.room_version}"
+    const val coil = "io.coil-kt:coil-compose:2.2.1"
+
 }
 
 
 object ConfigVersions {
-    const val namespace = "com.denisgithuku.catdogfacts"
-    const val applicationId = "com.denisgithuku.catdogfacts"
+    const val namespace = "com.denisgithuku.muvii"
+    const val applicationId = "com.denisgithuku.muvii"
     const val compileSdk = 32
     const val minSdk = 24
     const val targetSdk = 32
