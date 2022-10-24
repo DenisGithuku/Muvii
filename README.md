@@ -17,7 +17,7 @@
 ## Overview
 The app is online with an offline first strategy. 
 
-## Use 
+## Usage
 Clone the repository and run `./gradlew assembleDebug` to build the debug APK or `./gradlew installDebug` to build and deploy.
 
 ## Architecture
