@@ -1,7 +1,8 @@
 package com.denisgithuku.movies.data.data_src.repository_impl
 
-import com.denisgithuku.core.data.local.FavouriteMoviesDao
-import com.denisgithuku.core.data.local.MovieDBO
+import com.denisgithuku.core_data.data.local.FavouriteMoviesDao
+import com.denisgithuku.core_data.data.local.MovieDBO
+import com.denisgithuku.core_data.data.remote.dto.SearchItemDTO
 import com.denisgithuku.movies.data.data_src.remote.MoviesApiInterface
 import com.denisgithuku.movies.data.data_src.remote.dto.MovieGenreDTO
 import com.denisgithuku.movies.data.data_src.remote.dto.TrendingMovieDTO
@@ -91,6 +92,16 @@ class MoviesRepositoryImpl @Inject constructor(
 
     override suspend fun getFavouriteMoviesFromNetwork(): List<MovieDTO> {
         val response = moviesApiInterface.getFavouriteMovies()
+        response.body()?.let {
+            if (response.isSuccessful) {
+                return it.results
+            }
+        }
+        return emptyList()
+    }
+
+    override suspend fun search(query: String): List<SearchItemDTO> {
+        val response = moviesApiInterface.searchMovies(query = query)
         response.body()?.let {
             if (response.isSuccessful) {
                 return it.results

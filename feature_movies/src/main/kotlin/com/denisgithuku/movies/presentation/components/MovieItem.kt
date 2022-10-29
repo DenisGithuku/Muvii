@@ -20,8 +20,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.denisgithuku.core.Constants
-import com.denisgithuku.design.ui.theme.LocalAppDimens
+import com.denisgithuku.core_data.Constants
+import com.denisgithuku.core_design.ui.theme.LocalAppDimens
 import com.githukudenis.movies.R
 
 @OptIn(ExperimentalMaterialApi::class)

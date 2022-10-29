@@ -1,6 +1,6 @@
 package com.denisgithuku.movies.presentation.screens.home
 
-import com.denisgithuku.core.UserMessage
+import com.denisgithuku.core_data.UserMessage
 import com.denisgithuku.movies.domain.common.SortType
 import com.denisgithuku.movies.domain.model.Genre
 import com.denisgithuku.movies.domain.model.Movie
@@ -10,6 +10,7 @@ data class HomeUiState(
     val genresLoading: Boolean = false,
     val selectedGenre: Int = Math.random().toInt(),
     val moviesLoading: Boolean = false,
+    val searchLoading: Boolean = false,
     val trendingMovieLoading: Boolean = false,
     val genres: List<Genre> = listOf(),
     val movies: List<Movie> = listOf(),

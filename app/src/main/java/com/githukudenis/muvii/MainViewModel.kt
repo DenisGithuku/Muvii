@@ -3,7 +3,7 @@ package com.githukudenis.muvii
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.denisgithuku.core.providers.AppThemeProvider
+import com.denisgithuku.core_data.providers.AppThemeProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch

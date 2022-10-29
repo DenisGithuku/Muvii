@@ -4,11 +4,11 @@ import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.denisgithuku.core.Constants
-import com.denisgithuku.core.Resource
-import com.denisgithuku.core.UserMessage
-import com.denisgithuku.core.data.local.MovieDBO
-import com.denisgithuku.core.providers.DispatcherProvider
+import com.denisgithuku.core_data.Constants
+import com.denisgithuku.core_data.Resource
+import com.denisgithuku.core_data.UserMessage
+import com.denisgithuku.core_data.data.local.MovieDBO
+import com.denisgithuku.core_data.providers.DispatcherProvider
 import com.denisgithuku.movies.domain.repository.MoviesRepository
 import com.denisgithuku.movies.domain.use_cases.MovieUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel

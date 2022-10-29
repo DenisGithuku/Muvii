@@ -25,13 +25,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.denisgithuku.design.ui.components.MuviiIconButton
-import com.denisgithuku.design.ui.theme.LocalAppDimens
+import com.denisgithuku.core_design.ui.components.MuviiIconButton
+import com.denisgithuku.core_design.ui.theme.LocalAppDimens
 import com.denisgithuku.movies.domain.common.SortType
 import com.denisgithuku.movies.domain.model.Genre
 import com.denisgithuku.movies.domain.model.Movie
 import com.denisgithuku.movies.domain.model.TrendingMovie
-import com.denisgithuku.movies.presentation.components.*
+import com.denisgithuku.movies.presentation.components.CustomSwitch
+import com.denisgithuku.movies.presentation.components.GenreItem
+import com.denisgithuku.movies.presentation.components.MovieItem
+import com.denisgithuku.movies.presentation.components.TrendingMovieItem
+import com.denisgithuku.movies.presentation.screens.home.components.SearchBar
 import com.githukudenis.movies.R
 import kotlinx.coroutines.launch
 
@@ -131,7 +135,10 @@ fun HomeScreen(
             genres = uiState.genres,
             movies = uiState.movies,
             trending_movies = uiState.trending,
-            onOpenDetails = onOpenDetails
+            onOpenDetails = onOpenDetails,
+            onSearchMovies = {
+                homeViewModel.onEvent(HomeEvent.Search(it))
+            }
         )
     }
 }
@@ -141,6 +148,7 @@ private fun HomeScreen(
     modifier: Modifier = Modifier,
     selectedGenre: Int,
     onChangeGenre: (Int) -> Unit,
+    onSearchMovies: (String) -> Unit,
     genres: List<Genre>,
     movies: List<Movie>,
     trending_movies: List<TrendingMovie>,
@@ -157,11 +165,7 @@ private fun HomeScreen(
     ) {
 
         item {
-            SearchBar(
-                modifier = modifier
-                    .fillMaxWidth()
-                    .padding(LocalAppDimens.current.small)
-            )
+            SearchBar(onSearch = onSearchMovies)
         }
         item {
             LazyRow(

@@ -19,7 +19,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.denisgithuku.design.ui.theme.LocalAppDimens
+import com.denisgithuku.core_design.ui.theme.LocalAppDimens
 
 @Composable
 fun CustomSwitch(

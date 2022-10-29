@@ -1,7 +1,7 @@
 package com.denisgithuku.movies.domain.use_cases
 
-import com.denisgithuku.core.Constants
-import com.denisgithuku.core.providers.UserPreferences
+import com.denisgithuku.core_data.Constants
+import com.denisgithuku.core_data.providers.UserPreferences
 import javax.inject.Inject
 
 class EnableAdultContent @Inject constructor(

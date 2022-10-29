@@ -1,5 +1,6 @@
 package com.denisgithuku.movies.data.data_src.remote
 
+import com.denisgithuku.core_data.data.remote.dto.AllSearchItemsDTO
 import com.denisgithuku.movies.data.data_src.remote.dto.AllMovieGenresDTO
 import com.denisgithuku.movies.data.data_src.remote.dto.AllMoviesByGenreDTO
 import com.denisgithuku.movies.data.data_src.remote.dto.AllTrendingMoviesDTO
@@ -57,4 +58,11 @@ interface MoviesApiInterface {
         @Query("api_key") api_key: String = BuildConfig.TMDB_API_KEY,
         @Query("language") language: String = "en-US"
     ): Response<AllMoviesByGenreDTO>
+
+    @GET("search/multi")
+    suspend fun searchMovies(
+        @Query("api_key") api_key: String = BuildConfig.TMDB_API_KEY,
+        @Query("language") language: String = "en-US",
+        @Query("query") query: String
+    ): Response<AllSearchItemsDTO>
 }

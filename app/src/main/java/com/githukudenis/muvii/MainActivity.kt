@@ -9,7 +9,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.compose.rememberNavController
-import com.denisgithuku.design.ui.theme.MuviiTheme
+import com.denisgithuku.core_design.ui.theme.MuviiTheme
 import com.githukudenis.core_navigation.MuviiNavigator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
