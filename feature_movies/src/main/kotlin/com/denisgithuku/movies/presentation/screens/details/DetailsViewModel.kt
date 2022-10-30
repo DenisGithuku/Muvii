@@ -1,6 +1,5 @@
 package com.denisgithuku.movies.presentation.screens.details
 
-import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -9,7 +8,6 @@ import com.denisgithuku.core_data.Resource
 import com.denisgithuku.core_data.UserMessage
 import com.denisgithuku.core_data.data.local.MovieDBO
 import com.denisgithuku.core_data.providers.DispatcherProvider
-import com.denisgithuku.movies.domain.repository.MoviesRepository
 import com.denisgithuku.movies.domain.use_cases.MovieUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
@@ -23,7 +21,6 @@ import javax.inject.Inject
 @HiltViewModel
 class DetailsViewModel @Inject constructor(
     private val movieUseCases: MovieUseCases,
-    private val moviesRepository: MoviesRepository,
     private val dispatcherProvider: DispatcherProvider,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
@@ -36,7 +33,6 @@ class DetailsViewModel @Inject constructor(
     init {
         savedStateHandle.get<String>(Constants.movieId)?.let { movieId ->
             getMovieDetails(movieId.toInt()).also {
-                getFavouriteMovies()
                 getSimilarMovies(movieId.toInt())
             }
         }
@@ -54,31 +50,21 @@ class DetailsViewModel @Inject constructor(
                     )
                 }
             }
-            DetailsUiEvent.MarkFavourite -> {
-                getFavouriteMovies().also {
-                    if (_uiState.value.favMovieListIds.any { it == _uiState.value.movieDetails!!.id }) {
-                        _uiState.update {
-                            it.copy(
-                                showConfirmationDialog = !_uiState.value.showConfirmationDialog
-                            )
-                        }
+            DetailsUiEvent.MarkUnmarkFavourite -> {
+                _uiState.value.movieDetails?.let { movieDetails ->
+                    if (movieDetails.favourite) {
+                        deleteFromFavourites(movieDetails.id)
                     } else {
-                        val movieDBO = MovieDBO(movieId = _uiState.value.movieDetails!!.id)
-                        markAsFavourite(
-                            movieDBO
-                        )
+                        markAsFavourite(movieDetails.id)
                     }
                 }
             }
             DetailsUiEvent.UserDialogDismiss -> {
                 _uiState.update {
                     it.copy(
-                        showConfirmationDialog = !_uiState.value.showConfirmationDialog
+                        showConfirmationDialog = false
                     )
                 }
-            }
-           DetailsUiEvent.DeleteFromFavourites -> {
-                deleteFromFavourites(_uiState.value.movieDetails!!.id)
             }
         }
     }
@@ -94,14 +80,9 @@ class DetailsViewModel @Inject constructor(
                         }
                     }
                     is Resource.Success -> {
-                        _uiState.update {
-                            val movieDetails =
-                                result.data?.copy(favourite = _uiState.value.favMovieListIds.any { id ->
-                                    id == result.data?.id
-                                })
-
-                            it.copy(
-                                movieDetailsLoading = false, movieDetails = movieDetails
+                        _uiState.update { currentState ->
+                            currentState.copy(
+                                movieDetailsLoading = false, movieDetails = result.data
                             )
                         }
                     }
@@ -164,48 +145,32 @@ class DetailsViewModel @Inject constructor(
         }
     }
 
-    private fun getFavouriteMovies() {
-        viewModelScope.launch(dispatcherProvider.ioDispatcher) {
-            moviesRepository.getFavouriteMovieIdsFromDB().also { favMovieIds ->
-                _uiState.update {
-                    val ids = favMovieIds.map { it.movieId }
-                    it.copy(
-                        favMovieListIds = ids
-                    )
-                }
-                Log.d("favs2", favMovieIds.toString())
+    private fun markAsFavourite(movieId: Int) {
+        viewModelScope.launch {
+            val movie = MovieDBO(movieId)
+            movieUseCases.insertIntoFavourites(movie)
+            getMovieDetails(movieId)
+            _uiState.update { currentState ->
+                val userMessages = mutableListOf<UserMessage>()
+                userMessages.add(UserMessage(id = 0, "Added to favourites"))
+                currentState.copy(
+                    userMessages = userMessages
+                )
             }
-        }
-    }
 
-    private fun markAsFavourite(movieDBO: MovieDBO) {
-        viewModelScope.launch(dispatcherProvider.ioDispatcher) {
-            movieUseCases.insertIntoFavourites(movieDBO).also { markedAsFavourite ->
-                if (markedAsFavourite) {
-                    _uiState.update {
-                        val userMessages = mutableListOf<UserMessage>()
-                        userMessages.add(UserMessage(id = 0, message = "Added to favourites"))
-                        it.copy(
-                            userMessages = userMessages,
-                            movieDetails = it.movieDetails?.copy(favourite = true)
-                        )
-                    }
-                }
-            }
         }
     }
 
     private fun deleteFromFavourites(movieId: Int) {
-        viewModelScope.launch(dispatcherProvider.ioDispatcher) {
-            val movieDBO = MovieDBO(movieId)
-            movieUseCases.deleteFromFavouritesById(movieDBO).also {
-                _uiState.update {
-                    it.copy(
-                        movieDetails = _uiState.value.movieDetails?.copy(
-                            favourite = !_uiState.value.movieDetails!!.favourite
-                        )
-                    )
-                }
+        viewModelScope.launch {
+                movieUseCases.deleteFromFavouritesById(MovieDBO(movieId = movieId))
+                getMovieDetails(movieId)
+            _uiState.update { currentState ->
+                val userMessages = mutableListOf<UserMessage>()
+                userMessages.add(UserMessage(id = 0, "Removed from favourites"))
+                currentState.copy(
+                    userMessages = userMessages
+                )
             }
         }
     }
