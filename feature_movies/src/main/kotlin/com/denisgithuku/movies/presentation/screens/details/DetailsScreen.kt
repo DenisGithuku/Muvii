@@ -43,22 +43,15 @@ import okhttp3.internal.trimSubstring
 @OptIn(ExperimentalLifecycleComposeApi::class, ExperimentalMaterialApi::class)
 @Composable
 fun DetailsScreen(
+    scaffoldState: ScaffoldState,
     detailsViewModel: DetailsViewModel = hiltViewModel(),
     onOpenMovieDetails: (Int) -> Unit,
     onNavigateUp: () -> Unit
 ) {
     val uiState = detailsViewModel.uiState.collectAsStateWithLifecycle().value
-    val scaffoldState = rememberBottomSheetScaffoldState(
-        bottomSheetState = BottomSheetState(
-            initialValue = BottomSheetValue.Collapsed
-        )
-    )
 
-    BottomSheetScaffold(
-        scaffoldState = scaffoldState,
-        sheetContent = {},
-        sheetPeekHeight = 0.dp,
-    ) {
+
+
         if (uiState.movieDetailsLoading) {
             Box(
                 modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
@@ -107,9 +100,6 @@ fun DetailsScreen(
                 })
         }
     }
-
-
-}
 
 @Composable
 fun DetailsScreenWithState(

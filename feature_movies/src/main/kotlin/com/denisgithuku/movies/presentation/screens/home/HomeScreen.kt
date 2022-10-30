@@ -43,18 +43,19 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun HomeScreen(
+    scaffoldState: ScaffoldState,
     homeViewModel: HomeViewModel = hiltViewModel(),
     onToggleTheme: () -> Unit,
     onOpenDetails: (Int) -> Unit
 ) {
     val uiState = homeViewModel.uiState.collectAsState().value
-    val scaffoldState =
-        rememberBottomSheetScaffoldState(bottomSheetState = BottomSheetState(initialValue = BottomSheetValue.Collapsed))
     val coroutineScope = rememberCoroutineScope()
-
-
-
-    BottomSheetScaffold(scaffoldState = scaffoldState,
+    
+    val modalBottomSheetState = rememberModalBottomSheetState(
+        initialValue = ModalBottomSheetValue.Hidden
+    )
+    ModalBottomSheetLayout(
+        sheetState = modalBottomSheetState,
         sheetContent = {
             BottomSheetColumnContent(isLightTheme = !uiState.isSystemInDarkTheme,
                 sortTypes = uiState.sortTypes,
@@ -69,23 +70,10 @@ fun HomeScreen(
                 onToggleEnableAdultContent = { homeViewModel.onEvent(HomeEvent.ToggleAdultContentEnable) })
         },
         sheetBackgroundColor = MaterialTheme.colors.surface,
-        sheetPeekHeight = LocalAppDimens.current.default,
         sheetElevation = LocalAppDimens.current.large,
         sheetShape = MaterialTheme.shapes.large.copy(
             topEnd = CornerSize(18.dp), topStart = CornerSize(18.dp)
-        ),
-
-        topBar = {
-            TopBar {
-                coroutineScope.launch {
-                    if (scaffoldState.bottomSheetState.isCollapsed) {
-                        scaffoldState.bottomSheetState.expand()
-                    } else {
-                        scaffoldState.bottomSheetState.collapse()
-                    }
-                }
-            }
-        }) {
+        )) {
 
         if (uiState.genresLoading) {
             Row(
@@ -136,6 +124,15 @@ fun HomeScreen(
             movies = uiState.movies,
             trending_movies = uiState.trending,
             onOpenDetails = onOpenDetails,
+            onHandleBottomSheet = {
+                coroutineScope.launch {
+                    if (modalBottomSheetState.isVisible) {
+                        modalBottomSheetState.hide()
+                    } else {
+                        modalBottomSheetState.show()
+                    }
+                }
+            },
             onSearchMovies = {
                 homeViewModel.onEvent(HomeEvent.Search(it))
             }
@@ -143,12 +140,14 @@ fun HomeScreen(
     }
 }
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 private fun HomeScreen(
     modifier: Modifier = Modifier,
     selectedGenre: Int,
     onChangeGenre: (Int) -> Unit,
     onSearchMovies: (String) -> Unit,
+    onHandleBottomSheet: () -> Unit,
     genres: List<Genre>,
     movies: List<Movie>,
     trending_movies: List<TrendingMovie>,
@@ -163,6 +162,12 @@ private fun HomeScreen(
         verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+
+        item {
+            TopBar {
+                onHandleBottomSheet()
+            }
+        }
 
         item {
             SearchBar(onSearch = onSearchMovies)

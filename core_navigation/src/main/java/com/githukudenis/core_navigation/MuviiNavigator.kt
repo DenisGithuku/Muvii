@@ -14,7 +14,9 @@ fun MuviiNavigator(
 ) {
     NavHost(navController = navHostController, startDestination = Home.route) {
         composable(route = Home.route) {
-            HomeScreen(onToggleTheme = onToggleTheme, onOpenDetails = { movieId ->
+            HomeScreen(
+                scaffoldState = scaffoldState,
+                onToggleTheme = onToggleTheme, onOpenDetails = { movieId ->
                 navHostController.navigate(route = Details.route + "/${movieId}") {
 //                    launchSingleTop = true
                     popUpTo(route = Details.route) {
@@ -39,7 +41,9 @@ fun MuviiNavigator(
                 }
             }, onNavigateUp = {
                 navHostController.navigateUp()
-            })
+            },
+                scaffoldState = scaffoldState
+            )
         }
     }
 }

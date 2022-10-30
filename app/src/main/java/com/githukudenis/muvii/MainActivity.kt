@@ -4,7 +4,12 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
+import androidx.compose.ui.Modifier
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -34,11 +39,17 @@ class MainActivity : ComponentActivity() {
                         val navHostController = rememberNavController()
                         val scaffoldState = rememberScaffoldState()
                         MuviiTheme(darkTheme = darkTheme) {
-                            MuviiNavigator(
-                                scaffoldState = scaffoldState,
-                                navHostController = navHostController,
-                                onToggleTheme = mainViewModel::changeUiTheme
-                            )
+                            Scaffold(
+                                scaffoldState = scaffoldState
+                            ) { contentPadding ->
+                                Box(modifier = Modifier.fillMaxSize().padding(contentPadding)) {
+                                    MuviiNavigator(
+                                        scaffoldState = scaffoldState,
+                                        navHostController = navHostController,
+                                        onToggleTheme = mainViewModel::changeUiTheme
+                                    )
+                                }
+                            }
                         }
                     }
                 }
