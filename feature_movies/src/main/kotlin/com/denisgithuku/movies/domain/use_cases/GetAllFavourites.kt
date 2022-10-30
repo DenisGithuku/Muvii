@@ -1,7 +1,7 @@
 package com.denisgithuku.movies.domain.use_cases
 
-import com.denisgithuku.core.Resource
-import com.denisgithuku.core.providers.DispatcherProvider
+import com.denisgithuku.core_data.Resource
+import com.denisgithuku.core_data.providers.DispatcherProvider
 import com.denisgithuku.movies.data.data_src.remote.dto.movie.MovieDTO
 import com.denisgithuku.movies.domain.model.Movie
 import com.denisgithuku.movies.domain.repository.MoviesRepository

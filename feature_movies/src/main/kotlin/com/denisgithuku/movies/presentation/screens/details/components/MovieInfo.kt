@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.denisgithuku.design.ui.theme.LocalAppDimens
+import com.denisgithuku.core_design.ui.theme.LocalAppDimens
 
 @Composable
 fun MovieInfo(

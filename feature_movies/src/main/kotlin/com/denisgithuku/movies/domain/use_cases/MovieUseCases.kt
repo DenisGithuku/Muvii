@@ -13,4 +13,5 @@ data class MovieUseCases(
     val deleteAllFavourites: DeleteAllFavourites,
     val deleteFromFavouritesById: DeleteFromFavouritesById,
     val getAllFavourites: GetAllFavourites,
+    val searchMovies: SearchMovies
 )

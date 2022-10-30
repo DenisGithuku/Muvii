@@ -3,9 +3,9 @@ package com.denisgithuku.movies.presentation.screens.home
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.denisgithuku.core.Resource
-import com.denisgithuku.core.UserMessage
-import com.denisgithuku.core.providers.AppThemeProvider
+import com.denisgithuku.core_data.Resource
+import com.denisgithuku.core_data.UserMessage
+import com.denisgithuku.core_data.providers.AppThemeProvider
 import com.denisgithuku.movies.domain.common.SortType
 import com.denisgithuku.movies.domain.use_cases.MovieUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -54,12 +54,17 @@ class HomeViewModel @Inject constructor(
                     }
                     is Resource.Success -> {
                         _uiState.update {
-                            it.copy(genresLoading = false,
+                            it.copy(
+                                genresLoading = false,
                                 selectedGenre = result.data?.first()?.id ?: Math.random().toInt(),
-                                genres = result.data ?: emptyList())
+                                genres = result.data ?: emptyList()
+                            )
                         }
-                        getMoviesByGenre(sort_by = _uiState.value.selectedSortType,
-                            genreId = _uiState.value.selectedGenre, include_adult = _uiState.value.adultContentEnabled)
+                        getMoviesByGenre(
+                            sort_by = _uiState.value.selectedSortType,
+                            genreId = _uiState.value.selectedGenre,
+                            include_adult = _uiState.value.adultContentEnabled
+                        )
                     }
                 }
             }
@@ -68,9 +73,13 @@ class HomeViewModel @Inject constructor(
 
     private fun getUserMessagesFromException(throwable: Throwable?): List<UserMessage> {
         val userMessages = mutableListOf<UserMessage>()
-        userMessages.add(UserMessage(id = 0,
-            message = throwable?.localizedMessage
-                ?: Throwable(message = "Something went wrong.").localizedMessage))
+        userMessages.add(
+            UserMessage(
+                id = 0,
+                message = throwable?.localizedMessage
+                    ?: Throwable(message = "Something went wrong.").localizedMessage
+            )
+        )
         return userMessages
     }
 
@@ -84,8 +93,11 @@ class HomeViewModel @Inject constructor(
                             val userMessages = getUserMessagesFromException(result.throwable)
                             it.copy(trendingMovieLoading = false, userMessages = userMessages)
                         }
-                        getMoviesByGenre(sort_by = _uiState.value.selectedSortType,
-                            genreId = _uiState.value.selectedGenre, include_adult = _uiState.value.adultContentEnabled)
+                        getMoviesByGenre(
+                            sort_by = _uiState.value.selectedSortType,
+                            genreId = _uiState.value.selectedGenre,
+                            include_adult = _uiState.value.adultContentEnabled
+                        )
 
                     }
                     is Resource.Loading -> {
@@ -95,8 +107,10 @@ class HomeViewModel @Inject constructor(
                     }
                     is Resource.Success -> {
                         _uiState.update {
-                            it.copy(trendingMovieLoading = false,
-                                trending = result.data ?: emptyList())
+                            it.copy(
+                                trendingMovieLoading = false,
+                                trending = result.data ?: emptyList()
+                            )
                         }
                     }
                 }
@@ -110,8 +124,11 @@ class HomeViewModel @Inject constructor(
                 _uiState.update {
                     it.copy(selectedGenre = event.genreId)
                 }
-                getMoviesByGenre(sort_by = _uiState.value.selectedSortType,
-                    genreId = _uiState.value.selectedGenre, include_adult = _uiState.value.adultContentEnabled)
+                getMoviesByGenre(
+                    sort_by = _uiState.value.selectedSortType,
+                    genreId = _uiState.value.selectedGenre,
+                    include_adult = _uiState.value.adultContentEnabled
+                )
 
             }
             is HomeEvent.ErrorMessageDismissed -> {
@@ -128,36 +145,51 @@ class HomeViewModel @Inject constructor(
                         _uiState.update {
                             it.copy(selectedSortType = SortType.Popularity)
                         }
-                        getMoviesByGenre(sort_by = _uiState.value.selectedSortType,
-                            genreId = _uiState.value.selectedGenre, include_adult = _uiState.value.adultContentEnabled)
+                        getMoviesByGenre(
+                            sort_by = _uiState.value.selectedSortType,
+                            genreId = _uiState.value.selectedGenre,
+                            include_adult = _uiState.value.adultContentEnabled
+                        )
                     }
                     SortType.ReleaseDate -> {
                         _uiState.update {
                             it.copy(selectedSortType = SortType.ReleaseDate)
                         }
-                        getMoviesByGenre(sort_by = _uiState.value.selectedSortType,
-                            genreId = _uiState.value.selectedGenre, include_adult = _uiState.value.adultContentEnabled)
+                        getMoviesByGenre(
+                            sort_by = _uiState.value.selectedSortType,
+                            genreId = _uiState.value.selectedGenre,
+                            include_adult = _uiState.value.adultContentEnabled
+                        )
                     }
                     SortType.Revenue -> {
                         _uiState.update {
                             it.copy(selectedSortType = SortType.Revenue)
                         }
-                        getMoviesByGenre(sort_by = _uiState.value.selectedSortType,
-                            genreId = _uiState.value.selectedGenre, include_adult = _uiState.value.adultContentEnabled)
+                        getMoviesByGenre(
+                            sort_by = _uiState.value.selectedSortType,
+                            genreId = _uiState.value.selectedGenre,
+                            include_adult = _uiState.value.adultContentEnabled
+                        )
                     }
                     SortType.VoteAverage -> {
                         _uiState.update {
                             it.copy(selectedSortType = SortType.VoteAverage)
                         }
-                        getMoviesByGenre(sort_by = _uiState.value.selectedSortType,
-                            genreId = _uiState.value.selectedGenre, include_adult = _uiState.value.adultContentEnabled)
+                        getMoviesByGenre(
+                            sort_by = _uiState.value.selectedSortType,
+                            genreId = _uiState.value.selectedGenre,
+                            include_adult = _uiState.value.adultContentEnabled
+                        )
                     }
                     SortType.VoteCount -> {
                         _uiState.update {
                             it.copy(selectedSortType = SortType.VoteCount)
                         }
-                        getMoviesByGenre(sort_by = _uiState.value.selectedSortType,
-                            genreId = _uiState.value.selectedGenre, include_adult = _uiState.value.adultContentEnabled)
+                        getMoviesByGenre(
+                            sort_by = _uiState.value.selectedSortType,
+                            genreId = _uiState.value.selectedGenre,
+                            include_adult = _uiState.value.adultContentEnabled
+                        )
                     }
                 }
             }
@@ -170,12 +202,16 @@ class HomeViewModel @Inject constructor(
                     )
                 }
             }
+            is HomeEvent.Search -> {
+                searchMovie(event.query)
+            }
         }
     }
 
     private fun readUserPrefs() {
         viewModelScope.launch {
-            movieUseCases.readAdultContentPreferences(viewModelScope).collectLatest { adult_content_enabled ->
+            movieUseCases.readAdultContentPreferences(viewModelScope)
+                .collectLatest { adult_content_enabled ->
                     Log.d("user_prefs", adult_content_enabled.toString())
                     _uiState.update {
                         it.copy(adultContentEnabled = adult_content_enabled)
@@ -196,30 +232,57 @@ class HomeViewModel @Inject constructor(
     private fun getMoviesByGenre(sort_by: SortType, genreId: Int, include_adult: Boolean) {
         moviesByGenreJob?.cancel()
         moviesByGenreJob = viewModelScope.launch {
-            movieUseCases.getMoviesByGenre(sort_by, genreId, include_adult = include_adult).collect { result ->
+            movieUseCases.getMoviesByGenre(sort_by, genreId, include_adult = include_adult)
+                .collect { result ->
+                    when (result) {
+                        is Resource.Error -> {
+                            val messages = getUserMessagesFromException(result.throwable)
+                            _uiState.update {
+                                it.copy(moviesLoading = false, userMessages = messages)
+                            }
+
+                        }
+                        is Resource.Loading -> {
+                            _uiState.update {
+                                it.copy(moviesLoading = true)
+                            }
+                        }
+                        is Resource.Success -> {
+                            _uiState.update {
+                                it.copy(moviesLoading = false, movies = result.data ?: emptyList())
+                            }
+                            Log.d("genre", _uiState.value.selectedGenre.toString())
+                            Log.d("movieDetails", result.data.toString())
+                        }
+                    }
+                }
+        }
+    }
+
+    private fun searchMovie(query: String) {
+        viewModelScope.launch {
+            movieUseCases.searchMovies(query).collect { result ->
                 when (result) {
                     is Resource.Error -> {
-                        val messages = getUserMessagesFromException(result.throwable)
                         _uiState.update {
-                            it.copy(moviesLoading = false, userMessages = messages)
+                            val userMessages = getUserMessagesFromException(result.throwable)
+                            it.copy(searchLoading = false, userMessages = userMessages)
                         }
-
+                        Log.d("search_result", result.throwable?.message ?: "Error occurred")
                     }
+
                     is Resource.Loading -> {
                         _uiState.update {
-                            it.copy(moviesLoading = true)
+                            it.copy(
+                                searchLoading = true
+                            )
                         }
                     }
                     is Resource.Success -> {
-                        _uiState.update {
-                            it.copy(moviesLoading = false, movies = result.data ?: emptyList())
-                        }
-                        Log.d("genre", _uiState.value.selectedGenre.toString())
-                        Log.d("movieDetails", result.data.toString())
+                        Log.d("search_result", result.data.toString())
                     }
                 }
             }
         }
     }
-
 }

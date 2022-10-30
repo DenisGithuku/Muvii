@@ -26,10 +26,10 @@ import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.denisgithuku.core.Constants
-import com.denisgithuku.design.ui.components.ConfirmationDialog
-import com.denisgithuku.design.ui.components.MuviiIconButton
-import com.denisgithuku.design.ui.theme.LocalAppDimens
+import com.denisgithuku.core_data.Constants
+import com.denisgithuku.core_design.ui.components.ConfirmationDialog
+import com.denisgithuku.core_design.ui.components.MuviiIconButton
+import com.denisgithuku.core_design.ui.theme.LocalAppDimens
 import com.denisgithuku.movies.domain.model.Movie
 import com.denisgithuku.movies.domain.model.MovieDetails
 import com.denisgithuku.movies.presentation.components.TrendingMovieItem

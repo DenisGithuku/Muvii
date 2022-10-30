@@ -1,6 +1,6 @@
 package com.denisgithuku.movies.presentation.screens.details
 
-import com.denisgithuku.core.UserMessage
+import com.denisgithuku.core_data.UserMessage
 import com.denisgithuku.movies.domain.model.Movie
 import com.denisgithuku.movies.domain.model.MovieDetails
 

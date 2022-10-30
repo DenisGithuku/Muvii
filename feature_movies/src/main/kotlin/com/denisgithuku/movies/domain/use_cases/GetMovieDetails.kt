@@ -1,6 +1,7 @@
 package com.denisgithuku.movies.domain.use_cases
 
-import com.denisgithuku.core.Resource
+import com.denisgithuku.core_data.Resource
+import com.denisgithuku.core_data.providers.DispatcherProvider
 import com.denisgithuku.movies.domain.model.MovieDetails
 import com.denisgithuku.movies.domain.repository.MoviesRepository
 import kotlinx.coroutines.flow.Flow
@@ -11,7 +12,8 @@ import javax.inject.Inject
 
 class GetMovieDetails @Inject constructor(
     private val movieRepository: MoviesRepository,
-    private val formatDateUseCase: FormatDateUseCase
+    private val formatDateUseCase: FormatDateUseCase,
+    private val dispatcherProvider: DispatcherProvider
 ) {
 
     suspend operator fun invoke(movieId: Int): Flow<Resource<MovieDetails>> = flow {
@@ -23,7 +25,6 @@ class GetMovieDetails @Inject constructor(
                     release_date = formatDateUseCase(it.release_date)
                 )))
             }
-
         } catch (e: HttpException) {
             emit(Resource.Error(e))
         } catch (e: IOException) {

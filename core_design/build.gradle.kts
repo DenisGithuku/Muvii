@@ -45,4 +45,5 @@ dependencies {
     implementation(Deps.compose_tooling_preview)
     implementation(Deps.compose_material)
     testImplementation("junit:junit:4.12")
+    androidTestImplementation("junit:junit:4.12")
 }

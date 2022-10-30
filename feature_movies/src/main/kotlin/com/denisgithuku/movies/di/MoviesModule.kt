@@ -1,9 +1,9 @@
 package com.denisgithuku.movies.di
 
-import com.denisgithuku.core.Constants
-import com.denisgithuku.core.data.local.FavouriteMoviesDao
-import com.denisgithuku.core.providers.DispatcherProvider
-import com.denisgithuku.core.providers.UserPreferences
+import com.denisgithuku.core_data.Constants
+import com.denisgithuku.core_data.data.local.FavouriteMoviesDao
+import com.denisgithuku.core_data.providers.DispatcherProvider
+import com.denisgithuku.core_data.providers.UserPreferences
 import com.denisgithuku.movies.data.data_src.remote.MoviesApiInterface
 import com.denisgithuku.movies.data.data_src.repository_impl.MoviesRepositoryImpl
 import com.denisgithuku.movies.domain.repository.MoviesRepository
@@ -63,12 +63,13 @@ object MoviesModule {
             readAdultContentPreferences = GetAdultContentPreferences(userPreferences),
             changeUiTheme = ChangeUiTheme(userPreferences),
             enableAdultContent = EnableAdultContent(userPreferences),
-            getMovieDetails = GetMovieDetails(moviesRepository, formatDateUseCase),
+            getMovieDetails = GetMovieDetails(moviesRepository, formatDateUseCase, dispatcherProvider),
             getSimilarMoviesById = GetSimilarMoviesById(moviesRepository),
             insertIntoFavourites = InsertIntoFavourites(moviesRepository),
             deleteAllFavourites = DeleteAllFavourites(moviesRepository),
             deleteFromFavouritesById = DeleteFromFavouritesById(moviesRepository),
-            getAllFavourites = GetAllFavourites(moviesRepository, dispatcherProvider)
+            getAllFavourites = GetAllFavourites(moviesRepository, dispatcherProvider),
+            searchMovies = SearchMovies(moviesRepository, dispatcherProvider)
         )
     }
 }

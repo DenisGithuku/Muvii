@@ -2,7 +2,7 @@
 package com.denisgithuku.movies.presentation.screens.details;
 
 import androidx.lifecycle.SavedStateHandle;
-import com.denisgithuku.core.providers.DispatcherProvider;
+import com.denisgithuku.core_data.providers.DispatcherProvider;
 import com.denisgithuku.movies.domain.repository.MoviesRepository;
 import com.denisgithuku.movies.domain.use_cases.MovieUseCases;
 import dagger.internal.DaggerGenerated;
