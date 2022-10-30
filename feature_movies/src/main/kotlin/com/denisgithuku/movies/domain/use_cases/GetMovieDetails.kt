@@ -20,9 +20,10 @@ class GetMovieDetails @Inject constructor(
         try {
             emit(Resource.Loading())
             val res = movieRepository.getMovieDetails(movieId)
-            res?.let {
-                emit(Resource.Success(it.toMovie().copy(
-                    release_date = formatDateUseCase(it.release_date)
+            res?.let { movieDetails ->
+                emit(Resource.Success(movieDetails.toMovie().copy(
+                    release_date = formatDateUseCase(movieDetails.release_date),
+                    favourite = movieRepository.getFavouriteMovieIdsFromDB().any { it.movieId == movieDetails.id }
                 )))
             }
         } catch (e: HttpException) {

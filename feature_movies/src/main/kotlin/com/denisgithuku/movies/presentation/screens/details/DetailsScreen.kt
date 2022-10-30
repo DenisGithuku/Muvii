@@ -83,7 +83,7 @@ fun DetailsScreen(
                 confirmButtonTextId = com.denisgithuku.core_design.R.string.confirm_button_text,
                 cancelButtonTextId = com.denisgithuku.core_design.R.string.cancel_button_text,
                 onConfirm = {
-                    detailsViewModel.onEvent(DetailsUiEvent.DeleteFromFavourites)
+                    detailsViewModel.onEvent(DetailsUiEvent.MarkUnmarkFavourite)
                     detailsViewModel.onEvent(DetailsUiEvent.UserDialogDismiss)
                 },
                 onCancel = {
@@ -100,9 +100,9 @@ fun DetailsScreen(
                 similarMovies = uiState.similarMovies,
                 onOpenSimilarMovie = onOpenMovieDetails,
                 onNavigateUp = onNavigateUp,
-                onMarkFavourite = {
+                onMarkUnmarkFavourite = {
                     detailsViewModel.onEvent(
-                        DetailsUiEvent.MarkFavourite
+                        DetailsUiEvent.MarkUnmarkFavourite
                     )
                 })
         }
@@ -117,7 +117,7 @@ fun DetailsScreenWithState(
     similarMoviesLoading: Boolean,
     similarMovies: List<Movie>,
     onOpenSimilarMovie: (Int) -> Unit,
-    onMarkFavourite: () -> Unit,
+    onMarkUnmarkFavourite: () -> Unit,
     onNavigateUp: () -> Unit,
 ) {
     val context = LocalContext.current
@@ -171,7 +171,7 @@ fun DetailsScreenWithState(
                         )
                     }
                     MuviiIconButton(onClick = {
-                        onMarkFavourite()
+                        onMarkUnmarkFavourite()
                     }) {
                         if (movieDetails.favourite) {
                             Icon(
@@ -332,6 +332,6 @@ fun DetailsScreenWithStatePreview() {
         similarMoviesLoading = false,
         similarMovies = emptyList(),
         onOpenSimilarMovie = {},
-        onMarkFavourite = {},
+        onMarkUnmarkFavourite = {},
         onNavigateUp = {})
 }
