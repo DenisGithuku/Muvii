@@ -6,7 +6,6 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.gestures.detectTapGestures
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -19,12 +18,11 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.denisgithuku.core_design.ui.theme.LocalAppDimens
 
 @Composable
 fun CustomSwitch(
-    modifier: Modifier = Modifier.padding(LocalAppDimens.current.medium),
-    gapBetweenIndicatorAndThumb: Dp = 2.dp,
+    modifier: Modifier = Modifier,
+    gapBetweenIndicatorAndThumb: Dp = 4.dp,
     strokeWidth: Dp = 2.dp,
     width: Dp = 40.dp,
     height: Dp = 22.dp,

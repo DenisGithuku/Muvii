@@ -6,11 +6,11 @@ plugins {
 
 android {
     namespace = "com.githukudenis.core_navigation"
-    compileSdk = 32
+    compileSdk = 33
 
     defaultConfig {
         minSdk = 24
-        targetSdk = 32
+        targetSdk = 33
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -45,6 +45,7 @@ android {
 
 dependencies {
 
+    implementation(project(":core_design"))
     implementation(project(":core_data"))
     implementation(project(":feature_movies"))
     implementation(Deps.navigation)

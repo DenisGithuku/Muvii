@@ -1,7 +1,13 @@
 package com.githukudenis.core_navigation
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.ScaffoldState
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -12,14 +18,14 @@ import com.denisgithuku.movies.presentation.screens.home.HomeScreen
 fun MuviiNavigator(
     scaffoldState: ScaffoldState, navHostController: NavHostController, onToggleTheme: () -> Unit
 ) {
-    NavHost(navController = navHostController, startDestination = Home.route) {
-        composable(route = Home.route) {
+    NavHost(navController = navHostController, startDestination = Screen.Home.routeId) {
+        composable(route = Screen.Home.routeId) {
             HomeScreen(
                 scaffoldState = scaffoldState,
                 onToggleTheme = onToggleTheme, onOpenDetails = { movieId ->
-                navHostController.navigate(route = Details.route + "/${movieId}") {
+                navHostController.navigate(route = "details" + "/${movieId}") {
 //                    launchSingleTop = true
-                    popUpTo(route = Details.route) {
+                    popUpTo(route = "details") {
                         inclusive = true
                         saveState = true
                     }
@@ -28,12 +34,12 @@ fun MuviiNavigator(
             })
         }
 
-        composable(route = Details.route + "/{movieId}") {
+        composable(route = "details" + "/{movieId}") {
             DetailsScreen(
                 onOpenMovieDetails = { movieId ->
-                navHostController.navigate(route = Details.route + "/${movieId}") {
+                navHostController.navigate(route = "details" + "/${movieId}") {
 //                    launchSingleTop = true
-                    popUpTo(route = Details.route) {
+                    popUpTo(route = "details") {
                         inclusive = true
                         saveState = true
                     }
@@ -44,6 +50,39 @@ fun MuviiNavigator(
             },
                 scaffoldState = scaffoldState
             )
+        }
+        composable(route = Screen.Shows.routeId) {
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = "Coming soon..."
+                )
+            }
+        }
+        composable(route = Screen.Favourites.routeId) {
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = "Coming soon..."
+                )
+            }
+        }
+        composable(route = Screen.Search.routeId) {
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = "Coming soon..."
+                )
+            }
         }
     }
 }

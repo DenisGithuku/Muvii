@@ -66,7 +66,7 @@ val Typography = Typography(
     subtitle1 = TextStyle(
         fontFamily = OpenSans,
         fontStyle = FontStyle.Normal,
-        fontWeight = FontWeight.Normal,
+        fontWeight = FontWeight.SemiBold,
         fontSize = 16.sp
     ),
     subtitle2 = TextStyle(

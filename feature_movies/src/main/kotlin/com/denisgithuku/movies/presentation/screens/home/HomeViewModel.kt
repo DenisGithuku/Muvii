@@ -29,8 +29,10 @@ class HomeViewModel @Inject constructor(
     private var genresJob: Job? = null
     private var moviesByGenreJob: Job? = null
     private var trendingMoviesJob: Job? = null
+    private var themeJob: Job? = null
 
     init {
+        getAppTheme()
         readUserPrefs()
         getGenres()
         getTrending()
@@ -205,6 +207,9 @@ class HomeViewModel @Inject constructor(
             is HomeEvent.Search -> {
                 searchMovie(event.query)
             }
+            is HomeEvent.ToggleTheme -> {
+                getAppTheme()
+            }
         }
     }
 
@@ -224,6 +229,17 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             movieUseCases.enableAdultContent(!_uiState.value.adultContentEnabled).also {
                 readUserPrefs()
+            }
+        }
+    }
+
+    private fun getAppTheme() {
+        themeJob?.cancel()
+        themeJob = viewModelScope.launch {
+            appThemeProvider.getUserTheme(this).collectLatest { inDarkTheme ->
+                _uiState.update {
+                    it.copy(isSystemInDarkTheme = inDarkTheme)
+                }
             }
         }
     }
