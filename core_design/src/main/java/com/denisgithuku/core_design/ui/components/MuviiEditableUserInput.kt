@@ -3,13 +3,14 @@ package com.denisgithuku.core_design.ui.components
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import com.denisgithuku.core_design.ui.theme.LocalAppDimens
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MuviiEditableUserInput(
     modifier: Modifier = Modifier,
@@ -33,7 +34,7 @@ fun MuviiEditableUserInput(
             placeholder = {
                 Text(
                     text = state.hint,
-                    style = MaterialTheme.typography.caption,
+                    style = MaterialTheme.typography.bodySmall,
                     maxLines = 1,
                 )
             },
@@ -54,7 +55,7 @@ fun MuviiEditableUserInput(
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent
             ),
-            textStyle = MaterialTheme.typography.caption,
+            textStyle = MaterialTheme.typography.bodySmall,
             modifier = modifier.padding(LocalAppDimens.current.large)
         )
     }

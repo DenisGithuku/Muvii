@@ -6,9 +6,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,7 +24,7 @@ fun RoundedRectangleChip(
         shape = CircleShape,
         border = BorderStroke(
             width = LocalAppDimens.current.extra_small,
-            color = MaterialTheme.colors.secondary.copy(alpha = 0.7f)
+            color = MaterialTheme.colorScheme.secondary.copy(alpha = 0.7f)
         ),
         color = Color.Transparent
     ) {
@@ -35,7 +35,7 @@ fun RoundedRectangleChip(
         ) {
             Text(
                 text = label,
-                style = MaterialTheme.typography.caption,
+                style = MaterialTheme.typography.bodySmall,
                 modifier = modifier.padding(
                     horizontal = LocalAppDimens.current.large,
                     vertical = LocalAppDimens.current.medium

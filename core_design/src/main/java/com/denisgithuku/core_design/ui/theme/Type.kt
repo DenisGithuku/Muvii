@@ -1,6 +1,6 @@
 package com.denisgithuku.core_design.ui.theme
 
-import androidx.compose.material.Typography
+import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -21,71 +21,66 @@ val OpenSans = FontFamily(
 
 
 val Typography = Typography(
-    body1 = TextStyle(
+    bodyLarge = TextStyle(
         fontFamily = OpenSans,
         fontWeight = FontWeight.Normal,
         fontStyle = FontStyle.Normal,
         fontSize = 16.sp),
-    body2 = TextStyle(
+    bodyMedium = TextStyle(
         fontFamily = OpenSans,
         fontStyle = FontStyle.Normal,
         fontWeight = FontWeight.Normal,
         fontSize = 14.sp
     ),
-    h1 = TextStyle(
+    displayLarge = TextStyle(
         fontFamily = OpenSans,
         fontStyle = FontStyle.Normal,
         fontWeight = FontWeight.Bold,
         fontSize = 24.sp
     ),
-    h2 = TextStyle(
+    displayMedium = TextStyle(
         fontFamily = OpenSans,
         fontWeight = FontWeight.Bold,
         fontSize = 22.sp
     ),
-    h3 = TextStyle(
+    displaySmall = TextStyle(
         fontFamily = OpenSans,
         fontWeight = FontWeight.SemiBold,
         fontSize = 18.sp
     ),
-    h4 = TextStyle(
-        fontFamily = OpenSans,
-        fontWeight = FontWeight.SemiBold,
-        fontSize = 20.sp
-    ),
-    h5 = TextStyle(
+    headlineLarge = TextStyle(
         fontFamily = OpenSans,
         fontWeight = FontWeight.Normal,
         fontSize = 20.sp
     ),
-    h6 = TextStyle(
+    headlineMedium = TextStyle(
         fontFamily = OpenSans,
         fontWeight = FontWeight.Normal,
         fontSize = 20.sp
     ),
-    subtitle1 = TextStyle(
+    titleMedium = TextStyle(
         fontFamily = OpenSans,
         fontStyle = FontStyle.Normal,
         fontWeight = FontWeight.SemiBold,
         fontSize = 16.sp
     ),
-    subtitle2 = TextStyle(
+    titleLarge = TextStyle(
         fontFamily = OpenSans,
         fontStyle = FontStyle.Normal,
         fontWeight = FontWeight.Normal,
         fontSize = 14.sp
     ),
-    button = TextStyle(
+    labelLarge = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.W500,
         fontSize = 14.sp),
-    caption = TextStyle(
+    bodySmall = TextStyle(
         fontFamily = OpenSans,
         fontStyle = FontStyle.Normal,
         fontWeight = FontWeight.Normal,
         fontSize = 12.sp
     ),
-    overline = TextStyle(
+    labelSmall = TextStyle(
         fontFamily = OpenSans,
         fontStyle = FontStyle.Italic,
         fontWeight = FontWeight.Light,

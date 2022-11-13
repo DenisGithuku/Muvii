@@ -3,9 +3,9 @@ package com.denisgithuku.movies.presentation.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,7 +24,7 @@ import com.denisgithuku.core_data.Constants
 import com.denisgithuku.core_design.ui.theme.LocalAppDimens
 import com.githukudenis.movies.R
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MovieItem(
     modifier: Modifier = Modifier,
@@ -38,7 +38,8 @@ fun MovieItem(
     Surface(
         onClick = { onOpen(movieId) },
         shape = RoundedCornerShape(16.dp),
-        color = MaterialTheme.colors.onBackground.copy(alpha = 0.07f),
+        color = MaterialTheme.colorScheme.surface,
+        shadowElevation = 2.dp,
         modifier = modifier.padding(
             horizontal = LocalAppDimens.current.large,
             vertical = LocalAppDimens.current.medium
@@ -95,25 +96,24 @@ fun MovieItem(
 private fun InfoItem(rating: Double, modifier: Modifier) {
     Box(
         modifier = modifier.background(
-            color = MaterialTheme.colors.secondary, shape = RoundedCornerShape(16.dp)
+            color = MaterialTheme.colorScheme.secondary, shape = RoundedCornerShape(16.dp)
         ), contentAlignment = Alignment.Center
     ) {
         Row(
             modifier = modifier.padding(4.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
+            horizontalArrangement = Arrangement.spacedBy(LocalAppDimens.current.medium),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
                 text = rating.toString(),
-                style = TextStyle(
-                    textAlign = TextAlign.Center,
-                    color = MaterialTheme.colors.onSecondary
+                style = MaterialTheme.typography.labelMedium.copy(
+                    color = MaterialTheme.colorScheme.onSecondary
                 )
             )
             Icon(
                 imageVector = Icons.Default.Star,
                 contentDescription = "Rating",
-                tint = MaterialTheme.colors.onSecondary
+                tint = MaterialTheme.colorScheme.onSecondary
             )
         }
     }

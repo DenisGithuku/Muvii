@@ -6,7 +6,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
@@ -18,28 +18,30 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.denisgithuku.core_design.ui.components.MuviiIconButton
 import com.denisgithuku.core_design.ui.theme.LocalAppDimens
 import com.denisgithuku.movies.domain.common.SortType
 import com.denisgithuku.movies.domain.model.Genre
 import com.denisgithuku.movies.domain.model.Movie
 import com.denisgithuku.movies.domain.model.TrendingMovie
-import com.denisgithuku.movies.presentation.components.CustomSwitch
 import com.denisgithuku.movies.presentation.components.GenreItem
 import com.denisgithuku.movies.presentation.components.MovieItem
 import com.denisgithuku.movies.presentation.components.TrendingMovieItem
 import com.denisgithuku.movies.presentation.screens.home.components.SearchBar
 
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun HomeScreen(
-    scaffoldState: ScaffoldState,
+    snackbarHostState: SnackbarHostState,
     homeViewModel: HomeViewModel = hiltViewModel(),
     onToggleTheme: () -> Unit,
+    isInDarkTheme: Boolean,
     onOpenDetails: (Int) -> Unit
 ) {
-    val uiState = homeViewModel.uiState.collectAsState().value
+    val uiState by homeViewModel.uiState.collectAsStateWithLifecycle()
 
 
     val dialogProperties = DialogProperties(
@@ -56,7 +58,7 @@ fun HomeScreen(
             horizontalArrangement = Arrangement.Center
         ) {
             CircularProgressIndicator(
-                color = MaterialTheme.colors.secondary
+                color = MaterialTheme.colorScheme.secondary
             )
         }
     }
@@ -68,7 +70,7 @@ fun HomeScreen(
             horizontalArrangement = Arrangement.Center
         ) {
             CircularProgressIndicator(
-                color = MaterialTheme.colors.secondary
+                color = MaterialTheme.colorScheme.secondary
             )
         }
     }
@@ -76,7 +78,7 @@ fun HomeScreen(
     if (uiState.moviesLoading) {
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
             CircularProgressIndicator(
-                color = MaterialTheme.colors.secondary
+                color = MaterialTheme.colorScheme.secondary
             )
         }
     }
@@ -91,10 +93,13 @@ fun HomeScreen(
             Box(
                 modifier = Modifier
                     .sizeIn(minWidth = 200.dp, minHeight = 300.dp)
-                    .background(MaterialTheme.colors.surface, shape = MaterialTheme.shapes.large)
+                    .background(
+                        MaterialTheme.colorScheme.surface,
+                        shape = MaterialTheme.shapes.large
+                    )
             ) {
                 DialogContent(
-                    isDarkTheme = uiState.isSystemInDarkTheme,
+                    isDarkTheme = isInDarkTheme,
                     sortTypes = uiState.sortTypes,
                     selectedSortType = uiState.selectedSortType,
                     adultContentEnabled = uiState.adultContentEnabled,
@@ -106,7 +111,6 @@ fun HomeScreen(
                     },
                     onToggleTheme = {
                         onToggleTheme()
-                        homeViewModel.onEvent(HomeEvent.ToggleTheme)
                     },
                     onDismissRequest = {
                         settingsDialogOpen = !settingsDialogOpen
@@ -118,8 +122,8 @@ fun HomeScreen(
 
     if (uiState.userMessages.isNotEmpty()) {
         val userMessage = uiState.userMessages[0]
-        LaunchedEffect(scaffoldState.snackbarHostState, uiState.userMessages) {
-            scaffoldState.snackbarHostState.showSnackbar(userMessage.message)
+        LaunchedEffect(snackbarHostState, uiState.userMessages) {
+            snackbarHostState.showSnackbar(userMessage.message)
             homeViewModel.onEvent(HomeEvent.ErrorMessageDismissed(userMessage.id))
         }
     }
@@ -140,7 +144,7 @@ fun HomeScreen(
         })
 }
 
-@OptIn(ExperimentalMaterialApi::class)
+
 @Composable
 private fun HomeScreen(
     modifier: Modifier = Modifier,
@@ -235,12 +239,12 @@ fun DialogContent(
     ) {
 
         Text(
-            text = "Settings", style = MaterialTheme.typography.h3
+            text = "Settings", style = MaterialTheme.typography.displaySmall
         )
         Divider()
         Text(
             text = "Theme",
-            style = MaterialTheme.typography.subtitle1,
+            style = MaterialTheme.typography.titleMedium,
         )
 
         Row(
@@ -248,20 +252,17 @@ fun DialogContent(
             horizontalArrangement = Arrangement.spacedBy(LocalAppDimens.current.medium),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            CustomSwitch(
-                selectedColor = MaterialTheme.colors.secondary,
-                isToggleOn = isDarkTheme,
-                unSelectedColor = MaterialTheme.colors.onSurface.copy(alpha = 0.6f)) {
-                onToggleTheme()
-            }
+            
+            Switch(checked = isDarkTheme, onCheckedChange = { onToggleTheme() })
+            
             Text(
-                text = "Dark", style = MaterialTheme.typography.body2
+                text = "Dark", style = MaterialTheme.typography.bodyLarge
             )
         }
 
         Text(
             text = "Content preferences",
-            style = MaterialTheme.typography.subtitle1
+            style = MaterialTheme.typography.titleMedium
         )
 
         Row(
@@ -269,21 +270,15 @@ fun DialogContent(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(LocalAppDimens.current.medium)
         ) {
-            CustomSwitch(
-                selectedColor = MaterialTheme.colors.secondary,
-                isToggleOn = adultContentEnabled,
-                unSelectedColor = MaterialTheme.colors.onSurface.copy(alpha = 0.6f)
-            ) {
-                onToggleEnableAdultContent()
-            }
+            Switch(checked = adultContentEnabled, onCheckedChange = { onToggleEnableAdultContent() })
             Text(
-                text = "Include adult content", style = MaterialTheme.typography.body2
+                text = "Include adult content", style = MaterialTheme.typography.bodyMedium
             )
         }
 
         Text(
             text = "Sort Type",
-            style = MaterialTheme.typography.subtitle1
+            style = MaterialTheme.typography.titleMedium
         )
 
         Column(
@@ -301,7 +296,7 @@ fun DialogContent(
                     RadioButton(selected = sortType == selectedSortType,
                         onClick = { onChangeSortType(sortType) })
                     Text(
-                        text = getSortType(sortType), style = MaterialTheme.typography.body2
+                        text = getSortType(sortType), style = MaterialTheme.typography.bodyMedium
                     )
                 }
             }
@@ -310,16 +305,14 @@ fun DialogContent(
         TextButton(onClick = { onDismissRequest() }) {
             Text(
                 text = "Ok",
-                style = MaterialTheme.typography.button.copy(
-                    color = MaterialTheme.colors.onSurface
+                style = MaterialTheme.typography.labelSmall.copy(
+                    color = MaterialTheme.colorScheme.onSurface
                 )
             )
         }
     }
 }
 
-
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun TopBar(
     modifier: Modifier = Modifier,
@@ -333,7 +326,7 @@ fun TopBar(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Text(text = "Discover", style = MaterialTheme.typography.subtitle1)
+        Text(text = "Discover", style = MaterialTheme.typography.titleMedium)
         MuviiIconButton(onClick = { onOpenSettings() }) {
             Icon(
                 painter = painterResource(id = com.denisgithuku.core_design.R.drawable.settings_outline),

@@ -1,11 +1,11 @@
 package com.denisgithuku.core_design.ui.components
 
 import androidx.compose.foundation.background
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -19,7 +19,7 @@ fun MuviiIconButton(
     IconButton(
         modifier = Modifier
         .background(
-            MaterialTheme.colors.onBackground.copy(alpha = 0.2f), shape = MaterialTheme.shapes.large
+            MaterialTheme.colorScheme.surfaceVariant, shape = MaterialTheme.shapes.large
         )
         , onClick = { onClick() }, content = icon)
 }

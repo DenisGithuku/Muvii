@@ -13,11 +13,11 @@ val TMDB_API_KEY: String = gradleLocalProperties(rootDir).getProperty("TMDB_API_
 
 android {
     namespace = "com.githukudenis.movies"
-    compileSdk = 32
+    compileSdk = 33
 
     defaultConfig {
         minSdk = 24
-        targetSdk = 32
+        targetSdk = 33
 
         buildConfigField("String", "TMDB_API_KEY", TMDB_API_KEY)
 

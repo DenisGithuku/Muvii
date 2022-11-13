@@ -8,7 +8,7 @@ object Versions {
     const val espresso = "3.4.0"
     const val dagger_hilt = "2.42"
     const val appcompat = "1.4.2"
-    const val material = "1.6.1"
+    const val material3 = "1.0.1"
     const val okhttp = "4.10.0"
     const val gson = "2.9.0"
     const val retrofit = "2.6.4"
@@ -27,7 +27,6 @@ object Versions {
 
 object Deps {
     const val appcompat = "androidx.appcompat:appcompat:${Versions.appcompat}"
-    const val material = "com.google.android.material:material:${Versions.material}"
     const val lifecycle_runtime = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle_runtime}"
     const val activity_compose = "androidx.activity:activity-compose:${Versions.activity_compose}"
     const val core = "androidx.core:core-ktx:${Versions.core}"
@@ -38,7 +37,7 @@ object Deps {
     const val dagger_hilt_compiler = "com.google.dagger:hilt-android-compiler:${Versions.dagger_hilt}"
     const val compose_ui = "androidx.compose.ui:ui:${Versions.compose}"
     const val compose_tooling_preview = "androidx.compose.ui:ui-tooling-preview:${Versions.compose}"
-    const val compose_material = "androidx.compose.material:material:${Versions.compose}"
+    const val compose_material = "androidx.compose.material3:material3:${Versions.material3}"
     const val junit_testImplementation =  "junit:junit:${Versions.junit}"
     const val junit_androidTestImplementation = "androidx.test.ext:junit:${Versions.ext_junit}"
     const val espresso_androidTestImplementation = "androidx.test.espresso:espresso-core:${Versions.espresso}"

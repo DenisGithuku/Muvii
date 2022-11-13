@@ -3,9 +3,9 @@ package com.denisgithuku.core_design.ui.components
 import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -42,7 +42,7 @@ fun ConfirmationDialog(
                     minWidth = 200.dp,
                     minHeight = 300.dp
                 )
-                .background(color = MaterialTheme.colors.surface,
+                .background(color = MaterialTheme.colorScheme.surface,
                     shape = MaterialTheme.shapes.large).padding(LocalAppDimens.current.medium),
             contentAlignment = Alignment.Center
         ) {
@@ -55,11 +55,11 @@ fun ConfirmationDialog(
             ) {
                 Text(
                     text = context.getString(dialogTitleId),
-                    style = MaterialTheme.typography.subtitle2
+                    style = MaterialTheme.typography.titleMedium
                 )
                 Text(
                     text = context.getString(dialogDescriptionId),
-                    style = MaterialTheme.typography.body2,
+                    style = MaterialTheme.typography.bodyLarge,
                     textAlign = TextAlign.Center
                 )
                 Row(

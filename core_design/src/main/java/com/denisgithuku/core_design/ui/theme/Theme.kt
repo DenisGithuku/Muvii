@@ -1,8 +1,8 @@
 package com.denisgithuku.core_design.ui.theme
 
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.darkColors
-import androidx.compose.material.lightColors
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
@@ -10,9 +10,9 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 
-private val DarkColorPalette = darkColors(
+
+private val DarkColorPalette = darkColorScheme(
     primary = Blue900,
-    primaryVariant = Pink900,
     secondary = Orange900,
     background = Blue900,
     surface = Blue700,
@@ -20,19 +20,16 @@ private val DarkColorPalette = darkColors(
     onSecondary = Color.White,
     onBackground = White,
     onSurface = White,
-
     )
 
-private val LightColorPalette = lightColors(
+private val LightColorPalette = lightColorScheme(
     primary = Blue500,
-    primaryVariant = Pink900,
     secondary = Orange500,
     background = Color.White,
     surface = Color.White,
     onPrimary = Color.White,
     onSecondary = Color.White,
     onBackground = Color.Black.copy(alpha = 0.8f),
-    secondaryVariant = Orange200,
     error = Color.White,
 )
 
@@ -52,7 +49,7 @@ val LocalAppDimens = staticCompositionLocalOf { swDimens }
 
 @Composable
 fun MuviiTheme(darkTheme: Boolean, content: @Composable () -> Unit) {
-    val colors = if (darkTheme) {
+    val colorScheme = if (darkTheme) {
         DarkColorPalette
     } else {
         LightColorPalette
@@ -63,7 +60,7 @@ fun MuviiTheme(darkTheme: Boolean, content: @Composable () -> Unit) {
 
     CompositionLocalProvider(LocalAppDimens provides dimens) {
         MaterialTheme(
-            colors = colors,
+            colorScheme = colorScheme,
             typography = Typography,
             shapes = Shapes,
             content = content

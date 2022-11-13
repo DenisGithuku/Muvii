@@ -8,7 +8,7 @@ sealed class Screen (val routeId: String, @DrawableRes val vectorId: Int? = null
         Screen(routeId = "TV", vectorId = com.denisgithuku.core_design.R.drawable.tv_outline)
 
     object Home:
-        Screen(routeId = "Movies", vectorId = com.denisgithuku.core_design.R.drawable.home_outline)
+        Screen(routeId = "Movie", vectorId = com.denisgithuku.core_design.R.drawable.home_outline)
 
     object Details:
             Screen(routeId = "Details", null)
@@ -16,7 +16,7 @@ sealed class Screen (val routeId: String, @DrawableRes val vectorId: Int? = null
         Screen(routeId = "Search", vectorId = com.denisgithuku.core_design.R.drawable.search)
 
     object Favourites: Screen(
-        routeId = "Favourites",
+        routeId = "Saved",
         vectorId = com.denisgithuku.core_design.R.drawable.favourites
     )
 }

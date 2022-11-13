@@ -8,8 +8,9 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.lifecycle.Lifecycle
@@ -37,6 +38,7 @@ class MainActivity : ComponentActivity() {
         Screen.Favourites,
     )
 
+    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -44,31 +46,32 @@ class MainActivity : ComponentActivity() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 mainViewModel.uiState.map {
                     it.isSystemInDarkTheme
-                }.distinctUntilChanged().collectLatest { darkTheme ->
+                }.distinctUntilChanged().collectLatest { isInDarkTheme ->
                     setContent {
                         val navHostController = rememberNavController()
                         val navState by navHostController.currentBackStackEntryAsState()
                         val currentDestination = navState?.destination
-                        val scaffoldState = rememberScaffoldState()
-                        MuviiTheme(darkTheme = darkTheme) {
+                        val snackbarHostState = remember { SnackbarHostState() }
+
+                        MuviiTheme(darkTheme = isInDarkTheme) {
                             Scaffold(
-                                scaffoldState = scaffoldState,
+                                snackbarHost = { SnackbarHost(snackbarHostState) },
                                 bottomBar = {
                                     AnimatedVisibility(visible = currentDestination?.route != Screen.Details.routeId){
-                                    BottomNavigation {
+                                    NavigationBar {
                                             screens.forEach { screen ->
-                                                BottomNavigationItem(
+                                                NavigationBarItem(
                                                     selected = screen.routeId == currentDestination?.route,
                                                     onClick = {
                                                         if (currentDestination?.route == screen.routeId) {
-                                                            return@BottomNavigationItem
+                                                            return@NavigationBarItem
                                                         }
                                                         navHostController.navigate(screen.routeId)
                                                     },
                                                     label = {
                                                         Text(
                                                             text = screen.routeId,
-                                                            style = MaterialTheme.typography.caption
+                                                            style = MaterialTheme.typography.labelSmall
                                                         )
                                                     },
                                                     icon = {
@@ -89,9 +92,10 @@ class MainActivity : ComponentActivity() {
                                     .fillMaxSize()
                                     .padding(contentPadding)) {
                                     MuviiNavigator(
-                                        scaffoldState = scaffoldState,
+                                        snackbarHostState = snackbarHostState,
                                         navHostController = navHostController,
-                                        onToggleTheme = mainViewModel::changeUiTheme
+                                        onToggleTheme = mainViewModel::changeUiTheme,
+                                        isInDarkTheme = isInDarkTheme
                                     )
                                 }
                             }

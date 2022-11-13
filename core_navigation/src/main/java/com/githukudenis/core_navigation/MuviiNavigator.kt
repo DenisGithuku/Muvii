@@ -3,8 +3,8 @@ package com.githukudenis.core_navigation
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.ScaffoldState
-import androidx.compose.material.Text
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -16,12 +16,15 @@ import com.denisgithuku.movies.presentation.screens.home.HomeScreen
 
 @Composable
 fun MuviiNavigator(
-    scaffoldState: ScaffoldState, navHostController: NavHostController, onToggleTheme: () -> Unit
+    snackbarHostState: SnackbarHostState,
+    navHostController: NavHostController,
+    isInDarkTheme: Boolean,
+    onToggleTheme: () -> Unit
 ) {
     NavHost(navController = navHostController, startDestination = Screen.Home.routeId) {
         composable(route = Screen.Home.routeId) {
             HomeScreen(
-                scaffoldState = scaffoldState,
+                snackbarHostState = snackbarHostState,
                 onToggleTheme = onToggleTheme, onOpenDetails = { movieId ->
                 navHostController.navigate(route = "details" + "/${movieId}") {
 //                    launchSingleTop = true
@@ -31,7 +34,7 @@ fun MuviiNavigator(
                     }
                     restoreState = true
                 }
-            })
+            }, isInDarkTheme = isInDarkTheme)
         }
 
         composable(route = "details" + "/{movieId}") {
@@ -48,7 +51,7 @@ fun MuviiNavigator(
             }, onNavigateUp = {
                 navHostController.navigateUp()
             },
-                scaffoldState = scaffoldState
+                snackbarHostState = snackbarHostState
             )
         }
         composable(route = Screen.Shows.routeId) {

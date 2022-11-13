@@ -8,5 +8,4 @@ sealed interface HomeEvent {
     data class ChangeSortType(val sortType: SortType): HomeEvent
     data class Search(val query: String): HomeEvent
     object ToggleAdultContentEnable: HomeEvent
-    object ToggleTheme: HomeEvent
 }

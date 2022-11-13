@@ -51,7 +51,6 @@ dependencies {
     implementation(Deps.navigation)
     implementation(Deps.lifecycle_aware_state)
     implementation(Deps.nav_animation)
-    implementation(Deps.material)
     implementation(Deps.room_ktx)
     kapt(Deps.room_runtime)
     implementation(Deps.room_runtime)
