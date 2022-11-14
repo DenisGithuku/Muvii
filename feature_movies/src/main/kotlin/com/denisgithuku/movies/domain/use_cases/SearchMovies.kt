@@ -1,7 +1,7 @@
 package com.denisgithuku.movies.domain.use_cases
 
 import com.denisgithuku.core_data.Resource
-import com.denisgithuku.core_data.domain.SearchMovieItem
+import com.denisgithuku.core_data.domain.model.SearchMovieItem
 import com.denisgithuku.core_data.providers.DispatcherProvider
 import com.denisgithuku.movies.domain.repository.MoviesRepository
 import kotlinx.coroutines.flow.Flow

@@ -6,7 +6,7 @@ import java.lang.System;
 public final class MovieItemKt {
     
     @androidx.compose.runtime.Composable()
-    @kotlin.OptIn(markerClass = {androidx.compose.material.ExperimentalMaterialApi.class})
+    @kotlin.OptIn(markerClass = {androidx.compose.material3.ExperimentalMaterial3Api.class})
     public static final void MovieItem(@org.jetbrains.annotations.NotNull()
     androidx.compose.ui.Modifier modifier, @org.jetbrains.annotations.NotNull()
     java.lang.String title, double rating, @org.jetbrains.annotations.NotNull()

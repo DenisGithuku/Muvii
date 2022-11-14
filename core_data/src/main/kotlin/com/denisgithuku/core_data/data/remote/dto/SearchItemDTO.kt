@@ -1,6 +1,6 @@
 package com.denisgithuku.core_data.data.remote.dto
 
-import com.denisgithuku.core_data.domain.SearchMovieItem
+import com.denisgithuku.core_data.domain.model.SearchMovieItem
 
 data class SearchItemDTO(
     val adult: Boolean?,

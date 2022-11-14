@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.denisgithuku.core_data.ui.favourites.FavouritesScreen
 import com.denisgithuku.movies.presentation.screens.details.DetailsScreen
 import com.denisgithuku.movies.presentation.screens.home.HomeScreen
 
@@ -66,15 +67,7 @@ fun MuviiNavigator(
             }
         }
         composable(route = Screen.Favourites.routeId) {
-            Column(
-                modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    text = "Coming soon..."
-                )
-            }
+            FavouritesScreen(snackbarHostState = snackbarHostState)
         }
         composable(route = Screen.Search.routeId) {
             Column(

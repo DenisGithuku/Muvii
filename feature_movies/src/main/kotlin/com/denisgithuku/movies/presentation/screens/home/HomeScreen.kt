@@ -194,7 +194,7 @@ private fun HomeScreen(
             }
         }
         item {
-            LazyRow(modifier = modifier.padding(vertical = LocalAppDimens.current.medium)) {
+            LazyRow(modifier = modifier.padding(vertical = 16.dp, horizontal = 12.dp)) {
                 items(items = genres) { item: Genre ->
                     GenreItem(
                         name = item.name,

@@ -2,6 +2,7 @@ package com.denisgithuku.movies.di
 
 import com.denisgithuku.core_data.Constants
 import com.denisgithuku.core_data.data.local.FavouriteMoviesDao
+import com.denisgithuku.core_data.domain.repository.FavouriteMoviesRepository
 import com.denisgithuku.core_data.providers.DispatcherProvider
 import com.denisgithuku.core_data.providers.UserPreferences
 import com.denisgithuku.movies.data.data_src.remote.MoviesApiInterface
@@ -52,6 +53,7 @@ object MoviesModule {
     @Singleton
     fun provideMovieUseCases(
         moviesRepository: MoviesRepository,
+        favouriteMoviesRepository: FavouriteMoviesRepository,
         userPreferences: UserPreferences,
         formatDateUseCase: FormatDateUseCase,
         dispatcherProvider: DispatcherProvider
@@ -63,12 +65,16 @@ object MoviesModule {
             readAdultContentPreferences = GetAdultContentPreferences(userPreferences),
             changeUiTheme = ChangeUiTheme(userPreferences),
             enableAdultContent = EnableAdultContent(userPreferences),
-            getMovieDetails = GetMovieDetails(moviesRepository, formatDateUseCase, dispatcherProvider),
+            getMovieDetails = GetMovieDetails(
+                moviesRepository,
+                favouriteMoviesRepository,
+                formatDateUseCase,
+                dispatcherProvider
+            ),
             getSimilarMoviesById = GetSimilarMoviesById(moviesRepository),
             insertIntoFavourites = InsertIntoFavourites(moviesRepository),
             deleteAllFavourites = DeleteAllFavourites(moviesRepository),
             deleteFromFavouritesById = DeleteFromFavouritesById(moviesRepository),
-            getAllFavourites = GetAllFavourites(moviesRepository, dispatcherProvider),
             searchMovies = SearchMovies(moviesRepository, dispatcherProvider)
         )
     }

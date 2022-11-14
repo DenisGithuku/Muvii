@@ -19,7 +19,7 @@ class GetSimilarMoviesById @Inject constructor(
         try {
             emit(Resource.Loading())
             val movies = moviesRepository.getSimilarMovies(movieId)
-            emit(Resource.Success(movies.map { it.toMovie() }))
+            emit(Resource.Success(movies.map { it.toMovie() }.filterNot { it.id == movieId }))
         } catch (e: HttpException) {
             emit(Resource.Error(e))
         } catch (e: IOException) {

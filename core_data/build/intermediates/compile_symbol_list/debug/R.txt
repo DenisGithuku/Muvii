@@ -1,1 +1,3 @@
+int drawable bookmark_favourite_filled 0x0
+int drawable bookmarks 0x0
 int drawable sliders1_svgrepo_com 0x0

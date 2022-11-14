@@ -29,12 +29,12 @@ import coil.request.ImageRequest
 import com.denisgithuku.core_data.Constants
 import com.denisgithuku.core_design.ui.components.ConfirmationDialog
 import com.denisgithuku.core_design.ui.components.MuviiIconButton
+import com.denisgithuku.core_design.ui.components.RoundedRectangleChip
 import com.denisgithuku.core_design.ui.theme.LocalAppDimens
 import com.denisgithuku.movies.domain.model.Movie
 import com.denisgithuku.movies.domain.model.MovieDetails
 import com.denisgithuku.movies.presentation.components.TrendingMovieItem
 import com.denisgithuku.movies.presentation.screens.details.components.MovieInfo
-import com.denisgithuku.movies.presentation.screens.details.components.RoundedRectangleChip
 import com.google.accompanist.flowlayout.FlowCrossAxisAlignment
 import com.google.accompanist.flowlayout.FlowMainAxisAlignment
 import com.google.accompanist.flowlayout.FlowRow

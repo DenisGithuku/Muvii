@@ -6,7 +6,6 @@ import java.lang.System;
 public final class GenreItemKt {
     
     @androidx.compose.runtime.Composable()
-    @kotlin.OptIn(markerClass = {androidx.compose.material.ExperimentalMaterialApi.class})
     public static final void GenreItem(int genreId, @org.jetbrains.annotations.NotNull()
     java.lang.String name, boolean isSelected, @org.jetbrains.annotations.NotNull()
     androidx.compose.ui.Modifier modifier, @org.jetbrains.annotations.NotNull()

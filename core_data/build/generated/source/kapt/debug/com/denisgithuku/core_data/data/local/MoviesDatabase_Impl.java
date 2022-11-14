@@ -90,7 +90,7 @@ public final class MoviesDatabase_Impl extends MoviesDatabase {
         final TableInfo _infoFavouriteMoviesTable = new TableInfo("favourite_movies_table", _columnsFavouriteMoviesTable, _foreignKeysFavouriteMoviesTable, _indicesFavouriteMoviesTable);
         final TableInfo _existingFavouriteMoviesTable = TableInfo.read(_db, "favourite_movies_table");
         if (! _infoFavouriteMoviesTable.equals(_existingFavouriteMoviesTable)) {
-          return new RoomOpenHelper.ValidationResult(false, "favourite_movies_table(com.denisgithuku.core_data.data.local.MovieDBO).\n"
+          return new RoomOpenHelper.ValidationResult(false, "favourite_movies_table(com.denisgithuku.core_data.data.local.FavouriteMovieDBO).\n"
                   + " Expected:\n" + _infoFavouriteMoviesTable + "\n"
                   + " Found:\n" + _existingFavouriteMoviesTable);
         }

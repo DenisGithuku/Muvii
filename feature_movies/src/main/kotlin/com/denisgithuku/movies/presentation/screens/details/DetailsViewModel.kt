@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.denisgithuku.core_data.Constants
 import com.denisgithuku.core_data.Resource
 import com.denisgithuku.core_data.UserMessage
-import com.denisgithuku.core_data.data.local.MovieDBO
+import com.denisgithuku.core_data.data.local.FavouriteMovieDBO
 import com.denisgithuku.core_data.providers.DispatcherProvider
 import com.denisgithuku.movies.domain.use_cases.MovieUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -147,7 +147,7 @@ class DetailsViewModel @Inject constructor(
 
     private fun markAsFavourite(movieId: Int) {
         viewModelScope.launch {
-            val movie = MovieDBO(movieId)
+            val movie = FavouriteMovieDBO(movieId)
             movieUseCases.insertIntoFavourites(movie)
             getMovieDetails(movieId)
             _uiState.update { currentState ->
@@ -163,7 +163,7 @@ class DetailsViewModel @Inject constructor(
 
     private fun deleteFromFavourites(movieId: Int) {
         viewModelScope.launch {
-                movieUseCases.deleteFromFavouritesById(MovieDBO(movieId = movieId))
+            movieUseCases.deleteFromFavouritesById(FavouriteMovieDBO(movieId = movieId))
                 getMovieDetails(movieId)
             _uiState.update { currentState ->
                 val userMessages = mutableListOf<UserMessage>()

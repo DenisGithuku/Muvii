@@ -7,6 +7,10 @@ plugins {
     id("com.google.devtools.ksp") version "1.7.0-1.0.6"
 }
 
+val TMDB_API_KEY: String = com.android.build.gradle.internal.cxx.configure.gradleLocalProperties(
+    rootDir
+).getProperty("TMDB_API_KEY")
+
 android {
     namespace = "com.githukudenis.core_data"
     compileSdk = 33
@@ -14,12 +18,11 @@ android {
     defaultConfig {
         minSdk = 24
         targetSdk = 33
-
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
-            useSupportLibrary=  true
+            useSupportLibrary = true
         }
+        buildConfigField("String", "TMDB_API_KEY", TMDB_API_KEY)
     }
 
     kotlin {
@@ -61,6 +64,7 @@ android {
 
 dependencies {
 
+    implementation(project(":core_design"))
     implementation(Deps.core)
     implementation(Deps.lifecycle_runtime)
     implementation(Deps.activity_compose)
@@ -69,6 +73,7 @@ dependencies {
     implementation(Deps.compose_material)
     implementation(Deps.dagger_hilt)
     implementation(Deps.moshi)
+    implementation(Deps.coil)
     implementation(Deps.moshi_kotlin)
     implementation(Deps.datastore)
     implementation(Deps.accompanist)

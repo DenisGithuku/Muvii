@@ -28,33 +28,33 @@ import kotlin.coroutines.Continuation;
 public final class FavouriteMoviesDao_Impl implements FavouriteMoviesDao {
   private final RoomDatabase __db;
 
-  private final EntityInsertionAdapter<MovieDBO> __insertionAdapterOfMovieDBO;
+  private final EntityInsertionAdapter<FavouriteMovieDBO> __insertionAdapterOfFavouriteMovieDBO;
 
-  private final EntityDeletionOrUpdateAdapter<MovieDBO> __deletionAdapterOfMovieDBO;
+  private final EntityDeletionOrUpdateAdapter<FavouriteMovieDBO> __deletionAdapterOfFavouriteMovieDBO;
 
   private final SharedSQLiteStatement __preparedStmtOfDeleteAllFavouriteMovies;
 
   public FavouriteMoviesDao_Impl(RoomDatabase __db) {
     this.__db = __db;
-    this.__insertionAdapterOfMovieDBO = new EntityInsertionAdapter<MovieDBO>(__db) {
+    this.__insertionAdapterOfFavouriteMovieDBO = new EntityInsertionAdapter<FavouriteMovieDBO>(__db) {
       @Override
       public String createQuery() {
         return "INSERT OR REPLACE INTO `favourite_movies_table` (`movie_id`) VALUES (?)";
       }
 
       @Override
-      public void bind(SupportSQLiteStatement stmt, MovieDBO value) {
+      public void bind(SupportSQLiteStatement stmt, FavouriteMovieDBO value) {
         stmt.bindLong(1, value.getMovieId());
       }
     };
-    this.__deletionAdapterOfMovieDBO = new EntityDeletionOrUpdateAdapter<MovieDBO>(__db) {
+    this.__deletionAdapterOfFavouriteMovieDBO = new EntityDeletionOrUpdateAdapter<FavouriteMovieDBO>(__db) {
       @Override
       public String createQuery() {
         return "DELETE FROM `favourite_movies_table` WHERE `movie_id` = ?";
       }
 
       @Override
-      public void bind(SupportSQLiteStatement stmt, MovieDBO value) {
+      public void bind(SupportSQLiteStatement stmt, FavouriteMovieDBO value) {
         stmt.bindLong(1, value.getMovieId());
       }
     };
@@ -68,13 +68,14 @@ public final class FavouriteMoviesDao_Impl implements FavouriteMoviesDao {
   }
 
   @Override
-  public Object insertMovie(final MovieDBO movie, final Continuation<? super Unit> continuation) {
+  public Object insertMovie(final FavouriteMovieDBO movie,
+      final Continuation<? super Unit> continuation) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       public Unit call() throws Exception {
         __db.beginTransaction();
         try {
-          __insertionAdapterOfMovieDBO.insert(movie);
+          __insertionAdapterOfFavouriteMovieDBO.insert(movie);
           __db.setTransactionSuccessful();
           return Unit.INSTANCE;
         } finally {
@@ -85,13 +86,14 @@ public final class FavouriteMoviesDao_Impl implements FavouriteMoviesDao {
   }
 
   @Override
-  public Object deleteMovie(final MovieDBO movie, final Continuation<? super Unit> continuation) {
+  public Object deleteMovie(final FavouriteMovieDBO movie,
+      final Continuation<? super Unit> continuation) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       public Unit call() throws Exception {
         __db.beginTransaction();
         try {
-          __deletionAdapterOfMovieDBO.handle(movie);
+          __deletionAdapterOfFavouriteMovieDBO.handle(movie);
           __db.setTransactionSuccessful();
           return Unit.INSTANCE;
         } finally {
@@ -121,22 +123,23 @@ public final class FavouriteMoviesDao_Impl implements FavouriteMoviesDao {
   }
 
   @Override
-  public Object getFavouriteMovies(final Continuation<? super List<MovieDBO>> continuation) {
+  public Object getFavouriteMovies(
+      final Continuation<? super List<FavouriteMovieDBO>> continuation) {
     final String _sql = "SELECT * FROM favourite_movies_table";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
     final CancellationSignal _cancellationSignal = DBUtil.createCancellationSignal();
-    return CoroutinesRoom.execute(__db, false, _cancellationSignal, new Callable<List<MovieDBO>>() {
+    return CoroutinesRoom.execute(__db, false, _cancellationSignal, new Callable<List<FavouriteMovieDBO>>() {
       @Override
-      public List<MovieDBO> call() throws Exception {
+      public List<FavouriteMovieDBO> call() throws Exception {
         final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
         try {
           final int _cursorIndexOfMovieId = CursorUtil.getColumnIndexOrThrow(_cursor, "movie_id");
-          final List<MovieDBO> _result = new ArrayList<MovieDBO>(_cursor.getCount());
+          final List<FavouriteMovieDBO> _result = new ArrayList<FavouriteMovieDBO>(_cursor.getCount());
           while(_cursor.moveToNext()) {
-            final MovieDBO _item;
+            final FavouriteMovieDBO _item;
             final int _tmpMovieId;
             _tmpMovieId = _cursor.getInt(_cursorIndexOfMovieId);
-            _item = new MovieDBO(_tmpMovieId);
+            _item = new FavouriteMovieDBO(_tmpMovieId);
             _result.add(_item);
           }
           return _result;

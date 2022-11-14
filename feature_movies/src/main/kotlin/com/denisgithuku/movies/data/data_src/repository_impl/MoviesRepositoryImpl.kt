@@ -1,7 +1,7 @@
 package com.denisgithuku.movies.data.data_src.repository_impl
 
+import com.denisgithuku.core_data.data.local.FavouriteMovieDBO
 import com.denisgithuku.core_data.data.local.FavouriteMoviesDao
-import com.denisgithuku.core_data.data.local.MovieDBO
 import com.denisgithuku.core_data.data.remote.dto.SearchItemDTO
 import com.denisgithuku.movies.data.data_src.remote.MoviesApiInterface
 import com.denisgithuku.movies.data.data_src.remote.dto.MovieGenreDTO
@@ -78,15 +78,11 @@ class MoviesRepositoryImpl @Inject constructor(
         return emptyList()
     }
 
-    override suspend fun markMovieAsFavourite(movie: MovieDBO) {
+    override suspend fun markMovieAsFavourite(movie: FavouriteMovieDBO) {
         return favouriteMoviesDao.insertMovie(movie)
     }
 
-    override suspend fun getFavouriteMovieIdsFromDB(): List<MovieDBO> {
-        return favouriteMoviesDao.getFavouriteMovies()
-    }
-
-    override suspend fun deleteFromFavourites(movie: MovieDBO) {
+    override suspend fun deleteFromFavourites(movie: FavouriteMovieDBO) {
         return favouriteMoviesDao.deleteMovie(movie)
     }
 
