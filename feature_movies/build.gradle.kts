@@ -101,8 +101,6 @@ dependencies {
     implementation(Deps.room_ktx)
     kapt(Deps.room_compiler)
     implementation(Deps.room_runtime)
-    implementation(Deps.ramcosta_navigation_core)
-    ksp(Deps.ramcosta_navigation_ksp)
     implementation(Deps.viewmodel)
     implementation(Deps.lifecycle_aware_state)
     kapt(Deps.dagger_hilt_compiler)
