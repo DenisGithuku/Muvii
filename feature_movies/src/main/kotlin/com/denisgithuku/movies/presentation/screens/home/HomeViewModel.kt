@@ -195,13 +195,18 @@ class HomeViewModel @Inject constructor(
                 }
             }
             HomeEvent.ToggleAdultContentEnable -> {
-                enableAdultContent().also {
-                    getMoviesByGenre(
-                        sort_by = _uiState.value.selectedSortType,
-                        genreId = _uiState.value.selectedGenre,
-                        include_adult = _uiState.value.adultContentEnabled
+                _uiState.update { state ->
+                    state.copy(
+                        adultContentEnabled = !state.adultContentEnabled
                     )
                 }
+                toggleEnableAdultContent(_uiState.value.adultContentEnabled)
+                getMoviesByGenre(
+                    sort_by = _uiState.value.selectedSortType,
+                    genreId = _uiState.value.selectedGenre,
+                    include_adult = _uiState.value.adultContentEnabled
+                )
+
             }
             is HomeEvent.Search -> {
                 searchMovie(event.query)
@@ -221,14 +226,11 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    private fun enableAdultContent() {
+    private fun toggleEnableAdultContent(enabled: Boolean) {
         viewModelScope.launch {
-            movieUseCases.enableAdultContent(true).also {
-                readUserPrefs()
-            }
+            movieUseCases.enableAdultContent(enabled)
         }
     }
-
 
 
     private fun getMoviesByGenre(sort_by: SortType, genreId: Int, include_adult: Boolean) {

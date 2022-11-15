@@ -35,15 +35,16 @@ fun MovieItem(
     onOpen: (Int) -> Unit,
 ) {
     val context = LocalContext.current
-    Surface(
+    Card(
         onClick = { onOpen(movieId) },
-        shape = RoundedCornerShape(16.dp),
-        color = MaterialTheme.colorScheme.surface,
-        shadowElevation = 2.dp,
-        modifier = modifier.padding(
-            horizontal = LocalAppDimens.current.large,
-            vertical = LocalAppDimens.current.medium
-        )
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surface,
+            contentColor = MaterialTheme.colorScheme.onSurface
+        ),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 4.dp
+        ),
+        modifier = Modifier.padding(LocalAppDimens.current.large)
     ) {
         Row(
             modifier = modifier

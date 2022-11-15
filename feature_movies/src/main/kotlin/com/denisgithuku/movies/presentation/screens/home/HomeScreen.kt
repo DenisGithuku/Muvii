@@ -326,14 +326,14 @@ fun TopBar(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Text(text = "Discover", style = MaterialTheme.typography.titleMedium)
+        Text(text = "Discover", style = MaterialTheme.typography.displayLarge)
         MuviiIconButton(onClick = { onOpenSettings() }) {
             Icon(
                 painter = painterResource(id = com.denisgithuku.core_design.R.drawable.settings_outline),
                 contentDescription = "Settings",
                 modifier = modifier.sizeIn(
-                        minHeight = 32.dp, minWidth = 32.dp, maxWidth = 32.dp, maxHeight = 32.dp
-                    )
+                    minHeight = 32.dp, minWidth = 32.dp, maxWidth = 32.dp, maxHeight = 32.dp
+                )
 //                    .padding(LocalAppDimens.current.large)
             )
         }

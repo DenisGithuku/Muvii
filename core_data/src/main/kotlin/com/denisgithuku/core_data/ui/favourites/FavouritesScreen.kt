@@ -98,6 +98,13 @@ fun FavouriteMovieCard(
         modifier = Modifier
             .fillMaxWidth()
             .padding(LocalAppDimens.current.large),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surface,
+            contentColor = MaterialTheme.colorScheme.onSurface
+        ),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 4.dp
+        ),
         onClick = { onOpenDetails(favouriteMovie) },
         shape = MaterialTheme.shapes.large
     ) {

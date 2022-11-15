@@ -1,5 +1,6 @@
 package com.denisgithuku.core_data.ui.favourites
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.denisgithuku.core_data.Resource
@@ -42,6 +43,7 @@ class FavouritesViewModel @Inject constructor(
                                 favourites = result.data ?: emptyList()
                             )
                         }
+                        Log.d("favs", "getFavouriteMovies: ${result.data}")
                     }
                     is Resource.Error -> {
                         _uiState.update {

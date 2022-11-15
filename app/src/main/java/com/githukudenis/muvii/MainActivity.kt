@@ -53,12 +53,12 @@ class MainActivity : ComponentActivity() {
                         val currentDestination = navState?.destination
                         val snackbarHostState = remember { SnackbarHostState() }
 
-                        MuviiTheme(darkTheme = isInDarkTheme) {
+                        MuviiTheme(useDarkTheme = isInDarkTheme) {
                             Scaffold(
                                 snackbarHost = { SnackbarHost(snackbarHostState) },
                                 bottomBar = {
-                                    AnimatedVisibility(visible = currentDestination?.route != Screen.Details.routeId){
-                                    NavigationBar {
+                                    AnimatedVisibility(visible = currentDestination?.route != Screen.Details.routeId) {
+                                        NavigationBar {
                                             screens.forEach { screen ->
                                                 NavigationBarItem(
                                                     selected = screen.routeId == currentDestination?.route,
