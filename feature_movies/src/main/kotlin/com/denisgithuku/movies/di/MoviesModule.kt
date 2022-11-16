@@ -72,9 +72,8 @@ object MoviesModule {
                 dispatcherProvider
             ),
             getSimilarMoviesById = GetSimilarMoviesById(moviesRepository),
-            insertIntoFavourites = InsertIntoFavourites(moviesRepository),
+            toggleFavourite = ToggleFavourite(favouriteMoviesRepository),
             deleteAllFavourites = DeleteAllFavourites(moviesRepository),
-            deleteFromFavouritesById = DeleteFromFavouritesById(moviesRepository),
             searchMovies = SearchMovies(moviesRepository, dispatcherProvider)
         )
     }

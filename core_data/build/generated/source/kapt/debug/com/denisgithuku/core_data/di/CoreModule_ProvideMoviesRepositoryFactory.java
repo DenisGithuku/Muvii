@@ -2,8 +2,8 @@
 package com.denisgithuku.core_data.di;
 
 import com.denisgithuku.core_data.data.local.FavouriteMoviesDao;
-import com.denisgithuku.core_data.data.local.repository_impl.FavouriteMovieRepositoryImpl;
 import com.denisgithuku.core_data.data.remote.FavouriteMovieInterface;
+import com.denisgithuku.core_data.data.remote.repository_impl.FavouriteMoviesRepositoryImpl;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
 import dagger.internal.Preconditions;
@@ -18,7 +18,7 @@ import javax.inject.Provider;
     "unchecked",
     "rawtypes"
 })
-public final class CoreModule_ProvideMoviesRepositoryFactory implements Factory<FavouriteMovieRepositoryImpl> {
+public final class CoreModule_ProvideMoviesRepositoryFactory implements Factory<FavouriteMoviesRepositoryImpl> {
   private final Provider<FavouriteMoviesDao> favouriteMoviesDaoProvider;
 
   private final Provider<FavouriteMovieInterface> favouriteMoviesInterfaceProvider;
@@ -31,7 +31,7 @@ public final class CoreModule_ProvideMoviesRepositoryFactory implements Factory<
   }
 
   @Override
-  public FavouriteMovieRepositoryImpl get() {
+  public FavouriteMoviesRepositoryImpl get() {
     return provideMoviesRepository(favouriteMoviesDaoProvider.get(), favouriteMoviesInterfaceProvider.get());
   }
 
@@ -41,7 +41,7 @@ public final class CoreModule_ProvideMoviesRepositoryFactory implements Factory<
     return new CoreModule_ProvideMoviesRepositoryFactory(favouriteMoviesDaoProvider, favouriteMoviesInterfaceProvider);
   }
 
-  public static FavouriteMovieRepositoryImpl provideMoviesRepository(
+  public static FavouriteMoviesRepositoryImpl provideMoviesRepository(
       FavouriteMoviesDao favouriteMoviesDao, FavouriteMovieInterface favouriteMoviesInterface) {
     return Preconditions.checkNotNullFromProvides(CoreModule.INSTANCE.provideMoviesRepository(favouriteMoviesDao, favouriteMoviesInterface));
   }

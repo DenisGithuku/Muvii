@@ -29,8 +29,6 @@ interface MoviesRepository {
 
     suspend fun deleteAllFromFavourites()
 
-    suspend fun getFavouriteMoviesFromNetwork(): List<MovieDTO>
-
     suspend fun search(query: String): List<SearchItemDTO>
 
 

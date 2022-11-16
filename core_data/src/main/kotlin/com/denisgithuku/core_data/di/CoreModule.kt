@@ -5,8 +5,8 @@ import androidx.room.Room
 import com.denisgithuku.core_data.Constants
 import com.denisgithuku.core_data.data.local.FavouriteMoviesDao
 import com.denisgithuku.core_data.data.local.MoviesDatabase
-import com.denisgithuku.core_data.data.local.repository_impl.FavouriteMovieRepositoryImpl
 import com.denisgithuku.core_data.data.remote.FavouriteMovieInterface
+import com.denisgithuku.core_data.data.remote.repository_impl.FavouriteMoviesRepositoryImpl
 import com.denisgithuku.core_data.domain.repository.FavouriteMoviesRepository
 import com.denisgithuku.core_data.domain.use_cases.CoreMovieUseCases
 import com.denisgithuku.core_data.domain.use_cases.GetFavouriteMovies
@@ -79,8 +79,9 @@ object CoreModule {
     fun provideMoviesRepository(
         favouriteMoviesDao: FavouriteMoviesDao,
         favouriteMoviesInterface: FavouriteMovieInterface
-    ) = FavouriteMovieRepositoryImpl(
+    ) = FavouriteMoviesRepositoryImpl(
         favouriteMoviesDao = favouriteMoviesDao,
+        favouriteMoviesApiInterface = favouriteMoviesInterface
     )
 
     @Provides
@@ -113,7 +114,7 @@ object CoreModule {
         favouriteMoviesDao: FavouriteMoviesDao,
         favouriteMovieInterface: FavouriteMovieInterface
     ): FavouriteMoviesRepository {
-        return FavouriteMovieRepositoryImpl(favouriteMoviesDao)
+        return FavouriteMoviesRepositoryImpl(favouriteMovieInterface, favouriteMoviesDao)
     }
 
     @Provides
@@ -126,8 +127,7 @@ object CoreModule {
         return CoreMovieUseCases(
             getFavouriteMovies = GetFavouriteMovies(
                 favouriteMoviesRepository,
-                favouriteMovieInterface,
-                dispatcherProvider
+                dispatcherProvider = dispatcherProvider
             )
         )
     }

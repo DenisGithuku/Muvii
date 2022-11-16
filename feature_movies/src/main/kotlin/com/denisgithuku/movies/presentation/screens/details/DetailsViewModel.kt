@@ -51,13 +51,10 @@ class DetailsViewModel @Inject constructor(
                 }
             }
             DetailsUiEvent.MarkUnmarkFavourite -> {
-                _uiState.value.movieDetails?.let { movieDetails ->
-                    if (movieDetails.favourite) {
-                        deleteFromFavourites(movieDetails.id)
-                    } else {
-                        markAsFavourite(movieDetails.id)
-                    }
+                _uiState.value.movieDetails?.let { details ->
+                    toggleFavourite(details.id, !details.favourite)
                 }
+
             }
             DetailsUiEvent.UserDialogDismiss -> {
                 _uiState.update {
@@ -145,29 +142,18 @@ class DetailsViewModel @Inject constructor(
         }
     }
 
-    private fun markAsFavourite(movieId: Int) {
+    private fun toggleFavourite(movieId: Int, favourite: Boolean) {
         viewModelScope.launch {
-            val movie = FavouriteMovieDBO(movieId)
-            movieUseCases.insertIntoFavourites(movie)
+            movieUseCases.toggleFavourite(FavouriteMovieDBO(movieId = movieId), favourite)
             getMovieDetails(movieId)
             _uiState.update { currentState ->
                 val userMessages = mutableListOf<UserMessage>()
-                userMessages.add(UserMessage(id = 0, "Added to favourites"))
-                currentState.copy(
-                    userMessages = userMessages
+                userMessages.add(
+                    UserMessage(
+                        id = 0,
+                        message = if (favourite) "Added to favourites" else "Removed from favourites"
+                    )
                 )
-            }
-
-        }
-    }
-
-    private fun deleteFromFavourites(movieId: Int) {
-        viewModelScope.launch {
-            movieUseCases.deleteFromFavouritesById(FavouriteMovieDBO(movieId = movieId))
-                getMovieDetails(movieId)
-            _uiState.update { currentState ->
-                val userMessages = mutableListOf<UserMessage>()
-                userMessages.add(UserMessage(id = 0, "Removed from favourites"))
                 currentState.copy(
                     userMessages = userMessages
                 )

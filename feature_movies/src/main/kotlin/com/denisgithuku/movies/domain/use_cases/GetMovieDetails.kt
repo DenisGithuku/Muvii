@@ -26,7 +26,7 @@ class GetMovieDetails @Inject constructor(
             res?.let { movieDetails ->
                 emit(Resource.Success(movieDetails.toMovie().copy(
                     release_date = formatDateUseCase(movieDetails.release_date),
-                    favourite = favouriteMoviesRepository.getFavouriteMovies()
+                    favourite = favouriteMoviesRepository.getFavouriteMoviesFromDB()
                         .any { it.movieId == movieDetails.id }
                 )))
             }
