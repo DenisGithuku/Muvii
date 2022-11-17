@@ -2,13 +2,13 @@ package com.denisgithuku.core_data.data.remote.repository_impl
 
 import com.denisgithuku.core_data.data.local.FavouriteMovieDBO
 import com.denisgithuku.core_data.data.local.FavouriteMoviesDao
-import com.denisgithuku.core_data.data.remote.FavouriteMovieInterface
+import com.denisgithuku.core_data.data.remote.CoreInterface
 import com.denisgithuku.core_data.data.remote.dto.FavouriteMovieDTO
 import com.denisgithuku.core_data.domain.repository.FavouriteMoviesRepository
 import javax.inject.Inject
 
 class FavouriteMoviesRepositoryImpl @Inject constructor(
-    private val favouriteMoviesApiInterface: FavouriteMovieInterface,
+    private val favouriteMoviesApiInterface: CoreInterface,
     private val favouriteMoviesDao: FavouriteMoviesDao
 ) : FavouriteMoviesRepository {
     override suspend fun getFavouriteMoviesFromDB(): List<FavouriteMovieDBO> {

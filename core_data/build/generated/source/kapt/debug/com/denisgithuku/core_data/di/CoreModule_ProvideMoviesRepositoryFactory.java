@@ -2,7 +2,7 @@
 package com.denisgithuku.core_data.di;
 
 import com.denisgithuku.core_data.data.local.FavouriteMoviesDao;
-import com.denisgithuku.core_data.data.remote.FavouriteMovieInterface;
+import com.denisgithuku.core_data.data.remote.CoreInterface;
 import com.denisgithuku.core_data.data.remote.repository_impl.FavouriteMoviesRepositoryImpl;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
@@ -21,11 +21,11 @@ import javax.inject.Provider;
 public final class CoreModule_ProvideMoviesRepositoryFactory implements Factory<FavouriteMoviesRepositoryImpl> {
   private final Provider<FavouriteMoviesDao> favouriteMoviesDaoProvider;
 
-  private final Provider<FavouriteMovieInterface> favouriteMoviesInterfaceProvider;
+  private final Provider<CoreInterface> favouriteMoviesInterfaceProvider;
 
   public CoreModule_ProvideMoviesRepositoryFactory(
       Provider<FavouriteMoviesDao> favouriteMoviesDaoProvider,
-      Provider<FavouriteMovieInterface> favouriteMoviesInterfaceProvider) {
+      Provider<CoreInterface> favouriteMoviesInterfaceProvider) {
     this.favouriteMoviesDaoProvider = favouriteMoviesDaoProvider;
     this.favouriteMoviesInterfaceProvider = favouriteMoviesInterfaceProvider;
   }
@@ -37,12 +37,12 @@ public final class CoreModule_ProvideMoviesRepositoryFactory implements Factory<
 
   public static CoreModule_ProvideMoviesRepositoryFactory create(
       Provider<FavouriteMoviesDao> favouriteMoviesDaoProvider,
-      Provider<FavouriteMovieInterface> favouriteMoviesInterfaceProvider) {
+      Provider<CoreInterface> favouriteMoviesInterfaceProvider) {
     return new CoreModule_ProvideMoviesRepositoryFactory(favouriteMoviesDaoProvider, favouriteMoviesInterfaceProvider);
   }
 
   public static FavouriteMoviesRepositoryImpl provideMoviesRepository(
-      FavouriteMoviesDao favouriteMoviesDao, FavouriteMovieInterface favouriteMoviesInterface) {
+      FavouriteMoviesDao favouriteMoviesDao, CoreInterface favouriteMoviesInterface) {
     return Preconditions.checkNotNullFromProvides(CoreModule.INSTANCE.provideMoviesRepository(favouriteMoviesDao, favouriteMoviesInterface));
   }
 }

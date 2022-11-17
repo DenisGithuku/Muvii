@@ -5,10 +5,13 @@ import androidx.room.Room
 import com.denisgithuku.core_data.Constants
 import com.denisgithuku.core_data.data.local.FavouriteMoviesDao
 import com.denisgithuku.core_data.data.local.MoviesDatabase
-import com.denisgithuku.core_data.data.remote.FavouriteMovieInterface
+import com.denisgithuku.core_data.data.remote.CoreInterface
+import com.denisgithuku.core_data.data.remote.repository_impl.CastRepositoryImpl
 import com.denisgithuku.core_data.data.remote.repository_impl.FavouriteMoviesRepositoryImpl
+import com.denisgithuku.core_data.domain.repository.CastRepository
 import com.denisgithuku.core_data.domain.repository.FavouriteMoviesRepository
 import com.denisgithuku.core_data.domain.use_cases.CoreMovieUseCases
+import com.denisgithuku.core_data.domain.use_cases.GetCast
 import com.denisgithuku.core_data.domain.use_cases.GetFavouriteMovies
 import com.denisgithuku.core_data.providers.AppThemeProvider
 import com.denisgithuku.core_data.providers.DispatcherProvider
@@ -78,7 +81,7 @@ object CoreModule {
     @Singleton
     fun provideMoviesRepository(
         favouriteMoviesDao: FavouriteMoviesDao,
-        favouriteMoviesInterface: FavouriteMovieInterface
+        favouriteMoviesInterface: CoreInterface
     ) = FavouriteMoviesRepositoryImpl(
         favouriteMoviesDao = favouriteMoviesDao,
         favouriteMoviesApiInterface = favouriteMoviesInterface
@@ -86,13 +89,13 @@ object CoreModule {
 
     @Provides
     @Singleton
-    fun provideFavouriteMoviesApiInterface(okHttpClient: OkHttpClient): FavouriteMovieInterface =
+    fun provideFavouriteMoviesApiInterface(okHttpClient: OkHttpClient): CoreInterface =
         Retrofit.Builder()
             .baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()
-            .create(FavouriteMovieInterface::class.java)
+            .create(CoreInterface::class.java)
 
     @Provides
     @Singleton
@@ -112,23 +115,34 @@ object CoreModule {
     @Singleton
     fun provideFavouriteMoviesRepository(
         favouriteMoviesDao: FavouriteMoviesDao,
-        favouriteMovieInterface: FavouriteMovieInterface
+        coreInterface: CoreInterface
     ): FavouriteMoviesRepository {
-        return FavouriteMoviesRepositoryImpl(favouriteMovieInterface, favouriteMoviesDao)
+        return FavouriteMoviesRepositoryImpl(coreInterface, favouriteMoviesDao)
     }
+
 
     @Provides
     @Singleton
     fun provideCoreMovieUseCases(
         favouriteMoviesRepository: FavouriteMoviesRepository,
         dispatcherProvider: DispatcherProvider,
-        favouriteMovieInterface: FavouriteMovieInterface
+        castRepository: CastRepository,
+        coreInterface: CoreInterface
     ): CoreMovieUseCases {
         return CoreMovieUseCases(
             getFavouriteMovies = GetFavouriteMovies(
                 favouriteMoviesRepository,
+                dispatcherProvider = dispatcherProvider,
+            ),
+            getCast = GetCast(
+                castRepository = castRepository,
                 dispatcherProvider = dispatcherProvider
             )
         )
     }
+
+    @Provides
+    @Singleton
+    fun provideCastRepository(coreInterface: CoreInterface): CastRepository =
+        CastRepositoryImpl(coreInterface)
 }

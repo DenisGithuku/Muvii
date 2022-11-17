@@ -23,7 +23,7 @@ fun MovieInfo(
         ),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = label, style = MaterialTheme.typography.titleLarge)
+        Text(text = label, style = MaterialTheme.typography.displaySmall)
         Text(
             text = value, style = MaterialTheme.typography.bodySmall
         )

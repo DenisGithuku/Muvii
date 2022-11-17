@@ -7,6 +7,7 @@ import com.denisgithuku.core_data.Constants
 import com.denisgithuku.core_data.Resource
 import com.denisgithuku.core_data.UserMessage
 import com.denisgithuku.core_data.data.local.FavouriteMovieDBO
+import com.denisgithuku.core_data.domain.use_cases.CoreMovieUseCases
 import com.denisgithuku.core_data.providers.DispatcherProvider
 import com.denisgithuku.movies.domain.use_cases.MovieUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,6 +22,7 @@ import javax.inject.Inject
 @HiltViewModel
 class DetailsViewModel @Inject constructor(
     private val movieUseCases: MovieUseCases,
+    private val coreMovieUseCases: CoreMovieUseCases,
     private val dispatcherProvider: DispatcherProvider,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
@@ -33,6 +35,7 @@ class DetailsViewModel @Inject constructor(
     init {
         savedStateHandle.get<String>(Constants.movieId)?.let { movieId ->
             getMovieDetails(movieId.toInt()).also {
+                getCast(movieId.toInt())
                 getSimilarMovies(movieId.toInt())
             }
         }
@@ -157,6 +160,46 @@ class DetailsViewModel @Inject constructor(
                 currentState.copy(
                     userMessages = userMessages
                 )
+            }
+        }
+    }
+
+    private fun getCast(movieId: Int) {
+        viewModelScope.launch {
+            coreMovieUseCases.getCast(movieId).collect { result ->
+                when (result) {
+                    is Resource.Loading -> {
+                        _uiState.update { state ->
+                            state.copy(
+                                castLoading = true
+                            )
+                        }
+                    }
+                    is Resource.Success -> {
+                        _uiState.update { state ->
+                            state.copy(
+                                castLoading = false,
+                                cast = result.data ?: emptyList()
+                            )
+                        }
+                    }
+                    is Resource.Error -> {
+                        _uiState.update { state ->
+                            val error = result.throwable?.message
+                            val userMessages = mutableListOf<UserMessage>()
+                            userMessages.add(
+                                UserMessage(
+                                    id = 0,
+                                    message = error ?: "Couldn't complete operation"
+                                )
+                            )
+                            state.copy(
+                                userMessages = userMessages,
+                                castLoading = false
+                            )
+                        }
+                    }
+                }
             }
         }
     }

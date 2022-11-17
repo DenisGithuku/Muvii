@@ -2,7 +2,7 @@
 package com.denisgithuku.core_data.di;
 
 import com.denisgithuku.core_data.data.local.FavouriteMoviesDao;
-import com.denisgithuku.core_data.data.remote.FavouriteMovieInterface;
+import com.denisgithuku.core_data.data.remote.CoreInterface;
 import com.denisgithuku.core_data.domain.repository.FavouriteMoviesRepository;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
@@ -21,28 +21,28 @@ import javax.inject.Provider;
 public final class CoreModule_ProvideFavouriteMoviesRepositoryFactory implements Factory<FavouriteMoviesRepository> {
   private final Provider<FavouriteMoviesDao> favouriteMoviesDaoProvider;
 
-  private final Provider<FavouriteMovieInterface> favouriteMovieInterfaceProvider;
+  private final Provider<CoreInterface> coreInterfaceProvider;
 
   public CoreModule_ProvideFavouriteMoviesRepositoryFactory(
       Provider<FavouriteMoviesDao> favouriteMoviesDaoProvider,
-      Provider<FavouriteMovieInterface> favouriteMovieInterfaceProvider) {
+      Provider<CoreInterface> coreInterfaceProvider) {
     this.favouriteMoviesDaoProvider = favouriteMoviesDaoProvider;
-    this.favouriteMovieInterfaceProvider = favouriteMovieInterfaceProvider;
+    this.coreInterfaceProvider = coreInterfaceProvider;
   }
 
   @Override
   public FavouriteMoviesRepository get() {
-    return provideFavouriteMoviesRepository(favouriteMoviesDaoProvider.get(), favouriteMovieInterfaceProvider.get());
+    return provideFavouriteMoviesRepository(favouriteMoviesDaoProvider.get(), coreInterfaceProvider.get());
   }
 
   public static CoreModule_ProvideFavouriteMoviesRepositoryFactory create(
       Provider<FavouriteMoviesDao> favouriteMoviesDaoProvider,
-      Provider<FavouriteMovieInterface> favouriteMovieInterfaceProvider) {
-    return new CoreModule_ProvideFavouriteMoviesRepositoryFactory(favouriteMoviesDaoProvider, favouriteMovieInterfaceProvider);
+      Provider<CoreInterface> coreInterfaceProvider) {
+    return new CoreModule_ProvideFavouriteMoviesRepositoryFactory(favouriteMoviesDaoProvider, coreInterfaceProvider);
   }
 
   public static FavouriteMoviesRepository provideFavouriteMoviesRepository(
-      FavouriteMoviesDao favouriteMoviesDao, FavouriteMovieInterface favouriteMovieInterface) {
-    return Preconditions.checkNotNullFromProvides(CoreModule.INSTANCE.provideFavouriteMoviesRepository(favouriteMoviesDao, favouriteMovieInterface));
+      FavouriteMoviesDao favouriteMoviesDao, CoreInterface coreInterface) {
+    return Preconditions.checkNotNullFromProvides(CoreModule.INSTANCE.provideFavouriteMoviesRepository(favouriteMoviesDao, coreInterface));
   }
 }
