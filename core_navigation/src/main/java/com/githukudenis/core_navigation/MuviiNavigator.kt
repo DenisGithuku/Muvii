@@ -67,7 +67,19 @@ fun MuviiNavigator(
             }
         }
         composable(route = Screen.Favourites.routeId) {
-            FavouritesScreen(snackbarHostState = snackbarHostState)
+            FavouritesScreen(
+                snackbarHostState = snackbarHostState,
+                onOpenDetails = { movieId ->
+                    navHostController.navigate(route = "details" + "/${movieId}") {
+//                    launchSingleTop = true
+                        popUpTo(route = "details") {
+                            inclusive = true
+                            saveState = true
+                        }
+                        restoreState = true
+                    }
+                }
+            )
         }
         composable(route = Screen.Search.routeId) {
             Column(

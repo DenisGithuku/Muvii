@@ -32,7 +32,8 @@ import com.denisgithuku.core_design.ui.theme.LocalAppDimens
 @OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun FavouritesScreen(
-    snackbarHostState: SnackbarHostState
+    snackbarHostState: SnackbarHostState,
+    onOpenDetails: (Int) -> Unit
 ) {
     val favouritesViewModel: FavouritesViewModel = hiltViewModel()
     val uiState = favouritesViewModel.uiState.collectAsStateWithLifecycle().value
@@ -49,12 +50,13 @@ fun FavouritesScreen(
         }
     }
 
-    FavouritesScreen(favourites = uiState.favourites)
+    FavouritesScreen(favourites = uiState.favourites, onOpenDetails = onOpenDetails)
 }
 
 @Composable
 private fun FavouritesScreen(
-    favourites: List<FavouriteMovie>
+    favourites: List<FavouriteMovie>,
+    onOpenDetails: (Int) -> Unit
 ) {
     LazyColumn {
         item {
@@ -75,8 +77,10 @@ private fun FavouritesScreen(
         items(favourites) { favouriteMovie ->
             FavouriteMovieCard(
                 favouriteMovie = favouriteMovie,
-                onToggleFavourite = { /*TODO*/ },
-                onOpenDetails = {}
+                onToggleFavourite = { },
+                onOpenDetails = {
+                    onOpenDetails(it.id)
+                }
             )
         }
     }
