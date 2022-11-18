@@ -28,6 +28,7 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.denisgithuku.core_data.Constants
 import com.denisgithuku.core_data.domain.model.Cast
+import com.denisgithuku.core_data.ui.components.JumpingBubblesLoadingIndicator
 import com.denisgithuku.core_design.ui.components.ConfirmationDialog
 import com.denisgithuku.core_design.ui.components.MuviiIconButton
 import com.denisgithuku.core_design.ui.components.RoundedRectangleChip
@@ -53,13 +54,16 @@ fun DetailsScreen(
 ) {
     val uiState = detailsViewModel.uiState.collectAsStateWithLifecycle().value
 
-    if (uiState.movieDetailsLoading) {
+
+    AnimatedVisibility(
+        visible = uiState.movieDetailsLoading,
+        enter = fadeIn() + slideInVertically(),
+        exit = fadeOut() + slideOutVertically()
+    ) {
         Box(
             modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
         ) {
-            CircularProgressIndicator(
-                color = MaterialTheme.colorScheme.secondary
-            )
+            JumpingBubblesLoadingIndicator()
         }
     }
 

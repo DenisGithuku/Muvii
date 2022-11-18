@@ -1,5 +1,6 @@
 package com.denisgithuku.movies.presentation.screens.home
 
+import androidx.compose.animation.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -20,6 +21,7 @@ import androidx.compose.ui.window.DialogProperties
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.denisgithuku.core_data.ui.components.JumpingBubblesLoadingIndicator
 import com.denisgithuku.core_design.ui.components.MuviiIconButton
 import com.denisgithuku.core_design.ui.theme.LocalAppDimens
 import com.denisgithuku.movies.domain.common.SortType
@@ -63,26 +65,16 @@ fun HomeScreen(
         }
     }
 
-    if (uiState.trendingMovieLoading) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center
+    if (uiState.moviesLoading) {
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
         ) {
             CircularProgressIndicator(
                 color = MaterialTheme.colorScheme.secondary
             )
         }
     }
-
-    if (uiState.moviesLoading) {
-        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-            CircularProgressIndicator(
-                color = MaterialTheme.colorScheme.secondary
-            )
-        }
-    }
-
     if (settingsDialogOpen) {
         Dialog(
             onDismissRequest = {
@@ -118,7 +110,7 @@ fun HomeScreen(
                 )
             }
         }
-        }
+    }
 
     if (uiState.userMessages.isNotEmpty()) {
         val userMessage = uiState.userMessages[0]
@@ -128,7 +120,9 @@ fun HomeScreen(
         }
     }
 
-    HomeScreen(selectedGenre = uiState.selectedGenre,
+    HomeScreen(
+        selectedGenre = uiState.selectedGenre,
+        trendingMoviesLoading = uiState.trendingMovieLoading,
         onChangeGenre = { genreId: Int ->
             homeViewModel.onEvent(HomeEvent.ChangeMovieGenre(genreId))
         },
@@ -148,6 +142,7 @@ fun HomeScreen(
 @Composable
 private fun HomeScreen(
     modifier: Modifier = Modifier,
+    trendingMoviesLoading: Boolean,
     selectedGenre: Int,
     onChangeGenre: (Int) -> Unit,
     onSearchMovies: (String) -> Unit,
@@ -176,6 +171,13 @@ private fun HomeScreen(
             SearchBar(onSearch = onSearchMovies)
         }
         item {
+            AnimatedVisibility(
+                visible = trendingMoviesLoading,
+                enter = fadeIn() + slideInVertically(),
+                exit = fadeOut() + slideOutVertically()
+            ) {
+                JumpingBubblesLoadingIndicator()
+            }
             LazyRow(
                 state = rememberLazyListState(),
                 modifier = modifier.padding(LocalAppDimens.current.medium)

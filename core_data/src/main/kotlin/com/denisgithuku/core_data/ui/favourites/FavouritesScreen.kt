@@ -25,6 +25,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.denisgithuku.core_data.domain.model.FavouriteMovie
+import com.denisgithuku.core_data.ui.components.JumpingBubblesLoadingIndicator
 import com.denisgithuku.core_design.ui.components.MuviiIconButton
 import com.denisgithuku.core_design.ui.theme.LocalAppDimens
 
@@ -38,7 +39,7 @@ fun FavouritesScreen(
 
     if (uiState.isLoading) {
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-            CircularProgressIndicator()
+            JumpingBubblesLoadingIndicator()
         }
     }
 

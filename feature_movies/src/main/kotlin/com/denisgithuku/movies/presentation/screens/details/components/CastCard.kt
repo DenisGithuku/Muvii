@@ -42,12 +42,6 @@ fun CastCard(
         Box(
             modifier = modifier
                 .sizeIn(minWidth = 80.dp, minHeight = 80.dp)
-                .clip(
-                    CircleShape
-                )
-                .clickable {
-                    onOpenProfile(castId)
-                }
         ) {
             AsyncImage(
                 model = ImageRequest.Builder(context)
@@ -56,7 +50,14 @@ fun CastCard(
                     .build(),
                 contentScale = ContentScale.Crop,
                 contentDescription = "Cast profile",
-                modifier = modifier.matchParentSize()
+                modifier = modifier
+                    .matchParentSize()
+                    .clip(
+                        CircleShape
+                    )
+                    .clickable {
+                        onOpenProfile(castId)
+                    }
             )
             Box(modifier = modifier
                 .sizeIn(30.dp)
