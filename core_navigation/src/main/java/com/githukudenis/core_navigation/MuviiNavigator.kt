@@ -14,6 +14,7 @@ import androidx.navigation.compose.composable
 import com.denisgithuku.core_data.ui.favourites.FavouritesScreen
 import com.denisgithuku.movies.presentation.screens.details.DetailsScreen
 import com.denisgithuku.movies.presentation.screens.home.HomeScreen
+import com.denisgithuku.tv_shows.presentation.screens.tv.TvScreen
 
 @Composable
 fun MuviiNavigator(
@@ -56,15 +57,7 @@ fun MuviiNavigator(
             )
         }
         composable(route = Screen.Shows.routeId) {
-            Column(
-                modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    text = "Coming soon..."
-                )
-            }
+            TvScreen(snackbarHostState = snackbarHostState)
         }
         composable(route = Screen.Favourites.routeId) {
             FavouritesScreen(
