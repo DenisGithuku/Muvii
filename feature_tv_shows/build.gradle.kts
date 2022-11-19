@@ -6,7 +6,6 @@ plugins {
     id("kotlin-parcelize")
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
-    id("com.google.devtools.ksp") version "1.7.0-1.0.6"
 }
 
 val TMDB_API_KEY: String = gradleLocalProperties(rootDir).getProperty("TMDB_API_KEY")
@@ -69,6 +68,7 @@ android {
 dependencies {
 
     implementation(project(":core_data"))
+    implementation(project(":core_design"))
     implementation(Deps.core)
     implementation(Deps.lifecycle_runtime)
     implementation(Deps.activity_compose)
@@ -81,6 +81,7 @@ dependencies {
     implementation(Deps.datastore)
     implementation(Deps.accompanist)
     implementation(Deps.lifecycle_viewmodel)
+    implementation(Deps.lifecycle_aware_state)
     implementation(Deps.navigation)
     implementation(Deps.okhttp)
     implementation(Deps.coil)
@@ -99,7 +100,6 @@ dependencies {
     implementation(Deps.room_ktx)
     implementation(Deps.room_runtime)
     kapt(Deps.room_compiler)
-    ksp(Deps.ramcosta_navigation_ksp)
     implementation(Deps.viewmodel)
     kapt(Deps.dagger_hilt_compiler)
     testImplementation(Deps.junit_testImplementation)

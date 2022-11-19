@@ -74,7 +74,7 @@ private fun FavouritesScreen(
             }
         }
 
-        items(favourites) { favouriteMovie ->
+        items(items = favourites, key = { favourite_movie -> favourite_movie.id }) { favouriteMovie ->
             FavouriteMovieCard(
                 favouriteMovie = favouriteMovie,
                 onToggleFavourite = { },
