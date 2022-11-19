@@ -19,7 +19,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.denisgithuku.core_design.ui.theme.MuviiTheme
-import com.githukudenis.core_navigation.MuviiNavigator
+import com.githukudenis.core_navigation.navigators.MuviiNavigator
 import com.githukudenis.core_navigation.Screen
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -32,8 +32,8 @@ class MainActivity : ComponentActivity() {
 
     private val mainViewModel: MainViewModel by viewModels()
     val screens = listOf<Screen>(
-        Screen.Home,
-        Screen.Shows,
+        Screen.Movies,
+        Screen.Tv,
         Screen.Search,
         Screen.Favourites,
     )
@@ -57,7 +57,7 @@ class MainActivity : ComponentActivity() {
                             Scaffold(
                                 snackbarHost = { SnackbarHost(snackbarHostState) },
                                 bottomBar = {
-                                    AnimatedVisibility(visible = currentDestination?.route != Screen.Details.routeId) {
+                                    AnimatedVisibility(visible = currentDestination?.route != Screen.MovieDetails.routeId) {
                                         NavigationBar {
                                             screens.forEach { screen ->
                                                 NavigationBarItem(

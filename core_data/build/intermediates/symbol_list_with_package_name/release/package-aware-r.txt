@@ -1,2 +1,4 @@
 com.githukudenis.core_data
+drawable bookmark_favourite_filled
+drawable bookmarks
 drawable sliders1_svgrepo_com

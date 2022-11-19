@@ -1,2 +1,4 @@
 R_DEF: Internal format may change without notice
 local
+drawable ic_baseline_add_24
+drawable ic_baseline_check_24

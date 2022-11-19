@@ -17,7 +17,7 @@ fun MuviiIconButton(
     icon: (@Composable () -> Unit)
 ) {
     IconButton(
-        modifier = Modifier
+        modifier = modifier
         .background(
             MaterialTheme.colorScheme.surfaceVariant, shape = MaterialTheme.shapes.large
         )

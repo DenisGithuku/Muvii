@@ -6,4 +6,6 @@ object Constants {
     const val ADULT_CONTENT_ENABLED_KEY = "adult_content_enabled"
     const val movieId = "movieId"
     const val imageSize = "original"
+    const val moviesRoute = "movies"
+    const val tvShowsRoute = "tv"
 }

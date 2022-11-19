@@ -126,8 +126,7 @@ object CoreModule {
     fun provideCoreMovieUseCases(
         favouriteMoviesRepository: FavouriteMoviesRepository,
         dispatcherProvider: DispatcherProvider,
-        castRepository: CastRepository,
-        coreInterface: CoreInterface
+        castRepository: CastRepository
     ): CoreMovieUseCases {
         return CoreMovieUseCases(
             getFavouriteMovies = GetFavouriteMovies(
