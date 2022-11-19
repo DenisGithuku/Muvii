@@ -5,6 +5,7 @@ import com.denisgithuku.core_data.providers.DispatcherProvider
 import com.denisgithuku.tv_shows.data.data_src.remote.api.TvApiInterface
 import com.denisgithuku.tv_shows.data.data_src.repository_impl.TvRepositoryImpl
 import com.denisgithuku.tv_shows.domain.repository.TvRepository
+import com.denisgithuku.tv_shows.domain.use_cases.GetShowDetails
 import com.denisgithuku.tv_shows.domain.use_cases.GetShows
 import com.denisgithuku.tv_shows.domain.use_cases.TvUseCases
 import dagger.Module
@@ -37,8 +38,17 @@ object TvModule {
 
     @Provides
     @Singleton
-    fun provideTvUseCases(tvRepository: TvRepository, dispatcherProvider: DispatcherProvider): TvUseCases = TvUseCases(getShows = GetShows(
+    fun provideTvUseCases(
+        tvRepository: TvRepository,
+        dispatcherProvider: DispatcherProvider
+    ): TvUseCases = TvUseCases(
+        getShows = GetShows(
         tvRepository = tvRepository,
         dispatcherProvider = dispatcherProvider
-    ))
+    ),
+        getShowDetails = GetShowDetails(
+            tvRepository = tvRepository,
+            dispatcherProvider = dispatcherProvider
+        )
+    )
 }

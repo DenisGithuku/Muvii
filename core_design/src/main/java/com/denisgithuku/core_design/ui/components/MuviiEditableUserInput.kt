@@ -19,13 +19,7 @@ fun MuviiEditableUserInput(
     contentDescription: String,
     onClick: () -> Unit
 ) {
-    MuviiEditableBaseInputField(
-        modifier = modifier,
-        contentDescription = contentDescription,
-        vectorImageId = vectorImageId,
-        onClick = onClick
-    )
-    {
+    MuviiEditableBaseInputField {
         TextField(
             value = state.text,
             onValueChange = {

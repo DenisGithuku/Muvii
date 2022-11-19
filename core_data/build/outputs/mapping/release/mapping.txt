@@ -1,0 +1,24 @@
+# compiler: R8
+# compiler_version: 3.3.70
+# common_typos_disable
+# {"id":"com.android.tools.r8.mapping","version":"2.0"}
+# pg_map_id: 11a246c
+# pg_map_hash: SHA-256 11a246c02ce700dcb4a39336f1de1f76e6077c7a2ca6400adbe730bb89dc2f97
+com.denisgithuku.core_data.data.local.FavouriteMoviesDao -> a.a:
+com.denisgithuku.core_data.data.local.MoviesDatabase_Impl -> com.denisgithuku.core_data.data.local.MoviesDatabase_Impl:
+    java.util.List access$000(com.denisgithuku.core_data.data.local.MoviesDatabase_Impl) -> a
+    androidx.sqlite.db.SupportSQLiteDatabase access$602(com.denisgithuku.core_data.data.local.MoviesDatabase_Impl,androidx.sqlite.db.SupportSQLiteDatabase) -> a
+    java.util.List access$100(com.denisgithuku.core_data.data.local.MoviesDatabase_Impl) -> b
+    void access$700(com.denisgithuku.core_data.data.local.MoviesDatabase_Impl,androidx.sqlite.db.SupportSQLiteDatabase) -> b
+    java.util.List access$1000(com.denisgithuku.core_data.data.local.MoviesDatabase_Impl) -> c
+    java.util.List access$200(com.denisgithuku.core_data.data.local.MoviesDatabase_Impl) -> d
+    java.util.List access$300(com.denisgithuku.core_data.data.local.MoviesDatabase_Impl) -> e
+    java.util.List access$400(com.denisgithuku.core_data.data.local.MoviesDatabase_Impl) -> f
+    java.util.List access$500(com.denisgithuku.core_data.data.local.MoviesDatabase_Impl) -> g
+    1:1:java.util.List com.denisgithuku.core_data.data.local.FavouriteMoviesDao_Impl.getRequiredConverters():0:0 -> getRequiredTypeConverters
+    1:1:java.util.Map getRequiredTypeConverters():0 -> getRequiredTypeConverters
+    2:2:java.util.Map getRequiredTypeConverters():0:0 -> getRequiredTypeConverters
+    java.util.List access$800(com.denisgithuku.core_data.data.local.MoviesDatabase_Impl) -> h
+    java.util.List access$900(com.denisgithuku.core_data.data.local.MoviesDatabase_Impl) -> i
+com.denisgithuku.core_data.data.local.MoviesDatabase_Impl$1 -> com.denisgithuku.core_data.data.local.MoviesDatabase_Impl$a:
+    com.denisgithuku.core_data.data.local.MoviesDatabase_Impl this$0 -> a

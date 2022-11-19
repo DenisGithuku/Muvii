@@ -1,7 +1,9 @@
 package com.denisgithuku.tv_shows.presentation.screens.tv
 
 import androidx.compose.animation.*
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
@@ -22,7 +24,8 @@ import com.denisgithuku.tv_shows.presentation.components.TvItem
 @OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun TvScreen(
-    snackbarHostState: SnackbarHostState
+    snackbarHostState: SnackbarHostState,
+    onOpenDetails: (Int) -> Unit
 ) {
     val viewModel: TvViewModel = hiltViewModel()
     val uiState = viewModel.uiState.collectAsStateWithLifecycle().value
@@ -48,7 +51,7 @@ fun TvScreen(
         }
     }
     
-    TvScreen(shows = uiState.shows, onOpenDetails = {})
+    TvScreen(shows = uiState.shows, onOpenDetails = onOpenDetails)
     
 }
 
@@ -56,12 +59,8 @@ fun TvScreen(
 private fun TvScreen(
     shows: List<Tv>,
     onOpenDetails: (Int) -> Unit,
-    modifier: Modifier = Modifier
 ) {
     LazyColumn(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(LocalAppDimens.current.large),
         verticalArrangement = Arrangement.spacedBy(LocalAppDimens.current.medium)
     ) {
         item {

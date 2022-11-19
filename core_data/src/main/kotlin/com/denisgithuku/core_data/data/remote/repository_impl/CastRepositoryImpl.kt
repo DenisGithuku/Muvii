@@ -22,9 +22,7 @@ class CastRepositoryImpl @Inject constructor(
     override suspend fun getCrew(movieId: Int): List<CrewDTO> {
         val response = coreInterface.getCast(movieId)
         if (response.isSuccessful) {
-            response.body()?.let {
-                it.crew ?: emptyList()
-            }
+            response.body()?.crew
         }
         return emptyList()
     }

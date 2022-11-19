@@ -12,7 +12,6 @@ class FormatDateUseCase {
         return try {
             val formatter =DateTimeFormatter.ofPattern("yyyy-MM-dd")
             val formattedDate = LocalDate.parse(date, formatter)
-            val calendar = Calendar.getInstance()
             return "${
                 formattedDate.month.toString().lowercase(Locale.ROOT).replaceFirstChar {
                 formattedDate.month.toString().first().uppercaseChar()

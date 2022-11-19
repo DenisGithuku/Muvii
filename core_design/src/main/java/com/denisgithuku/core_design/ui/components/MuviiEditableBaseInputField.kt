@@ -1,6 +1,5 @@
 package com.denisgithuku.core_design.ui.components
 
-import androidx.annotation.DrawableRes
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -8,14 +7,9 @@ import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.listSaver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Modifier
 
 @Composable
 fun MuviiEditableBaseInputField(
-    modifier: Modifier = Modifier,
-    contentDescription: String? = null,
-    onClick: () -> Unit,
-    @DrawableRes vectorImageId: Int? = null,
     textField: (@Composable () -> Unit)
 ) {
         textField()

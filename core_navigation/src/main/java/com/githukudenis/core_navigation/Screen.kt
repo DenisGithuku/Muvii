@@ -2,21 +2,23 @@ package com.githukudenis.core_navigation
 
 import androidx.annotation.DrawableRes
 
-sealed class Screen (val routeId: String, @DrawableRes val vectorId: Int? = null) {
+sealed class Screen(val routeId: String, @DrawableRes val vectorId: Int? = null) {
 
-    object Shows :
-        Screen(routeId = "TV", vectorId = com.denisgithuku.core_design.R.drawable.tv_outline)
+    object Tv :
+        Screen(routeId = "Tv", vectorId = com.denisgithuku.core_design.R.drawable.tv_outline)
 
-    object Home:
+    object Movies :
         Screen(routeId = "Movie", vectorId = com.denisgithuku.core_design.R.drawable.home_outline)
 
-    object Details:
-            Screen(routeId = "Details", null)
-    object Search:
+    object MovieDetails : Screen(routeId = "MovieDetails", null)
+    object Search :
         Screen(routeId = "Search", vectorId = com.denisgithuku.core_design.R.drawable.search)
 
-    object Favourites: Screen(
-        routeId = "Saved",
-        vectorId = com.denisgithuku.core_design.R.drawable.favourites
+    object Favourites : Screen(
+        routeId = "Saved", vectorId = com.denisgithuku.core_design.R.drawable.favourites
+    )
+
+    object TvDetails : Screen(
+        routeId = "TvDetails", null
     )
 }
