@@ -16,8 +16,8 @@ fun NavGraphBuilder.tvGraph(
 ) {
     navigation(startDestination = Screen.Tv.routeId, route = Constants.tvShowsRoute) {
             composable(route = Screen.Tv.routeId) {
-                TvScreen(snackbarHostState = snackbarHostState, onOpenDetails = {
-                    navHostController.navigate(Screen.TvDetails.routeId) {
+                TvScreen(snackbarHostState = snackbarHostState, onOpenDetails = { tvId ->
+                    navHostController.navigate(Screen.TvDetails.routeId + "/${tvId}") {
                       popUpTo(Screen.TvDetails.routeId) {
                           inclusive = true
                           saveState = true
@@ -26,8 +26,8 @@ fun NavGraphBuilder.tvGraph(
                     }
                 })
             }
-            composable(route = Screen.TvDetails.routeId) {
-                TvDetailsScreen()
+            composable(route = Screen.TvDetails.routeId + "/{tvId}") {
+                TvDetailsScreen(snackbarHostState = snackbarHostState)
             }
         }
     }
