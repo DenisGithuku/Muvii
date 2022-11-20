@@ -21,8 +21,6 @@ com.denisgithuku.movies.data.data_src.repository_impl.MoviesRepositoryImpl$searc
 com.denisgithuku.movies.data.data_src.repository_impl.MoviesRepositoryImpl
 com.denisgithuku.movies.data.data_src.repository_impl.MoviesRepositoryImpl_Factory
 com.denisgithuku.movies.di.MoviesModule
-com.denisgithuku.movies.di.MoviesModule_ProvideDateFormatterUseCaseFactory$InstanceHolder
-com.denisgithuku.movies.di.MoviesModule_ProvideDateFormatterUseCaseFactory
 com.denisgithuku.movies.di.MoviesModule_ProvideMovieUseCasesFactory
 com.denisgithuku.movies.di.MoviesModule_ProvideMoviesApiInterfaceFactory
 com.denisgithuku.movies.di.MoviesModule_ProvideMoviesRepositoryFactory
@@ -46,7 +44,6 @@ com.denisgithuku.movies.domain.use_cases.DeleteAllFavourites
 com.denisgithuku.movies.domain.use_cases.DeleteAllFavourites_Factory
 com.denisgithuku.movies.domain.use_cases.EnableAdultContent
 com.denisgithuku.movies.domain.use_cases.EnableAdultContent_Factory
-com.denisgithuku.movies.domain.use_cases.FormatDateUseCase
 com.denisgithuku.movies.domain.use_cases.GetAdultContentPreferences$invoke$2
 com.denisgithuku.movies.domain.use_cases.GetAdultContentPreferences
 com.denisgithuku.movies.domain.use_cases.GetAdultContentPreferences_Factory
@@ -204,7 +201,7 @@ com.denisgithuku.movies.presentation.screens.home.MoviesListScreenKt$BottomSheet
 com.denisgithuku.movies.presentation.screens.home.MoviesListScreenKt$BottomSheetPrev$5
 com.denisgithuku.movies.presentation.screens.home.MoviesListScreenKt$DialogContent$1$1$1$1
 com.denisgithuku.movies.presentation.screens.home.MoviesListScreenKt$DialogContent$1$2$1$1
-com.denisgithuku.movies.presentation.screens.home.MoviesListScreenKt$DialogContent$1$3$1$1
+com.denisgithuku.movies.presentation.screens.home.MoviesListScreenKt$DialogContent$1$3$1$1$1
 com.denisgithuku.movies.presentation.screens.home.MoviesListScreenKt$DialogContent$1$4$1
 com.denisgithuku.movies.presentation.screens.home.MoviesListScreenKt$DialogContent$2
 com.denisgithuku.movies.presentation.screens.home.MoviesListScreenKt$MoviesListScreen$10

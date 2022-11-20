@@ -2,10 +2,10 @@
 package com.denisgithuku.movies.di;
 
 import com.denisgithuku.core_data.domain.repository.FavouriteMoviesRepository;
+import com.denisgithuku.core_data.domain.use_cases.CoreMuviiUseCases;
 import com.denisgithuku.core_data.providers.DispatcherProvider;
 import com.denisgithuku.core_data.providers.UserPreferences;
 import com.denisgithuku.movies.domain.repository.MoviesRepository;
-import com.denisgithuku.movies.domain.use_cases.FormatDateUseCase;
 import com.denisgithuku.movies.domain.use_cases.MovieUseCases;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
@@ -28,7 +28,7 @@ public final class MoviesModule_ProvideMovieUseCasesFactory implements Factory<M
 
   private final Provider<UserPreferences> userPreferencesProvider;
 
-  private final Provider<FormatDateUseCase> formatDateUseCaseProvider;
+  private final Provider<CoreMuviiUseCases> coreMuviiUseCasesProvider;
 
   private final Provider<DispatcherProvider> dispatcherProvider;
 
@@ -36,32 +36,32 @@ public final class MoviesModule_ProvideMovieUseCasesFactory implements Factory<M
       Provider<MoviesRepository> moviesRepositoryProvider,
       Provider<FavouriteMoviesRepository> favouriteMoviesRepositoryProvider,
       Provider<UserPreferences> userPreferencesProvider,
-      Provider<FormatDateUseCase> formatDateUseCaseProvider,
+      Provider<CoreMuviiUseCases> coreMuviiUseCasesProvider,
       Provider<DispatcherProvider> dispatcherProvider) {
     this.moviesRepositoryProvider = moviesRepositoryProvider;
     this.favouriteMoviesRepositoryProvider = favouriteMoviesRepositoryProvider;
     this.userPreferencesProvider = userPreferencesProvider;
-    this.formatDateUseCaseProvider = formatDateUseCaseProvider;
+    this.coreMuviiUseCasesProvider = coreMuviiUseCasesProvider;
     this.dispatcherProvider = dispatcherProvider;
   }
 
   @Override
   public MovieUseCases get() {
-    return provideMovieUseCases(moviesRepositoryProvider.get(), favouriteMoviesRepositoryProvider.get(), userPreferencesProvider.get(), formatDateUseCaseProvider.get(), dispatcherProvider.get());
+    return provideMovieUseCases(moviesRepositoryProvider.get(), favouriteMoviesRepositoryProvider.get(), userPreferencesProvider.get(), coreMuviiUseCasesProvider.get(), dispatcherProvider.get());
   }
 
   public static MoviesModule_ProvideMovieUseCasesFactory create(
       Provider<MoviesRepository> moviesRepositoryProvider,
       Provider<FavouriteMoviesRepository> favouriteMoviesRepositoryProvider,
       Provider<UserPreferences> userPreferencesProvider,
-      Provider<FormatDateUseCase> formatDateUseCaseProvider,
+      Provider<CoreMuviiUseCases> coreMuviiUseCasesProvider,
       Provider<DispatcherProvider> dispatcherProvider) {
-    return new MoviesModule_ProvideMovieUseCasesFactory(moviesRepositoryProvider, favouriteMoviesRepositoryProvider, userPreferencesProvider, formatDateUseCaseProvider, dispatcherProvider);
+    return new MoviesModule_ProvideMovieUseCasesFactory(moviesRepositoryProvider, favouriteMoviesRepositoryProvider, userPreferencesProvider, coreMuviiUseCasesProvider, dispatcherProvider);
   }
 
   public static MovieUseCases provideMovieUseCases(MoviesRepository moviesRepository,
       FavouriteMoviesRepository favouriteMoviesRepository, UserPreferences userPreferences,
-      FormatDateUseCase formatDateUseCase, DispatcherProvider dispatcherProvider) {
-    return Preconditions.checkNotNullFromProvides(MoviesModule.INSTANCE.provideMovieUseCases(moviesRepository, favouriteMoviesRepository, userPreferences, formatDateUseCase, dispatcherProvider));
+      CoreMuviiUseCases coreMuviiUseCases, DispatcherProvider dispatcherProvider) {
+    return Preconditions.checkNotNullFromProvides(MoviesModule.INSTANCE.provideMovieUseCases(moviesRepository, favouriteMoviesRepository, userPreferences, coreMuviiUseCases, dispatcherProvider));
   }
 }

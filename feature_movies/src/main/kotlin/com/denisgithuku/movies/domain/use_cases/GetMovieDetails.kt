@@ -2,6 +2,7 @@ package com.denisgithuku.movies.domain.use_cases
 
 import com.denisgithuku.core_data.Resource
 import com.denisgithuku.core_data.domain.repository.FavouriteMoviesRepository
+import com.denisgithuku.core_data.domain.use_cases.CoreMuviiUseCases
 import com.denisgithuku.core_data.providers.DispatcherProvider
 import com.denisgithuku.movies.domain.model.MovieDetails
 import com.denisgithuku.movies.domain.repository.MoviesRepository
@@ -14,7 +15,7 @@ import javax.inject.Inject
 class GetMovieDetails @Inject constructor(
     private val movieRepository: MoviesRepository,
     private val favouriteMoviesRepository: FavouriteMoviesRepository,
-    private val formatDateUseCase: FormatDateUseCase,
+    private val coreMuviiUseCases: CoreMuviiUseCases,
     private val dispatcherProvider: DispatcherProvider,
 
     ) {
@@ -25,7 +26,7 @@ class GetMovieDetails @Inject constructor(
             val res = movieRepository.getMovieDetails(movieId)
             res?.let { movieDetails ->
                 emit(Resource.Success(movieDetails.toMovie().copy(
-                    release_date = formatDateUseCase(movieDetails.release_date),
+                    release_date = coreMuviiUseCases.formatDateUseCase(movieDetails.release_date),
                     favourite = favouriteMoviesRepository.getFavouriteMoviesFromDB()
                         .any { it.movieId == movieDetails.id }
                 )))

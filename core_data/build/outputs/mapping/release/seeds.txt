@@ -3,9 +3,9 @@ com.denisgithuku.core_data.data.local.MoviesDatabase_Impl
 com.denisgithuku.core_data.data.local.MoviesDatabase
 com.githukudenis.core_data.R$drawable
 com.githukudenis.core_data.R$drawable: int sliders1_svgrepo_com
-com.githukudenis.core_data.R$drawable: int bookmark_favourite_filled
 com.githukudenis.core_data.R$drawable: int bookmarks
-com.githukudenis.core_data.R: R()
-com.denisgithuku.core_data.data.local.MoviesDatabase: MoviesDatabase()
+com.githukudenis.core_data.R$drawable: int bookmark_favourite_filled
 com.denisgithuku.core_data.data.local.MoviesDatabase_Impl: MoviesDatabase_Impl()
+com.denisgithuku.core_data.data.local.MoviesDatabase: MoviesDatabase()
 com.githukudenis.core_data.R$drawable: R$drawable()
+com.githukudenis.core_data.R: R()

@@ -56,7 +56,7 @@ com.denisgithuku.core_data.data.remote.repository_impl.FavouriteMoviesRepository
 com.denisgithuku.core_data.data.remote.repository_impl.FavouriteMoviesRepositoryImpl_Factory
 com.denisgithuku.core_data.di.CoreModule
 com.denisgithuku.core_data.di.CoreModule_ProvideCastRepositoryFactory
-com.denisgithuku.core_data.di.CoreModule_ProvideCoreMovieUseCasesFactory
+com.denisgithuku.core_data.di.CoreModule_ProvideCoreMuviiUseCasesFactory
 com.denisgithuku.core_data.di.CoreModule_ProvideCoroutineDispatchersFactory$InstanceHolder
 com.denisgithuku.core_data.di.CoreModule_ProvideCoroutineDispatchersFactory
 com.denisgithuku.core_data.di.CoreModule_ProvideFavouriteMoviesApiInterfaceFactory
@@ -73,7 +73,8 @@ com.denisgithuku.core_data.domain.model.FavouriteMovie
 com.denisgithuku.core_data.domain.model.SearchMovieItem
 com.denisgithuku.core_data.domain.repository.CastRepository
 com.denisgithuku.core_data.domain.repository.FavouriteMoviesRepository
-com.denisgithuku.core_data.domain.use_cases.CoreMovieUseCases
+com.denisgithuku.core_data.domain.use_cases.CoreMuviiUseCases
+com.denisgithuku.core_data.domain.use_cases.FormatDateUseCase
 com.denisgithuku.core_data.domain.use_cases.GetCast$invoke$2
 com.denisgithuku.core_data.domain.use_cases.GetCast
 com.denisgithuku.core_data.domain.use_cases.GetCast_Factory

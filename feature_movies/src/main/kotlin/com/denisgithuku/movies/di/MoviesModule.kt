@@ -3,6 +3,7 @@ package com.denisgithuku.movies.di
 import com.denisgithuku.core_data.Constants
 import com.denisgithuku.core_data.data.local.FavouriteMoviesDao
 import com.denisgithuku.core_data.domain.repository.FavouriteMoviesRepository
+import com.denisgithuku.core_data.domain.use_cases.CoreMuviiUseCases
 import com.denisgithuku.core_data.providers.DispatcherProvider
 import com.denisgithuku.core_data.providers.UserPreferences
 import com.denisgithuku.movies.data.data_src.remote.MoviesApiInterface
@@ -46,16 +47,11 @@ object MoviesModule {
 
     @Provides
     @Singleton
-    fun provideDateFormatterUseCase(): FormatDateUseCase = FormatDateUseCase()
-
-
-    @Provides
-    @Singleton
     fun provideMovieUseCases(
         moviesRepository: MoviesRepository,
         favouriteMoviesRepository: FavouriteMoviesRepository,
         userPreferences: UserPreferences,
-        formatDateUseCase: FormatDateUseCase,
+        coreMuviiUseCases: CoreMuviiUseCases,
         dispatcherProvider: DispatcherProvider
     ): MovieUseCases {
         return MovieUseCases(
@@ -68,7 +64,7 @@ object MoviesModule {
             getMovieDetails = GetMovieDetails(
                 moviesRepository,
                 favouriteMoviesRepository,
-                formatDateUseCase,
+                coreMuviiUseCases,
                 dispatcherProvider
             ),
             getSimilarMoviesById = GetSimilarMoviesById(moviesRepository),

@@ -1,4 +1,4 @@
-package com.denisgithuku.movies.domain.use_cases
+package com.denisgithuku.core_data.domain.use_cases
 
 import android.annotation.SuppressLint
 import android.util.Log

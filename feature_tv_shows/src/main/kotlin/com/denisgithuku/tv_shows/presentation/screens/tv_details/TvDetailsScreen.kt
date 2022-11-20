@@ -46,7 +46,7 @@ fun TvDetailsScreen(
     val uiState = tvDetailsViewModel.uiState.collectAsStateWithLifecycle().value
 
     AnimatedVisibility(
-        uiState.tvDetailsLoading,
+        visible = uiState.tvDetailsLoading,
         enter = fadeIn(),
         exit = fadeOut()
     ) {
@@ -56,7 +56,10 @@ fun TvDetailsScreen(
     }
 
     if (uiState.userMessages.isNotEmpty()) {
-        LaunchedEffect(uiState.userMessages, snackbarHostState) {
+        LaunchedEffect(
+            key1 = uiState.userMessages,
+            key2 = snackbarHostState
+        ) {
             val userMessage = uiState.userMessages[0]
             snackbarHostState.showSnackbar(message = userMessage.message)
         }
@@ -171,6 +174,18 @@ private fun TvDetailsScreen(
                     start = LocalAppDimens.current.medium,
                     end = LocalAppDimens.current.medium
 
+                )
+            )
+        }
+
+        item {
+            Text(
+                text = "Storyline",
+                style = MaterialTheme.typography.displaySmall,
+                modifier = modifier.padding(
+                    top = LocalAppDimens.current.extra_large,
+                    start = LocalAppDimens.current.extra_large,
+                    end = LocalAppDimens.current.extra_large,
                 )
             )
         }

@@ -10,7 +10,8 @@ import com.denisgithuku.core_data.data.remote.repository_impl.CastRepositoryImpl
 import com.denisgithuku.core_data.data.remote.repository_impl.FavouriteMoviesRepositoryImpl
 import com.denisgithuku.core_data.domain.repository.CastRepository
 import com.denisgithuku.core_data.domain.repository.FavouriteMoviesRepository
-import com.denisgithuku.core_data.domain.use_cases.CoreMovieUseCases
+import com.denisgithuku.core_data.domain.use_cases.CoreMuviiUseCases
+import com.denisgithuku.core_data.domain.use_cases.FormatDateUseCase
 import com.denisgithuku.core_data.domain.use_cases.GetCast
 import com.denisgithuku.core_data.domain.use_cases.GetFavouriteMovies
 import com.denisgithuku.core_data.providers.AppThemeProvider
@@ -123,12 +124,12 @@ object CoreModule {
 
     @Provides
     @Singleton
-    fun provideCoreMovieUseCases(
+    fun provideCoreMuviiUseCases(
         favouriteMoviesRepository: FavouriteMoviesRepository,
         dispatcherProvider: DispatcherProvider,
         castRepository: CastRepository
-    ): CoreMovieUseCases {
-        return CoreMovieUseCases(
+    ): CoreMuviiUseCases {
+        return CoreMuviiUseCases(
             getFavouriteMovies = GetFavouriteMovies(
                 favouriteMoviesRepository,
                 dispatcherProvider = dispatcherProvider,
@@ -136,7 +137,8 @@ object CoreModule {
             getCast = GetCast(
                 castRepository = castRepository,
                 dispatcherProvider = dispatcherProvider
-            )
+            ),
+            formatDateUseCase = FormatDateUseCase()
         )
     }
 
