@@ -39,9 +39,9 @@ fun MovieItem(
     genres: List<Genre>,
     onOpen: (Int) -> Unit,
     onToggleFavourite: () -> Unit,
-    minWidth: Dp = 150.dp,
+    minWidth: Dp = 100.dp,
     minHeight: Dp = 100.dp,
-    maxWidth: Dp = 150.dp,
+    maxWidth: Dp = 100.dp,
     maxHeight: Dp = 120.dp
 ) {
     val context = LocalContext.current

@@ -72,10 +72,11 @@ private fun TvScreen(
         items(items = shows, key = { tv -> tv.id }) { tv ->
             TvItem(
                 title = tv.name,
-                rating = tv.vote_average,
+                favourite = tv.favourite,
                 poster = tv.poster_path,
                 tvId = tv.id,
-                onOpen = onOpenDetails
+                onOpen = onOpenDetails,
+                onToggleFavourite = {},
             )
         }
     }

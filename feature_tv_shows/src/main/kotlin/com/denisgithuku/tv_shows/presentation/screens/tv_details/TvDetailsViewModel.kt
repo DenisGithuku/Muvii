@@ -24,7 +24,7 @@ class TvDetailsViewModel @Inject constructor(
     val uiState: StateFlow<TvDetailsUiState> get() = _uiState.asStateFlow()
 
     init {
-        savedStateHandle.get<String>("tv_id")?.let { tvId ->
+        savedStateHandle.get<String>("tvId")?.let { tvId ->
             getTvDetails(tvId.toInt())
         }
     }

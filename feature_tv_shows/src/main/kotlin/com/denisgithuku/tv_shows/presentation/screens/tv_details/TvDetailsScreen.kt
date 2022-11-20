@@ -12,6 +12,7 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -27,6 +28,7 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.denisgithuku.core_data.Constants
 import com.denisgithuku.core_data.domain.model.Cast
+import com.denisgithuku.core_data.ui.components.JumpingBubblesLoadingIndicator
 import com.denisgithuku.core_design.ui.components.MuviiIconButton
 import com.denisgithuku.core_design.ui.theme.LocalAppDimens
 import com.denisgithuku.tv_shows.domain.model.Tv
@@ -37,9 +39,28 @@ import okhttp3.internal.trimSubstring
 
 @OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
-fun TvDetailsScreen() {
+fun TvDetailsScreen(
+    snackbarHostState: SnackbarHostState
+) {
     val tvDetailsViewModel: TvDetailsViewModel = hiltViewModel()
     val uiState = tvDetailsViewModel.uiState.collectAsStateWithLifecycle().value
+
+    AnimatedVisibility(
+        uiState.tvDetailsLoading,
+        enter = fadeIn(),
+        exit = fadeOut()
+    ) {
+        Box(modifier = Modifier.fillMaxSize()) {
+            JumpingBubblesLoadingIndicator()
+        }
+    }
+
+    if (uiState.userMessages.isNotEmpty()) {
+        LaunchedEffect(uiState.userMessages, snackbarHostState) {
+            val userMessage = uiState.userMessages[0]
+            snackbarHostState.showSnackbar(message = userMessage.message)
+        }
+    }
 
     uiState.tvDetails?.let { details ->
         TvDetailsScreen(
