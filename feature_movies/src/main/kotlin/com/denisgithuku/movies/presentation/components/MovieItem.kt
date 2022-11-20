@@ -2,6 +2,8 @@ package com.denisgithuku.movies.presentation.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
@@ -12,16 +14,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.denisgithuku.core_data.Constants
+import com.denisgithuku.core_design.ui.components.MuviiIconButton
+import com.denisgithuku.core_design.ui.components.RoundedRectangleChip
 import com.denisgithuku.core_design.ui.theme.LocalAppDimens
+import com.denisgithuku.movies.domain.model.Genre
 import com.githukudenis.movies.R
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -29,65 +32,84 @@ import com.githukudenis.movies.R
 fun MovieItem(
     modifier: Modifier = Modifier,
     title: String,
-    rating: Double,
     poster: String,
     movieId: Int,
+    favourite: Boolean,
+    overview: String,
+    genres: List<Genre>,
     onOpen: (Int) -> Unit,
+    onToggleFavourite: () -> Unit,
+    minWidth: Dp = 150.dp,
+    minHeight: Dp = 100.dp,
+    maxWidth: Dp = 150.dp,
+    maxHeight: Dp = 120.dp
 ) {
     val context = LocalContext.current
     Card(
-        onClick = { onOpen(movieId) },
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surface,
-            contentColor = MaterialTheme.colorScheme.onSurface
-        ),
-        elevation = CardDefaults.cardElevation(
-            defaultElevation = 4.dp
-        ),
-        modifier = Modifier.padding(LocalAppDimens.current.large)
+        onClick = { onOpen(movieId) }, colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(2.dp),
+            contentColor = MaterialTheme.colorScheme.onSurface,
+        ), modifier = Modifier.padding(LocalAppDimens.current.large)
     ) {
         Row(
             modifier = modifier
                 .fillMaxWidth()
-                .padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceEvenly
+                .heightIn(min = minHeight, max = maxHeight),
         ) {
             if (poster.isNotEmpty()) {
-                AsyncImage(
-                    model = ImageRequest.Builder(context)
-                        .data("https://image.tmdb.org/t/p/${Constants.imageSize}/${poster}")
-                        .crossfade(true).build(),
+                AsyncImage(model = ImageRequest.Builder(context)
+                    .data("https://image.tmdb.org/t/p/${Constants.imageSize}/$poster")
+                    .crossfade(true).build(),
                     contentDescription = "MovieDetails image",
-                    modifier = modifier
-                        .weight(1f)
-                        .sizeIn(maxWidth = 70.dp, maxHeight = 70.dp)
-                        .clip(
-                            RoundedCornerShape(16.dp)
-                        ),
+                    modifier = modifier.sizeIn(
+                        maxWidth = maxWidth,
+                        minWidth = minWidth,
+                    ).clip(
+                        shape = RoundedCornerShape(
+                            topStart = 16.dp,
+                            bottomStart = 16.dp
+                        )
+                    ),
                     contentScale = ContentScale.Crop,
                     onError = {
-                        ImageRequest.Builder(context)
-                            .data(
+                        ImageRequest.Builder(context).data(
                                 R.drawable.ic_broken_image_24
-                            )
-                            .build()
+                            ).build()
 
-                    }
-                )
+                    })
             }
-//            Spacer(modifier = modifier.width(16.dp))
-            Text(
-                modifier = modifier.weight(3f),
-                text = title, style = TextStyle(
-                    fontWeight = FontWeight.Bold, textAlign = TextAlign.Center,
-                ),
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
-            )
-            InfoItem(
-                rating = rating, modifier = modifier.weight(1f)
-            )
+            Column(
+                modifier = modifier.fillMaxWidth().padding(10.dp),
+                verticalArrangement = Arrangement.spacedBy(10.dp)
+            ) {
+                Row(
+                    modifier = modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(
+                        text = title,
+                        modifier = modifier.weight(weight = 1f, fill = false),
+                        style = MaterialTheme.typography.bodySmall,
+                        overflow = TextOverflow.Ellipsis,
+                        maxLines = 2
+                    )
+                    MuviiIconButton(onClick = { onToggleFavourite() }) {
+                        Icon(
+                            painter = painterResource(id = if (favourite) com.denisgithuku.core_design.R.drawable.bookmark_favourite_filled else com.denisgithuku.core_design.R.drawable.favourites),
+                            contentDescription = "Favourite icon",
+                        )
+                    }
+                }
+
+                LazyRow(
+                    modifier = modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(6.dp)
+                ) {
+                    items(items = genres) { genre ->
+                        RoundedRectangleChip(label = genre.name)
+                    }
+                }
+            }
         }
     }
 }
@@ -106,8 +128,7 @@ private fun InfoItem(rating: Double, modifier: Modifier) {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = rating.toString(),
-                style = MaterialTheme.typography.labelMedium.copy(
+                text = rating.toString(), style = MaterialTheme.typography.labelMedium.copy(
                     color = MaterialTheme.colorScheme.onSecondary
                 )
             )
@@ -118,10 +139,4 @@ private fun InfoItem(rating: Double, modifier: Modifier) {
             )
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun MovieItemPreview() {
-    MovieItem(title = "StarTrek", rating = 4.5, poster = "", movieId = 123, onOpen = {})
 }
