@@ -64,7 +64,7 @@ class HomeViewModel @Inject constructor(
                         getMoviesByGenre(
                             sort_by = _uiState.value.selectedSortType,
                             genreId = _uiState.value.selectedGenre,
-                            include_adult = _uiState.value.adultContentEnabled
+                            include_adult = _uiState.value.adultContentEnabled,
                         )
                     }
                 }
@@ -97,7 +97,7 @@ class HomeViewModel @Inject constructor(
                         getMoviesByGenre(
                             sort_by = _uiState.value.selectedSortType,
                             genreId = _uiState.value.selectedGenre,
-                            include_adult = _uiState.value.adultContentEnabled
+                            include_adult = _uiState.value.adultContentEnabled,
                         )
 
                     }
@@ -128,7 +128,7 @@ class HomeViewModel @Inject constructor(
                 getMoviesByGenre(
                     sort_by = _uiState.value.selectedSortType,
                     genreId = _uiState.value.selectedGenre,
-                    include_adult = _uiState.value.adultContentEnabled
+                    include_adult = _uiState.value.adultContentEnabled,
                 )
 
             }
@@ -149,7 +149,7 @@ class HomeViewModel @Inject constructor(
                         getMoviesByGenre(
                             sort_by = _uiState.value.selectedSortType,
                             genreId = _uiState.value.selectedGenre,
-                            include_adult = _uiState.value.adultContentEnabled
+                            include_adult = _uiState.value.adultContentEnabled,
                         )
                     }
                     SortType.ReleaseDate -> {
@@ -159,7 +159,7 @@ class HomeViewModel @Inject constructor(
                         getMoviesByGenre(
                             sort_by = _uiState.value.selectedSortType,
                             genreId = _uiState.value.selectedGenre,
-                            include_adult = _uiState.value.adultContentEnabled
+                            include_adult = _uiState.value.adultContentEnabled,
                         )
                     }
                     SortType.Revenue -> {
@@ -169,7 +169,7 @@ class HomeViewModel @Inject constructor(
                         getMoviesByGenre(
                             sort_by = _uiState.value.selectedSortType,
                             genreId = _uiState.value.selectedGenre,
-                            include_adult = _uiState.value.adultContentEnabled
+                            include_adult = _uiState.value.adultContentEnabled,
                         )
                     }
                     SortType.VoteAverage -> {
@@ -179,7 +179,7 @@ class HomeViewModel @Inject constructor(
                         getMoviesByGenre(
                             sort_by = _uiState.value.selectedSortType,
                             genreId = _uiState.value.selectedGenre,
-                            include_adult = _uiState.value.adultContentEnabled
+                            include_adult = _uiState.value.adultContentEnabled,
                         )
                     }
                     SortType.VoteCount -> {
@@ -189,7 +189,7 @@ class HomeViewModel @Inject constructor(
                         getMoviesByGenre(
                             sort_by = _uiState.value.selectedSortType,
                             genreId = _uiState.value.selectedGenre,
-                            include_adult = _uiState.value.adultContentEnabled
+                            include_adult = _uiState.value.adultContentEnabled,
                         )
                     }
                 }
@@ -204,7 +204,7 @@ class HomeViewModel @Inject constructor(
                 getMoviesByGenre(
                     sort_by = _uiState.value.selectedSortType,
                     genreId = _uiState.value.selectedGenre,
-                    include_adult = _uiState.value.adultContentEnabled
+                    include_adult = _uiState.value.adultContentEnabled,
                 )
 
             }

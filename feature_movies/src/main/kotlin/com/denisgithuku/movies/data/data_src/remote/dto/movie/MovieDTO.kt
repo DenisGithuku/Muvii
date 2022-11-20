@@ -20,20 +20,19 @@ data class MovieDTO(
 ) {
     fun toMovie(): Movie {
         return Movie(
-            adult,
-            backdrop_path,
-            genre_ids,
-            id,
-            original_language,
-            original_title,
-            overview,
-            popularity,
-            poster_path,
-            release_date,
-            title,
-            video,
-            vote_average,
-            vote_count
+            adult = adult,
+            backdrop_path = backdrop_path,
+            id = id,
+            original_language = original_language,
+            original_title = original_title,
+            overview = overview,
+            popularity = popularity,
+            poster_path = poster_path,
+            title = title,
+            video = video,
+            release_date = release_date,
+            vote_average = vote_average,
+            vote_count = vote_count
         )
     }
 }

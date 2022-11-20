@@ -1,6 +1,8 @@
 package com.denisgithuku.movies.presentation.screens.home
 
-import androidx.compose.animation.*
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -38,11 +40,11 @@ import com.denisgithuku.movies.presentation.screens.home.components.SearchBar
 @Composable
 fun MoviesListScreen(
     snackbarHostState: SnackbarHostState,
-    homeViewModel: HomeViewModel = hiltViewModel(),
     onToggleTheme: () -> Unit,
     isInDarkTheme: Boolean,
     onOpenDetails: (Int) -> Unit
 ) {
+    val homeViewModel: HomeViewModel = hiltViewModel()
     val uiState by homeViewModel.uiState.collectAsStateWithLifecycle()
 
 
@@ -53,16 +55,12 @@ fun MoviesListScreen(
     var settingsDialogOpen by rememberSaveable {
         mutableStateOf(false)
     }
-    if (uiState.genresLoading) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center
-        ) {
-            CircularProgressIndicator(
-                color = MaterialTheme.colorScheme.secondary
-            )
-        }
+    AnimatedVisibility(
+        visible = uiState.moviesLoading,
+        enter = fadeIn(),
+        exit = fadeOut()
+    ) {
+        JumpingBubblesLoadingIndicator()
     }
 
     if (uiState.moviesLoading) {
@@ -70,9 +68,7 @@ fun MoviesListScreen(
             modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.Center
         ) {
-            CircularProgressIndicator(
-                color = MaterialTheme.colorScheme.secondary
-            )
+            JumpingBubblesLoadingIndicator()
         }
     }
     if (settingsDialogOpen) {
@@ -173,8 +169,8 @@ private fun MoviesListScreen(
         item {
             AnimatedVisibility(
                 visible = trendingMoviesLoading,
-                enter = fadeIn() + slideInVertically(),
-                exit = fadeOut() + slideOutVertically()
+                enter = fadeIn(),
+                exit = fadeOut()
             ) {
                 JumpingBubblesLoadingIndicator()
             }
@@ -213,10 +209,13 @@ private fun MoviesListScreen(
         items(items = movies, key = { it.id }) { movie ->
             MovieItem(
                 title = movie.title,
-                rating = movie.vote_average,
                 poster = movie.poster_path,
                 movieId = movie.id,
-                onOpen = onOpenDetails
+                onOpen = onOpenDetails,
+                favourite = movie.favourite,
+                overview = movie.overview,
+                genres = movie.genre_ids,
+                onToggleFavourite = {}
             )
         }
     }
