@@ -3,7 +3,7 @@ package com.denisgithuku.movies.domain.model
 data class Movie(
     val adult: Boolean,
     val backdrop_path: String?,
-    val genre_ids: List<Int>,
+    val genre_ids: List<Genre> = emptyList(),
     val id: Int,
     val original_language: String,
     val original_title: String,
@@ -15,4 +15,5 @@ data class Movie(
     val video: Boolean,
     val vote_average: Double,
     val vote_count: Int,
+    val favourite: Boolean = false
 )

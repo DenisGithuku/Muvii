@@ -1,6 +1,8 @@
 package com.denisgithuku.movies.presentation.screens.details
 
-import androidx.compose.animation.*
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -57,8 +59,8 @@ fun MovieDetailsScreen(
 
     AnimatedVisibility(
         visible = uiState.movieDetailsLoading,
-        enter = fadeIn() + slideInVertically(),
-        exit = fadeOut() + slideOutVertically()
+        enter = fadeIn(),
+        exit = fadeOut()
     ) {
         Box(
             modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
@@ -126,17 +128,18 @@ private fun MovieDetailsScreen(
     onOpenSimilarMovie: (Int) -> Unit,
     onMarkUnmarkFavourite: () -> Unit,
     onNavigateUp: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
 
     LazyColumn(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(LocalAppDimens.current.medium),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         item {
             Box(
-                modifier = Modifier
+                modifier = modifier
                     .fillMaxWidth()
                     .sizeIn(minHeight = 200.dp, maxHeight = 400.dp)
             ) {
@@ -146,10 +149,10 @@ private fun MovieDetailsScreen(
                         .crossfade(enable = true).build(),
                     contentDescription = "Poster",
                     contentScale = ContentScale.Crop,
-                    modifier = Modifier.fillParentMaxSize(),
+                    modifier = modifier.fillParentMaxSize(),
                 )
                 Box(
-                    modifier = Modifier
+                    modifier = modifier
                         .fillParentMaxSize()
                         .background(
                             brush = Brush.verticalGradient(
@@ -160,7 +163,7 @@ private fun MovieDetailsScreen(
                         ),
                 )
                 Row(
-                    modifier = Modifier
+                    modifier = modifier
                         .fillMaxWidth()
                         .align(Alignment.TopCenter)
                         .background(color = Color.Transparent)
@@ -203,7 +206,7 @@ private fun MovieDetailsScreen(
                 text = movieDetails.title,
                 style = MaterialTheme.typography.displayMedium,
                 textAlign = TextAlign.Center,
-                modifier = Modifier.padding(
+                modifier = modifier.padding(
                     top = LocalAppDimens.current.medium,
                     start = LocalAppDimens.current.medium,
                     end = LocalAppDimens.current.medium
@@ -214,7 +217,7 @@ private fun MovieDetailsScreen(
 
         item {
             FlowRow(
-                modifier = Modifier
+                modifier = modifier
                     .fillMaxWidth()
                     .padding(
                         top = LocalAppDimens.current.extra_large,
@@ -236,9 +239,21 @@ private fun MovieDetailsScreen(
 
         item {
             Text(
+                text = "Storyline",
+                style = MaterialTheme.typography.displaySmall,
+                modifier = modifier.padding(
+                    top = LocalAppDimens.current.extra_large,
+                    start = LocalAppDimens.current.extra_large,
+                    end = LocalAppDimens.current.extra_large,
+                )
+            )
+        }
+
+        item {
+            Text(
                 text = movieDetails.overview,
                 style = MaterialTheme.typography.bodyMedium,
-                modifier = Modifier.padding(
+                modifier = modifier.padding(
                     top = LocalAppDimens.current.extra_large,
                     start = LocalAppDimens.current.extra_large,
                     end = LocalAppDimens.current.extra_large,
@@ -248,7 +263,7 @@ private fun MovieDetailsScreen(
         }
         item {
             Divider(
-                modifier = Modifier.padding(
+                modifier = modifier.padding(
                     top = LocalAppDimens.current.extra_large,
                     start = LocalAppDimens.current.extra_large,
                     end = LocalAppDimens.current.extra_large,
@@ -257,7 +272,7 @@ private fun MovieDetailsScreen(
         }
         item {
             Row(
-                modifier = Modifier
+                modifier = modifier
                     .fillMaxWidth()
                     .padding(LocalAppDimens.current.large),
                 verticalAlignment = Alignment.CenterVertically,
@@ -274,7 +289,7 @@ private fun MovieDetailsScreen(
 
         item {
             Divider(
-                modifier = Modifier.padding(
+                modifier = modifier.padding(
                     top = LocalAppDimens.current.extra_large,
                     start = LocalAppDimens.current.extra_large,
                     end = LocalAppDimens.current.extra_large,
@@ -284,10 +299,10 @@ private fun MovieDetailsScreen(
 
         item {
             Box(
-                modifier = Modifier.wrapContentSize(), contentAlignment = Alignment.Center
+                modifier = modifier.wrapContentSize(), contentAlignment = Alignment.Center
             ) {
                 Column(
-                    modifier = Modifier
+                    modifier = modifier
                         .fillMaxWidth()
                         .padding(LocalAppDimens.current.large),
                     verticalArrangement = Arrangement.spacedBy(
@@ -298,7 +313,8 @@ private fun MovieDetailsScreen(
                     Text(
                         text = "Cast",
                         style = MaterialTheme.typography.displaySmall,
-                        textAlign = TextAlign.Center
+                        textAlign = TextAlign.Center,
+                        modifier = modifier.align(Alignment.Start)
                     )
                     LazyRow(horizontalArrangement = Arrangement.spacedBy(LocalAppDimens.current.large)) {
                         items(items = castList, key = { it.cast_id }) { cast ->
@@ -317,10 +333,10 @@ private fun MovieDetailsScreen(
                 }
                 AnimatedVisibility(
                     visible = castLoading,
-                    enter = slideInVertically() + fadeIn(),
-                    exit = slideOutVertically() + fadeOut()
+                    enter = fadeIn(),
+                    exit = fadeOut()
                 ) {
-                    CircularProgressIndicator()
+                    JumpingBubblesLoadingIndicator()
                 }
             }
         }
@@ -329,13 +345,13 @@ private fun MovieDetailsScreen(
 
             Text(
                 text = "Similar movies",
-                modifier = Modifier.padding(LocalAppDimens.current.large),
+                modifier = modifier.padding(LocalAppDimens.current.large),
                 textAlign = TextAlign.Start,
                 style = MaterialTheme.typography.displaySmall
             )
 
             Box(
-                modifier = Modifier
+                modifier = modifier
                     .fillMaxWidth()
                     .padding(LocalAppDimens.current.large)
             ) {
@@ -355,11 +371,12 @@ private fun MovieDetailsScreen(
                     }
                 }
 
-                if (similarMoviesLoading) {
-                    CircularProgressIndicator(
-                        modifier = Modifier.align(Alignment.Center),
-                        color = MaterialTheme.colorScheme.secondary
-                    )
+                AnimatedVisibility(
+                    visible = similarMoviesLoading,
+                    enter = fadeIn(),
+                    exit = fadeOut()
+                ) {
+                    JumpingBubblesLoadingIndicator()
                 }
             }
         }

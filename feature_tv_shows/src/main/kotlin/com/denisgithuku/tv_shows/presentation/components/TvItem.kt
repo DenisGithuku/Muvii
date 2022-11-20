@@ -39,7 +39,7 @@ fun TvItem(
             contentColor = MaterialTheme.colorScheme.onSurface
         ),
         elevation = CardDefaults.cardElevation(
-            defaultElevation = 4.dp
+            defaultElevation = 12.dp
         ),
         modifier = androidx.compose.ui.Modifier.padding(12.dp)
     ) {
