@@ -27,7 +27,12 @@ fun NavGraphBuilder.tvGraph(
                 })
             }
             composable(route = Screen.TvDetails.routeId + "/{tvId}") {
-                TvDetailsScreen(snackbarHostState = snackbarHostState)
+                TvDetailsScreen(
+                    snackbarHostState = snackbarHostState,
+                    onNavigateUp = {
+                        navHostController.navigateUp()
+                    }
+                )
             }
         }
     }

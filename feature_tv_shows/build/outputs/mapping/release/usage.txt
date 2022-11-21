@@ -69,7 +69,6 @@ com.denisgithuku.tv_shows.presentation.screens.tv_details.TvDetailsScreenKt$TvDe
 com.denisgithuku.tv_shows.presentation.screens.tv_details.TvDetailsScreenKt$TvDetailsScreen$2$1
 com.denisgithuku.tv_shows.presentation.screens.tv_details.TvDetailsScreenKt$TvDetailsScreen$2$2
 com.denisgithuku.tv_shows.presentation.screens.tv_details.TvDetailsScreenKt$TvDetailsScreen$2$3
-com.denisgithuku.tv_shows.presentation.screens.tv_details.TvDetailsScreenKt$TvDetailsScreen$2$4
 com.denisgithuku.tv_shows.presentation.screens.tv_details.TvDetailsScreenKt$TvDetailsScreen$3
 com.denisgithuku.tv_shows.presentation.screens.tv_details.TvDetailsScreenKt$TvDetailsScreen$4$1$1$1$1$1
 com.denisgithuku.tv_shows.presentation.screens.tv_details.TvDetailsScreenKt$TvDetailsScreen$4$1$1$1$2$1

@@ -2,5 +2,9 @@ com.githukudenis.tv_shows.R$drawable
 com.githukudenis.tv_shows.R
 com.githukudenis.tv_shows.R$drawable: int ic_baseline_check_24
 com.githukudenis.tv_shows.R$drawable: int ic_baseline_add_24
+<<<<<<< HEAD
+=======
+com.githukudenis.tv_shows.R: R()
+>>>>>>> b9f5a8b49d72983bd308d42e3c43fac3c2cae642
 com.githukudenis.tv_shows.R$drawable: R$drawable()
 com.githukudenis.tv_shows.R: R()
