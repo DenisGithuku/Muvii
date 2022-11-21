@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.denisgithuku.core_data.Resource
 import com.denisgithuku.core_data.UserMessage
+import com.denisgithuku.core_data.domain.use_cases.CoreMuviiUseCases
 import com.denisgithuku.tv_shows.domain.use_cases.TvUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,6 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class TvDetailsViewModel @Inject constructor(
     private val tvUseCases: TvUseCases,
+    private val coreMuviiUseCases: CoreMuviiUseCases,
     savedStateHandle: SavedStateHandle
 ): ViewModel() {
 
@@ -26,6 +28,7 @@ class TvDetailsViewModel @Inject constructor(
     init {
         savedStateHandle.get<String>("tvId")?.let { tvId ->
             getTvDetails(tvId.toInt())
+            getCast(tvId.toInt())
         }
     }
 
@@ -53,6 +56,45 @@ class TvDetailsViewModel @Inject constructor(
                             userMessages.add(UserMessage(id = 0, message = result.throwable?.message ?: "An error occurred. Couldn't fetch details"))
                             it.copy(
                                 tvDetailsLoading = false,
+                                userMessages = userMessages
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun getCast(movieId: Int) {
+        viewModelScope.launch {
+            coreMuviiUseCases.getCast(movieId).collect { result ->
+                when(result) {
+                    is Resource.Loading -> {
+                        _uiState.update {
+                            it.copy(
+                                castLoading = true
+                            )
+                        }
+                    }
+                    is Resource.Success -> {
+                        _uiState.update {
+                            it.copy(
+                                castLoading = false,
+                                castList = result.data ?: emptyList()
+                            )
+                        }
+                    }
+                    is Resource.Error ->  {
+                        _uiState.update {
+                            val userMessages = mutableListOf<UserMessage>()
+                            userMessages.add(
+                                UserMessage(
+                                    id = 0,
+                                    message = result.throwable?.message ?: "An error occurred. Could not fetch cast"
+                                )
+                            )
+                            it.copy(
+                                castLoading = false,
                                 userMessages = userMessages
                             )
                         }

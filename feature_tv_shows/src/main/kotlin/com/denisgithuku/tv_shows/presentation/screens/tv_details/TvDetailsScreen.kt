@@ -1,6 +1,8 @@
 package com.denisgithuku.tv_shows.presentation.screens.tv_details
 
-import androidx.compose.animation.*
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -256,27 +258,30 @@ private fun TvDetailsScreen(
                         style = MaterialTheme.typography.displaySmall,
                         textAlign = TextAlign.Center
                     )
-                    LazyRow(horizontalArrangement = Arrangement.spacedBy(LocalAppDimens.current.large)) {
-                        items(items = castList, key = { it.cast_id }) { cast ->
-                            cast.profile_path?.let { profileUrl ->
-                                CastCard(
-                                    profileUrl = profileUrl,
-                                    castId = cast.cast_id,
-                                    name = cast.name,
-                                    onOpenProfile = onOpenProfile,
-                                    onToggleFollow = onToggleFollow,
-                                    vectorId = if (cast.following) R.drawable.ic_baseline_check_24 else R.drawable.ic_baseline_add_24
-                                )
+                    Box() {
+                        LazyRow(horizontalArrangement = Arrangement.spacedBy(LocalAppDimens.current.large)) {
+                            items(items = castList, key = { it.cast_id }) { cast ->
+                                cast.profile_path?.let { profileUrl ->
+                                    CastCard(
+                                        profileUrl = profileUrl,
+                                        castId = cast.cast_id,
+                                        name = cast.name,
+                                        onOpenProfile = onOpenProfile,
+                                        onToggleFollow = onToggleFollow,
+                                        vectorId = if (cast.following) R.drawable.ic_baseline_check_24 else R.drawable.ic_baseline_add_24
+                                    )
+                                }
                             }
                         }
                     }
                 }
+
                 AnimatedVisibility(
                     visible = castLoading,
-                    enter = slideInVertically() + fadeIn(),
-                    exit = slideOutVertically() + fadeOut()
+                    enter = fadeIn(),
+                    exit = fadeOut()
                 ) {
-                    CircularProgressIndicator()
+                    JumpingBubblesLoadingIndicator()
                 }
             }
         }
