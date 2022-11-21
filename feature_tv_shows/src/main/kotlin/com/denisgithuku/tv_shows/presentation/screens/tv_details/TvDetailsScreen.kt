@@ -40,7 +40,8 @@ import okhttp3.internal.trimSubstring
 @OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun TvDetailsScreen(
-    snackbarHostState: SnackbarHostState
+    snackbarHostState: SnackbarHostState,
+    onNavigateUp: () -> Unit
 ) {
     val tvDetailsViewModel: TvDetailsViewModel = hiltViewModel()
     val uiState = tvDetailsViewModel.uiState.collectAsStateWithLifecycle().value
@@ -70,7 +71,7 @@ fun TvDetailsScreen(
             onOpenProfile = {},
             onToggleFollow = {},
             castList = uiState.castList,
-            onNavigateUp = {  },
+            onNavigateUp = onNavigateUp,
             onMarkUnmarkFavourite = { },
             similarShows = uiState.similarShows
         )
