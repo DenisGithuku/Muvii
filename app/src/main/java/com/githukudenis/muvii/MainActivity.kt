@@ -19,8 +19,8 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.denisgithuku.core_design.ui.theme.MuviiTheme
-import com.githukudenis.core_navigation.navigators.MuviiNavigator
 import com.githukudenis.core_navigation.Screen
+import com.githukudenis.core_navigation.navigators.MuviiNavigator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -95,7 +95,6 @@ class MainActivity : ComponentActivity() {
                                         snackbarHostState = snackbarHostState,
                                         navHostController = navHostController,
                                         onToggleTheme = mainViewModel::changeUiTheme,
-                                        isInDarkTheme = isInDarkTheme
                                     )
                                 }
                             }

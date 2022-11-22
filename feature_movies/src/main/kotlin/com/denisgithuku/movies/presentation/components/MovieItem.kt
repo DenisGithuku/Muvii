@@ -54,7 +54,8 @@ fun MovieItem(
         Row(
             modifier = modifier
                 .fillMaxWidth()
-                .heightIn(min = minHeight, max = maxHeight),
+                .heightIn(min = minHeight, max = maxHeight)
+                .padding(12.dp),
         ) {
             if (poster.isNotEmpty()) {
                 AsyncImage(model = ImageRequest.Builder(context)
@@ -66,8 +67,7 @@ fun MovieItem(
                         minWidth = minWidth,
                     ).clip(
                         shape = RoundedCornerShape(
-                            topStart = 16.dp,
-                            bottomStart = 16.dp
+                            16.dp
                         )
                     ),
                     contentScale = ContentScale.Crop,
