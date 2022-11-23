@@ -362,7 +362,7 @@ private fun MovieDetailsScreen(
                 ) {
                     items(items = similarMovies, key = { it.id }) { movie ->
                         TrendingMovieItem(
-                            poster_path = movie.poster_path,
+                            poster_path = movie.poster_path ?: "",
                             movieId = movie.id,
                             context = context,
                             onSelect = onOpenSimilarMovie,

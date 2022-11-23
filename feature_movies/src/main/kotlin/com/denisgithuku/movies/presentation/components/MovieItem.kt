@@ -42,7 +42,7 @@ fun MovieItem(
     minWidth: Dp = 100.dp,
     minHeight: Dp = 100.dp,
     maxWidth: Dp = 100.dp,
-    maxHeight: Dp = 120.dp
+    maxHeight: Dp = 100.dp
 ) {
     val context = LocalContext.current
     Card(
@@ -54,7 +54,7 @@ fun MovieItem(
         Row(
             modifier = modifier
                 .fillMaxWidth()
-                .heightIn(min = minHeight, max = maxHeight)
+                .heightIn(min = minHeight)
                 .padding(12.dp),
         ) {
             if (poster.isNotEmpty()) {
@@ -65,6 +65,8 @@ fun MovieItem(
                     modifier = modifier.sizeIn(
                         maxWidth = maxWidth,
                         minWidth = minWidth,
+                        minHeight = minHeight,
+                        maxHeight = maxHeight
                     ).clip(
                         shape = RoundedCornerShape(
                             16.dp

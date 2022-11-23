@@ -210,7 +210,7 @@ private fun MoviesListScreen(
         items(items = movies, key = { it.id }) { movie ->
             MovieItem(
                 title = movie.title,
-                poster = movie.poster_path,
+                poster = movie.poster_path ?: "",
                 movieId = movie.id,
                 onOpen = onOpenDetails,
                 favourite = movie.favourite,
