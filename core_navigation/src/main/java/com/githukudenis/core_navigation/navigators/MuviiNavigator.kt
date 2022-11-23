@@ -12,14 +12,12 @@ import com.denisgithuku.core_data.Constants
 fun MuviiNavigator(
     snackbarHostState: SnackbarHostState,
     navHostController: NavHostController,
-    isInDarkTheme: Boolean,
     onToggleTheme: () -> Unit
 ) {
     NavHost(navController = navHostController, startDestination = Constants.moviesRoute) {
         moviesGraph(
             snackbarHostState = snackbarHostState,
             navHostController = navHostController,
-            isInDarkTheme = isInDarkTheme,
             onToggleTheme = onToggleTheme
         )
         tvGraph(

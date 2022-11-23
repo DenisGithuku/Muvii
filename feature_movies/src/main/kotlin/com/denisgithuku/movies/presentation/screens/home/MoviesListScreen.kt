@@ -41,7 +41,6 @@ import com.denisgithuku.movies.presentation.screens.home.components.SearchBar
 fun MoviesListScreen(
     snackbarHostState: SnackbarHostState,
     onToggleTheme: () -> Unit,
-    isInDarkTheme: Boolean,
     onOpenDetails: (Int) -> Unit
 ) {
     val homeViewModel: HomeViewModel = hiltViewModel()
@@ -87,7 +86,7 @@ fun MoviesListScreen(
                     )
             ) {
                 DialogContent(
-                    isDarkTheme = isInDarkTheme,
+                    isDarkTheme = uiState.isSystemInDarkTheme,
                     sortTypes = uiState.sortTypes,
                     selectedSortType = uiState.selectedSortType,
                     adultContentEnabled = uiState.adultContentEnabled,
@@ -98,7 +97,9 @@ fun MoviesListScreen(
                         homeViewModel.onEvent(HomeEvent.ChangeSortType(sortType))
                     },
                     onToggleTheme = {
-                        onToggleTheme()
+                        onToggleTheme().also {
+                            homeViewModel.onEvent(HomeEvent.RefreshUserPrefs)
+                        }
                     },
                     onDismissRequest = {
                         settingsDialogOpen = !settingsDialogOpen

@@ -17,11 +17,9 @@ import com.denisgithuku.movies.presentation.screens.details.MovieDetailsScreen
 import com.denisgithuku.movies.presentation.screens.home.MoviesListScreen
 import com.githukudenis.core_navigation.Screen
 
-
 fun NavGraphBuilder.moviesGraph(
     snackbarHostState: SnackbarHostState,
     navHostController: NavHostController,
-    isInDarkTheme: Boolean,
     onToggleTheme: () -> Unit
 ) {
     navigation(startDestination = Screen.Movies.routeId, route = Constants.moviesRoute) {
@@ -37,7 +35,7 @@ fun NavGraphBuilder.moviesGraph(
                         }
                         restoreState = true
                     }
-                }, isInDarkTheme = isInDarkTheme
+                }
             )
         }
 

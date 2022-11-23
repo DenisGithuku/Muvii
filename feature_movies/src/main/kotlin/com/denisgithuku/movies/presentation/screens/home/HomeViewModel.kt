@@ -211,11 +211,25 @@ class HomeViewModel @Inject constructor(
             is HomeEvent.Search -> {
                 searchMovie(event.query)
             }
+            HomeEvent.RefreshUserPrefs -> {
+                _uiState.update { state ->
+                    state.copy(
+                        isSystemInDarkTheme = !_uiState.value.isSystemInDarkTheme
+                    )
+                }
+            }
         }
     }
 
     private fun readUserPrefs() {
         viewModelScope.launch {
+            appThemeProvider.getUserTheme(viewModelScope).collectLatest { isSystemInDarkTheme ->
+                _uiState.update { state ->
+                    state.copy(
+                        isSystemInDarkTheme = isSystemInDarkTheme
+                    )
+                }
+            }
             movieUseCases.readAdultContentPreferences(viewModelScope)
                 .collectLatest { adult_content_enabled ->
                     Log.d("user_prefs", adult_content_enabled.toString())
