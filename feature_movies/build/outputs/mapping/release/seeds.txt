@@ -1,14 +1,14 @@
 com.githukudenis.movies.R$drawable
-com.githukudenis.movies.R
 com.githukudenis.movies.R$string
-com.githukudenis.movies.R$string: int error_message_text
-com.githukudenis.movies.R$drawable: int ic_sun_24
-com.githukudenis.movies.R$drawable: int ic_moon24
-com.githukudenis.movies.R$drawable: int ic_broken_image_24
+com.githukudenis.movies.R
 com.githukudenis.movies.R$drawable: int ic_star_24
-com.githukudenis.movies.R$drawable: int ic_baseline_check_24
+com.githukudenis.movies.R$string: int error_message_text
+com.githukudenis.movies.R$drawable: int ic_broken_image_24
 com.githukudenis.movies.R$drawable: int ic_search_24
+com.githukudenis.movies.R$drawable: int ic_sun_24
 com.githukudenis.movies.R$drawable: int ic_baseline_add_24
-com.githukudenis.movies.R$string: R$string()
+com.githukudenis.movies.R$drawable: int ic_baseline_check_24
+com.githukudenis.movies.R$drawable: int ic_moon24
 com.githukudenis.movies.R$drawable: R$drawable()
+com.githukudenis.movies.R$string: R$string()
 com.githukudenis.movies.R: R()

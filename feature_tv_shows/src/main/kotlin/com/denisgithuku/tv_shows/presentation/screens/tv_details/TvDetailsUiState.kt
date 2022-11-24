@@ -1,7 +1,7 @@
 package com.denisgithuku.tv_shows.presentation.screens.tv_details
 
 import com.denisgithuku.core_data.UserMessage
-import com.denisgithuku.core_data.domain.model.Cast
+import com.denisgithuku.feature_people.domain.model.Cast
 import com.denisgithuku.tv_shows.domain.model.Tv
 
 data class TvDetailsUiState (
@@ -9,6 +9,6 @@ data class TvDetailsUiState (
     val tvDetails: Tv? = null,
     val similarShows: List<Tv> = emptyList(),
     val castLoading: Boolean = false,
-    val castList: List<Cast> = emptyList(),
+    val castList: List<com.denisgithuku.feature_people.domain.model.Cast> = emptyList(),
     val userMessages: List<UserMessage> = emptyList()
 )

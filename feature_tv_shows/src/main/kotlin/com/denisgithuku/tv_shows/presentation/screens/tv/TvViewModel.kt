@@ -65,4 +65,20 @@ class TvViewModel @Inject constructor(
         }
     }
 
+    fun onEvent(tvEvent: TvEvent) {
+        when (tvEvent) {
+            is TvEvent.DismissUserMessage -> {
+                val userMessages = _uiState.value.userMessages
+                userMessages.filterNot { userMessage ->
+                    userMessage.id == tvEvent.messageId
+                }
+                _uiState.update { state ->
+                    state.copy(
+                        userMessages = userMessages
+                    )
+                }
+            }
+        }
+    }
+
 }

@@ -9,6 +9,7 @@ import com.denisgithuku.core_data.UserMessage
 import com.denisgithuku.core_data.data.local.FavouriteMovieDBO
 import com.denisgithuku.core_data.domain.use_cases.CoreMuviiUseCases
 import com.denisgithuku.core_data.providers.DispatcherProvider
+import com.denisgithuku.feature_people.domain.use_cases.PeopleUseCases
 import com.denisgithuku.movies.domain.use_cases.MovieUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
@@ -23,6 +24,7 @@ import javax.inject.Inject
 class DetailsViewModel @Inject constructor(
     private val movieUseCases: MovieUseCases,
     private val coreMuviiUseCases: CoreMuviiUseCases,
+    private val peopleUseCases: PeopleUseCases,
     private val dispatcherProvider: DispatcherProvider,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
@@ -166,7 +168,7 @@ class DetailsViewModel @Inject constructor(
 
     private fun getCast(movieId: Int) {
         viewModelScope.launch {
-            coreMuviiUseCases.getCast(movieId).collect { result ->
+            peopleUseCases.getCast(movieId).collect { result ->
                 when (result) {
                     is Resource.Loading -> {
                         _uiState.update { state ->

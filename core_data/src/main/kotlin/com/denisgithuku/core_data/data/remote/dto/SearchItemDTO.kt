@@ -1,5 +1,4 @@
 package com.denisgithuku.core_data.data.remote.dto
-
 import com.denisgithuku.core_data.domain.model.SearchMovieItem
 
 data class SearchItemDTO(
@@ -8,7 +7,7 @@ data class SearchItemDTO(
     val gender: Int?,
     val genre_ids: List<Int>?,
     val id: Int?,
-    val known_for: List<KnownFor>?,
+    val known_for: List<Any>?,
     val known_for_department: String?,
     val media_type: String?,
     val name: String?,

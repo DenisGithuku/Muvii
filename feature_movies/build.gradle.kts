@@ -68,6 +68,7 @@ dependencies {
 
     implementation(project(":core_design"))
     implementation(project(":core_data"))
+    implementation(project(":feature_people"))
     implementation(Deps.core)
     implementation(Deps.lifecycle_runtime)
     implementation(Deps.activity_compose)

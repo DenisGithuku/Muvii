@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.denisgithuku.core_data.Resource
 import com.denisgithuku.core_data.UserMessage
 import com.denisgithuku.core_data.domain.use_cases.CoreMuviiUseCases
+import com.denisgithuku.feature_people.domain.use_cases.PeopleUseCases
 import com.denisgithuku.tv_shows.domain.use_cases.TvUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,6 +20,7 @@ import javax.inject.Inject
 class TvDetailsViewModel @Inject constructor(
     private val tvUseCases: TvUseCases,
     private val coreMuviiUseCases: CoreMuviiUseCases,
+    private val peopleUseCases: PeopleUseCases,
     savedStateHandle: SavedStateHandle
 ): ViewModel() {
 
@@ -67,7 +69,7 @@ class TvDetailsViewModel @Inject constructor(
 
     private fun getCast(movieId: Int) {
         viewModelScope.launch {
-            coreMuviiUseCases.getCast(movieId).collect { result ->
+            peopleUseCases.getCast(movieId).collect { result ->
                 when(result) {
                     is Resource.Loading -> {
                         _uiState.update {
@@ -99,6 +101,22 @@ class TvDetailsViewModel @Inject constructor(
                             )
                         }
                     }
+                }
+            }
+        }
+    }
+
+    fun onEvent(tvDetailsEvent: TvDetailsEvent) {
+        when(tvDetailsEvent) {
+            is TvDetailsEvent.DismissUserMessage -> {
+                val userMessages = _uiState.value.userMessages
+                userMessages.filterNot { userMessage ->
+                    userMessage.id == tvDetailsEvent.messageId
+                }
+                _uiState.update { tvDetailsUiState ->
+                    tvDetailsUiState.copy(
+                        userMessages = userMessages
+                    )
                 }
             }
         }

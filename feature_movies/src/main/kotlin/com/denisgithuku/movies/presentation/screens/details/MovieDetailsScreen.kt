@@ -29,7 +29,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.denisgithuku.core_data.Constants
-import com.denisgithuku.core_data.domain.model.Cast
+import com.denisgithuku.feature_people.domain.model.Cast
 import com.denisgithuku.core_data.ui.components.JumpingBubblesLoadingIndicator
 import com.denisgithuku.core_design.ui.components.ConfirmationDialog
 import com.denisgithuku.core_design.ui.components.MuviiIconButton
@@ -121,7 +121,7 @@ private fun MovieDetailsScreen(
     movieDetails: MovieDetails,
     similarMoviesLoading: Boolean,
     castLoading: Boolean,
-    castList: List<Cast>,
+    castList: List<com.denisgithuku.feature_people.domain.model.Cast>,
     onOpenProfile: (Int) -> Unit,
     onToggleFollow: (Int) -> Unit,
     similarMovies: List<Movie>,
