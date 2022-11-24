@@ -11,63 +11,35 @@ plugins {
 val TMDB_API_KEY: String = gradleLocalProperties(rootDir).getProperty("TMDB_API_KEY")
 
 android {
-    namespace = "com.githukudenis.movies"
+    namespace = "com.denisgithuku.feature_people"
     compileSdk = 33
 
     defaultConfig {
-        minSdk = 24
+        minSdk = 21
         targetSdk = 33
 
-        buildConfigField("String", "TMDB_API_KEY", TMDB_API_KEY)
-
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
-    }
-
-    kotlin {
-        sourceSets {
-            debug {
-                kotlin.srcDir("build/generated/ksp/debug/kotlin")
-            }
-            release {
-                kotlin.srcDir("build/generated/ksp/release/kotlin")
-            }
-        }
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
         getByName("release") {
-            isMinifyEnabled = true
+            isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-                targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_1_6
+        targetCompatibility = JavaVersion.VERSION_1_6
     }
     kotlinOptions {
-        jvmTarget = "1.8"
-    }
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.2.0"
-    }
-    packagingOptions {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
+        jvmTarget = "1.6"
     }
 }
 
 dependencies {
-
-    implementation(project(":core_design"))
     implementation(project(":core_data"))
+    implementation(project(":core_design"))
     implementation(Deps.core)
     implementation(Deps.lifecycle_runtime)
     implementation(Deps.activity_compose)

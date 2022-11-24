@@ -69,6 +69,7 @@ dependencies {
     implementation(project(":core_navigation"))
     implementation(project(":feature_movies"))
     implementation(project(":feature_tv_shows"))
+    implementation(project(":feature_people"))
     implementation(Deps.core)
     implementation(Deps.lifecycle_runtime)
     implementation(Deps.activity_compose)

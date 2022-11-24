@@ -1,15 +1,14 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
     id("kotlin-parcelize")
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
-    id("com.google.devtools.ksp") version "1.7.0-1.0.6"
 }
 
-val TMDB_API_KEY: String = com.android.build.gradle.internal.cxx.configure.gradleLocalProperties(
-    rootDir
-).getProperty("TMDB_API_KEY")
+val TMDB_API_KEY: String = gradleLocalProperties(rootDir).getProperty("TMDB_API_KEY")
 
 android {
     namespace = "com.githukudenis.core_data"

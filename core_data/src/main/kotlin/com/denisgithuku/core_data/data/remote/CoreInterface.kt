@@ -2,6 +2,7 @@ package com.denisgithuku.core_data.data.remote
 
 import com.denisgithuku.core_data.data.remote.dto.FavouriteMoviesDTO
 import com.denisgithuku.core_data.data.remote.dto.MovieCastDTO
+import com.denisgithuku.core_data.data.remote.dto.PersonDTO
 import com.githukudenis.core_data.BuildConfig
 import retrofit2.Response
 import retrofit2.http.GET
@@ -22,4 +23,11 @@ interface CoreInterface {
         @Query("api_key") api_key: String = BuildConfig.TMDB_API_KEY,
         @Query("language") language: String = "en-US"
     ): Response<MovieCastDTO>
+
+    @GET("person/{personId}")
+    suspend fun getPersonDetails(
+        @Path("personId") personId: Int,
+        @Query("api_key") api_key: String = BuildConfig.TMDB_API_KEY,
+        @Query("language") language: String = "en-US"
+    ): Response<PersonDTO>
 }
