@@ -8,8 +8,10 @@ import com.denisgithuku.core_data.data.local.MoviesDatabase
 import com.denisgithuku.core_data.data.remote.CoreInterface
 import com.denisgithuku.core_data.data.remote.repository_impl.CastRepositoryImpl
 import com.denisgithuku.core_data.data.remote.repository_impl.FavouriteMoviesRepositoryImpl
+import com.denisgithuku.core_data.data.remote.repository_impl.PersonRepositoryImpl
 import com.denisgithuku.core_data.domain.repository.CastRepository
 import com.denisgithuku.core_data.domain.repository.FavouriteMoviesRepository
+import com.denisgithuku.core_data.domain.repository.PersonRepository
 import com.denisgithuku.core_data.domain.use_cases.CoreMuviiUseCases
 import com.denisgithuku.core_data.domain.use_cases.FormatDateUseCase
 import com.denisgithuku.core_data.domain.use_cases.GetCast
@@ -146,4 +148,7 @@ object CoreModule {
     @Singleton
     fun provideCastRepository(coreInterface: CoreInterface): CastRepository =
         CastRepositoryImpl(coreInterface)
+
+    @Provides
+    fun providePersonRepository(coreInterface: CoreInterface): PersonRepository = PersonRepositoryImpl(coreInterface = coreInterface)
 }

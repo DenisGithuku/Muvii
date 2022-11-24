@@ -20,3 +20,4 @@ include ":feature_movies"
 include ':feature_tv_shows'
 include ':core_design'
 include ':core_navigation'
+include ':feature_people'
