@@ -33,7 +33,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_6
     }
     kotlinOptions {
-        jvmTarget = "1.6"
+        jvmTarget = "1.8"
     }
 }
 

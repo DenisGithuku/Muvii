@@ -3,6 +3,7 @@ package com.denisgithuku.tv_shows.presentation.screens.tv_details;
 
 import androidx.lifecycle.SavedStateHandle;
 import com.denisgithuku.core_data.domain.use_cases.CoreMuviiUseCases;
+import com.denisgithuku.feature_people.domain.use_cases.PeopleUseCases;
 import com.denisgithuku.tv_shows.domain.use_cases.TvUseCases;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
@@ -22,29 +23,35 @@ public final class TvDetailsViewModel_Factory implements Factory<TvDetailsViewMo
 
   private final Provider<CoreMuviiUseCases> coreMuviiUseCasesProvider;
 
+  private final Provider<PeopleUseCases> peopleUseCasesProvider;
+
   private final Provider<SavedStateHandle> savedStateHandleProvider;
 
   public TvDetailsViewModel_Factory(Provider<TvUseCases> tvUseCasesProvider,
       Provider<CoreMuviiUseCases> coreMuviiUseCasesProvider,
+      Provider<PeopleUseCases> peopleUseCasesProvider,
       Provider<SavedStateHandle> savedStateHandleProvider) {
     this.tvUseCasesProvider = tvUseCasesProvider;
     this.coreMuviiUseCasesProvider = coreMuviiUseCasesProvider;
+    this.peopleUseCasesProvider = peopleUseCasesProvider;
     this.savedStateHandleProvider = savedStateHandleProvider;
   }
 
   @Override
   public TvDetailsViewModel get() {
-    return newInstance(tvUseCasesProvider.get(), coreMuviiUseCasesProvider.get(), savedStateHandleProvider.get());
+    return newInstance(tvUseCasesProvider.get(), coreMuviiUseCasesProvider.get(), peopleUseCasesProvider.get(), savedStateHandleProvider.get());
   }
 
   public static TvDetailsViewModel_Factory create(Provider<TvUseCases> tvUseCasesProvider,
       Provider<CoreMuviiUseCases> coreMuviiUseCasesProvider,
+      Provider<PeopleUseCases> peopleUseCasesProvider,
       Provider<SavedStateHandle> savedStateHandleProvider) {
-    return new TvDetailsViewModel_Factory(tvUseCasesProvider, coreMuviiUseCasesProvider, savedStateHandleProvider);
+    return new TvDetailsViewModel_Factory(tvUseCasesProvider, coreMuviiUseCasesProvider, peopleUseCasesProvider, savedStateHandleProvider);
   }
 
   public static TvDetailsViewModel newInstance(TvUseCases tvUseCases,
-      CoreMuviiUseCases coreMuviiUseCases, SavedStateHandle savedStateHandle) {
-    return new TvDetailsViewModel(tvUseCases, coreMuviiUseCases, savedStateHandle);
+      CoreMuviiUseCases coreMuviiUseCases, PeopleUseCases peopleUseCases,
+      SavedStateHandle savedStateHandle) {
+    return new TvDetailsViewModel(tvUseCases, coreMuviiUseCases, peopleUseCases, savedStateHandle);
   }
 }

@@ -29,10 +29,10 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.denisgithuku.core_data.Constants
-import com.denisgithuku.core_data.domain.model.Cast
 import com.denisgithuku.core_data.ui.components.JumpingBubblesLoadingIndicator
 import com.denisgithuku.core_design.ui.components.MuviiIconButton
 import com.denisgithuku.core_design.ui.theme.LocalAppDimens
+import com.denisgithuku.feature_people.domain.model.Cast
 import com.denisgithuku.tv_shows.domain.model.Tv
 import com.denisgithuku.tv_shows.presentation.components.CastCard
 import com.denisgithuku.tv_shows.presentation.components.TvInfo
@@ -65,6 +65,7 @@ fun TvDetailsScreen(
         ) {
             val userMessage = uiState.userMessages[0]
             snackbarHostState.showSnackbar(message = userMessage.message)
+            tvDetailsViewModel.onEvent(TvDetailsEvent.DismissUserMessage(messageId = userMessage.id))
         }
     }
 

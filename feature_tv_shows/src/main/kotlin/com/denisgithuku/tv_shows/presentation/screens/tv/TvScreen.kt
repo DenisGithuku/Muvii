@@ -48,6 +48,7 @@ fun TvScreen(
         LaunchedEffect(uiState.userMessages, snackbarHostState) {
             val message = uiState.userMessages[0]
             snackbarHostState.showSnackbar(message.message)
+            viewModel.onEvent(TvEvent.DismissUserMessage(messageId = message.id))
         }
     }
     

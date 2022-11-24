@@ -6,15 +6,10 @@ import com.denisgithuku.core_data.Constants
 import com.denisgithuku.core_data.data.local.FavouriteMoviesDao
 import com.denisgithuku.core_data.data.local.MoviesDatabase
 import com.denisgithuku.core_data.data.remote.CoreInterface
-import com.denisgithuku.core_data.data.remote.repository_impl.CastRepositoryImpl
 import com.denisgithuku.core_data.data.remote.repository_impl.FavouriteMoviesRepositoryImpl
-import com.denisgithuku.core_data.data.remote.repository_impl.PersonRepositoryImpl
-import com.denisgithuku.core_data.domain.repository.CastRepository
 import com.denisgithuku.core_data.domain.repository.FavouriteMoviesRepository
-import com.denisgithuku.core_data.domain.repository.PersonRepository
 import com.denisgithuku.core_data.domain.use_cases.CoreMuviiUseCases
 import com.denisgithuku.core_data.domain.use_cases.FormatDateUseCase
-import com.denisgithuku.core_data.domain.use_cases.GetCast
 import com.denisgithuku.core_data.domain.use_cases.GetFavouriteMovies
 import com.denisgithuku.core_data.providers.AppThemeProvider
 import com.denisgithuku.core_data.providers.DispatcherProvider
@@ -129,26 +124,13 @@ object CoreModule {
     fun provideCoreMuviiUseCases(
         favouriteMoviesRepository: FavouriteMoviesRepository,
         dispatcherProvider: DispatcherProvider,
-        castRepository: CastRepository
     ): CoreMuviiUseCases {
         return CoreMuviiUseCases(
             getFavouriteMovies = GetFavouriteMovies(
                 favouriteMoviesRepository,
                 dispatcherProvider = dispatcherProvider,
             ),
-            getCast = GetCast(
-                castRepository = castRepository,
-                dispatcherProvider = dispatcherProvider
-            ),
             formatDateUseCase = FormatDateUseCase()
         )
     }
-
-    @Provides
-    @Singleton
-    fun provideCastRepository(coreInterface: CoreInterface): CastRepository =
-        CastRepositoryImpl(coreInterface)
-
-    @Provides
-    fun providePersonRepository(coreInterface: CoreInterface): PersonRepository = PersonRepositoryImpl(coreInterface = coreInterface)
 }

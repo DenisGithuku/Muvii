@@ -1,11 +1,11 @@
-com.githukudenis.core_data.R
+com.denisgithuku.core_data.data.local.MoviesDatabase_Impl
 com.githukudenis.core_data.R$drawable
 com.denisgithuku.core_data.data.local.MoviesDatabase
-com.denisgithuku.core_data.data.local.MoviesDatabase_Impl
-com.githukudenis.core_data.R$drawable: int bookmarks
+com.githukudenis.core_data.R
 com.githukudenis.core_data.R$drawable: int bookmark_favourite_filled
+com.githukudenis.core_data.R$drawable: int bookmarks
 com.githukudenis.core_data.R$drawable: int sliders1_svgrepo_com
-com.githukudenis.core_data.R: R()
-com.githukudenis.core_data.R$drawable: R$drawable()
 com.denisgithuku.core_data.data.local.MoviesDatabase: MoviesDatabase()
 com.denisgithuku.core_data.data.local.MoviesDatabase_Impl: MoviesDatabase_Impl()
+com.githukudenis.core_data.R: R()
+com.githukudenis.core_data.R$drawable: R$drawable()
