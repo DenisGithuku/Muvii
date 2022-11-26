@@ -127,7 +127,6 @@ com.denisgithuku.movies.presentation.screens.details.MovieDetailsScreenKt$MovieD
 com.denisgithuku.movies.presentation.screens.details.MovieDetailsScreenKt$MovieDetailsScreen$3
 com.denisgithuku.movies.presentation.screens.details.MovieDetailsScreenKt$MovieDetailsScreen$4$1
 com.denisgithuku.movies.presentation.screens.details.MovieDetailsScreenKt$MovieDetailsScreen$4$2
-com.denisgithuku.movies.presentation.screens.details.MovieDetailsScreenKt$MovieDetailsScreen$4$3
 com.denisgithuku.movies.presentation.screens.details.MovieDetailsScreenKt$MovieDetailsScreen$5
 com.denisgithuku.movies.presentation.screens.details.MovieDetailsScreenKt$MovieDetailsScreen$6$1$1$1$1$1
 com.denisgithuku.movies.presentation.screens.details.MovieDetailsScreenKt$MovieDetailsScreen$6$1$1$1$2

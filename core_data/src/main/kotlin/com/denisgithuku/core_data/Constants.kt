@@ -8,4 +8,5 @@ object Constants {
     const val imageSize = "original"
     const val moviesRoute = "movies"
     const val tvShowsRoute = "tv"
+    const val peopleRoute = "people"
 }

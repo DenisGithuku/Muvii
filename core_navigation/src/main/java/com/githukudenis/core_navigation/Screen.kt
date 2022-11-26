@@ -19,6 +19,12 @@ sealed class Screen(val routeId: String, @DrawableRes val vectorId: Int? = null)
     )
 
     object TvDetails : Screen(
-        routeId = "TvDetails", null
+        routeId = "TvDetails",
+        vectorId = null
+    )
+
+    object Profile: Screen(
+        routeId = "profile",
+        vectorId = null
     )
 }
