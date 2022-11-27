@@ -24,5 +24,9 @@ fun MuviiNavigator(
             navHostController = navHostController,
             snackbarHostState = snackbarHostState
         )
+        profileGraph(
+            navHostController = navHostController,
+            snackbarHostState = snackbarHostState
+        )
     }
 }

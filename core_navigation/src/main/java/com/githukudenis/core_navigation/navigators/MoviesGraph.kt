@@ -53,7 +53,16 @@ fun NavGraphBuilder.moviesGraph(
                 }, onNavigateUp = {
                     navHostController.navigateUp()
                 },
-                snackbarHostState = snackbarHostState
+                snackbarHostState = snackbarHostState,
+                onOpenProfile = { profileId ->
+                    navHostController.navigate(Screen.Profile.routeId + "/${profileId}") {
+                        popUpTo(Screen.Profile.routeId) {
+                            inclusive = true
+                            saveState = true
+                        }
+                        restoreState = true
+                    }
+                }
             )
         }
         composable(route = Screen.Favourites.routeId) {

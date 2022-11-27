@@ -42,16 +42,13 @@ import okhttp3.internal.trimSubstring
 @OptIn(ExperimentalLifecycleComposeApi::class)
 @Composable
 fun TvDetailsScreen(
-    snackbarHostState: SnackbarHostState,
-    onNavigateUp: () -> Unit
+    snackbarHostState: SnackbarHostState, onNavigateUp: () -> Unit
 ) {
     val tvDetailsViewModel: TvDetailsViewModel = hiltViewModel()
     val uiState = tvDetailsViewModel.uiState.collectAsStateWithLifecycle().value
 
     AnimatedVisibility(
-        visible = uiState.tvDetailsLoading,
-        enter = fadeIn(),
-        exit = fadeOut()
+        visible = uiState.tvDetailsLoading, enter = fadeIn(), exit = fadeOut()
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
             JumpingBubblesLoadingIndicator()
@@ -60,8 +57,7 @@ fun TvDetailsScreen(
 
     if (uiState.userMessages.isNotEmpty()) {
         LaunchedEffect(
-            key1 = uiState.userMessages,
-            key2 = snackbarHostState
+            key1 = uiState.userMessages, key2 = snackbarHostState
         ) {
             val userMessage = uiState.userMessages[0]
             snackbarHostState.showSnackbar(message = userMessage.message)
@@ -183,28 +179,35 @@ private fun TvDetailsScreen(
         }
 
         item {
-            Text(
-                text = "Storyline",
-                style = MaterialTheme.typography.displaySmall,
-                modifier = modifier.padding(
-                    top = LocalAppDimens.current.extra_large,
-                    start = LocalAppDimens.current.extra_large,
-                    end = LocalAppDimens.current.extra_large,
-                )
-            )
-        }
-
-        item {
-            Text(
-                text = tvDetails.overview,
-                style = MaterialTheme.typography.bodyMedium,
-                modifier = modifier.padding(
-                    top = LocalAppDimens.current.extra_large,
-                    start = LocalAppDimens.current.extra_large,
-                    end = LocalAppDimens.current.extra_large,
-                ),
-                textAlign = TextAlign.Justify
-            )
+            if (tvDetails.overview.isNotEmpty()) {
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalArrangement = Arrangement.spacedBy(
+                        LocalAppDimens.current.medium
+                    ),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = "Storyline",
+                        style = MaterialTheme.typography.displaySmall,
+                        modifier = modifier.padding(
+                            top = LocalAppDimens.current.extra_large,
+                            start = LocalAppDimens.current.extra_large,
+                            end = LocalAppDimens.current.extra_large,
+                        )
+                    )
+                    Text(
+                        text = tvDetails.overview,
+                        style = MaterialTheme.typography.bodyMedium,
+                        modifier = modifier.padding(
+                            top = LocalAppDimens.current.extra_large,
+                            start = LocalAppDimens.current.extra_large,
+                            end = LocalAppDimens.current.extra_large,
+                        ),
+                        textAlign = TextAlign.Justify
+                    )
+                }
+            }
         }
         item {
             Divider(
@@ -243,89 +246,50 @@ private fun TvDetailsScreen(
         }
 
         item {
-            Box(
-                modifier = modifier.wrapContentSize(), contentAlignment = Alignment.Center
-            ) {
-                Column(
-                    modifier = modifier
-                        .fillMaxWidth()
-                        .padding(LocalAppDimens.current.large),
-                    verticalArrangement = Arrangement.spacedBy(
-                        LocalAppDimens.current.large
-                    ),
-                    horizontalAlignment = Alignment.CenterHorizontally
+            if (castList.isNotEmpty()) {
+                Box(
+                    modifier = modifier.wrapContentSize(),
+                    contentAlignment = Alignment.Center
                 ) {
-                    Text(
-                        text = "Cast",
-                        style = MaterialTheme.typography.displaySmall,
-                        textAlign = TextAlign.Center
-                    )
-                    Box() {
-                        LazyRow(horizontalArrangement = Arrangement.spacedBy(LocalAppDimens.current.large)) {
-                            items(items = castList, key = { it.cast_id }) { cast ->
-                                cast.profile_path?.let { profileUrl ->
-                                    CastCard(
-                                        profileUrl = profileUrl,
-                                        castId = cast.cast_id,
-                                        name = cast.name,
-                                        onOpenProfile = onOpenProfile,
-                                        onToggleFollow = onToggleFollow,
-                                        vectorId = if (cast.following) R.drawable.ic_baseline_check_24 else R.drawable.ic_baseline_add_24
-                                    )
+                    Column(
+                        modifier = modifier
+                            .fillMaxWidth()
+                            .padding(LocalAppDimens.current.large),
+                        verticalArrangement = Arrangement.spacedBy(
+                            LocalAppDimens.current.large
+                        ),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Text(
+                            text = "Cast",
+                            style = MaterialTheme.typography.displaySmall,
+                            textAlign = TextAlign.Center
+                        )
+                        Box {
+                            LazyRow(horizontalArrangement = Arrangement.spacedBy(LocalAppDimens.current.large)) {
+                                items(items = castList, key = { it.cast_id }) { cast ->
+                                    cast.profile_path?.let { profileUrl ->
+                                        CastCard(
+                                            profileUrl = profileUrl,
+                                            castId = cast.cast_id,
+                                            name = cast.name,
+                                            onOpenProfile = onOpenProfile,
+                                            onToggleFollow = onToggleFollow,
+                                            vectorId = if (cast.following) R.drawable.ic_baseline_check_24 else R.drawable.ic_baseline_add_24
+                                        )
+                                    }
                                 }
                             }
                         }
                     }
-                }
 
-                AnimatedVisibility(
-                    visible = castLoading,
-                    enter = fadeIn(),
-                    exit = fadeOut()
-                ) {
-                    JumpingBubblesLoadingIndicator()
+                    AnimatedVisibility(
+                        visible = castLoading, enter = fadeIn(), exit = fadeOut()
+                    ) {
+                        JumpingBubblesLoadingIndicator()
+                    }
                 }
             }
         }
-
-        item {
-
-            Text(
-                text = "Similar movies",
-                modifier = Modifier.padding(LocalAppDimens.current.large),
-                textAlign = TextAlign.Start,
-                style = MaterialTheme.typography.displaySmall
-            )
-
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(LocalAppDimens.current.large)
-            ) {
-
-//                LazyRow(
-//                    verticalAlignment = Alignment.CenterVertically,
-//                    horizontalArrangement = Arrangement.spacedBy(LocalAppDimens.current.medium)
-//                ) {
-//                    items(items = similarShows, key = { it.id }) { movie ->
-//                        TrendingMovieItem(
-//                            poster_path = movie.poster_path,
-//                            movieId = movie.id,
-//                            context = context,
-//                            onSelect = onOpenSimilarMovie,
-//                            modifier = Modifier.padding(horizontal = LocalAppDimens.current.large)
-//                        )
-//                    }
-//                }
-
-//                if (similarMoviesLoading) {
-//                    CircularProgressIndicator(
-//                        modifier = Modifier.align(Alignment.Center),
-//                        color = MaterialTheme.colorScheme.secondary
-//                    )
-//                }
-            }
-        }
-
     }
 }

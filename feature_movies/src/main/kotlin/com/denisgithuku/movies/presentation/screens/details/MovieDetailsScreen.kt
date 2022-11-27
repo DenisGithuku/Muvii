@@ -29,7 +29,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.denisgithuku.core_data.Constants
-import com.denisgithuku.feature_people.domain.model.Cast
 import com.denisgithuku.core_data.ui.components.JumpingBubblesLoadingIndicator
 import com.denisgithuku.core_design.ui.components.ConfirmationDialog
 import com.denisgithuku.core_design.ui.components.MuviiIconButton
@@ -52,6 +51,7 @@ fun MovieDetailsScreen(
     snackbarHostState: SnackbarHostState,
     detailsViewModel: DetailsViewModel = hiltViewModel(),
     onOpenMovieDetails: (Int) -> Unit,
+    onOpenProfile: (Int) -> Unit,
     onNavigateUp: () -> Unit
 ) {
     val uiState = detailsViewModel.uiState.collectAsStateWithLifecycle().value
@@ -107,9 +107,7 @@ fun MovieDetailsScreen(
             },
             castLoading = uiState.castLoading,
             castList = uiState.cast,
-            onOpenProfile = {
-
-            },
+            onOpenProfile = onOpenProfile,
             onToggleFollow = {
 
             })
@@ -321,7 +319,7 @@ private fun MovieDetailsScreen(
                             cast.profile_path?.let { profileUrl ->
                                 CastCard(
                                     profileUrl = profileUrl,
-                                    castId = cast.cast_id,
+                                    castId = cast.id,
                                     name = cast.name,
                                     onOpenProfile = onOpenProfile,
                                     onToggleFollow = onToggleFollow,

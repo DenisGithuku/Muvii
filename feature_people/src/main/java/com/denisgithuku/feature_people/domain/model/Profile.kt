@@ -5,7 +5,7 @@ data class Profile (
     val also_known_as: List<String>,
     val biography: String,
     val gender: Int,
-    val homepage: Any,
+    val homepage: Any?,
     val id: Int,
     val imdb_id: String,
     val known_for_department: String,
