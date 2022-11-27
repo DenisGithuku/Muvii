@@ -319,7 +319,7 @@ private fun MovieDetailsScreen(
                             cast.profile_path?.let { profileUrl ->
                                 CastCard(
                                     profileUrl = profileUrl,
-                                    castId = cast.cast_id,
+                                    castId = cast.id,
                                     name = cast.name,
                                     onOpenProfile = onOpenProfile,
                                     onToggleFollow = onToggleFollow,
