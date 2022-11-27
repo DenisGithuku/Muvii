@@ -24,6 +24,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
@@ -90,8 +92,8 @@ private fun ProfileScreenWithState(
     val gender = rememberSaveable {
         mutableStateOf(
             when (profile.gender) {
-                1 -> "Male"
-                2 -> "Female"
+                1 -> "Female"
+                2 -> "Male"
                 else -> "Rather not say"
             }
         )
@@ -145,9 +147,11 @@ private fun ProfileScreenWithState(
         item {
             if (profile.also_known_as.isNotEmpty()) {
                 Column(
-                    modifier = modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(
+                    modifier = modifier.fillMaxWidth(),
+                    verticalArrangement = Arrangement.spacedBy(
                         LocalAppDimens.current.medium
-                    ), horizontalAlignment = Alignment.CenterHorizontally
+                    ),
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
                         text = "Also known as", style = MaterialTheme.typography.bodyMedium
@@ -160,8 +164,9 @@ private fun ProfileScreenWithState(
                         )
                     ) {
                         items(profile.also_known_as) { also_known_as ->
-                            Text(
-                                text = also_known_as, style = MaterialTheme.typography.labelMedium
+                            RoundedRectangleChip(
+                                modifier = modifier,
+                                label = also_known_as
                             )
                         }
                     }
@@ -169,16 +174,27 @@ private fun ProfileScreenWithState(
             }
         }
         item {
-            Text(
-                text = profile.biography,
-                style = MaterialTheme.typography.bodyMedium,
-                modifier = modifier.padding(
-                    top = LocalAppDimens.current.extra_large,
-                    start = LocalAppDimens.current.extra_large,
-                    end = LocalAppDimens.current.extra_large,
-                ),
-                textAlign = TextAlign.Justify
-            )
+            if (profile.biography.isNotEmpty()) {
+                Column(
+                    modifier = modifier.fillMaxWidth().padding(
+                        LocalAppDimens.current.extra_large
+                    ),
+                    verticalArrangement = Arrangement.spacedBy(
+                        LocalAppDimens.current.large
+                    ),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = "Biography",
+                        style = MaterialTheme.typography.bodyLarge,
+                    )
+                    Text(
+                        text = profile.biography,
+                        style = MaterialTheme.typography.bodyMedium,
+                        textAlign = TextAlign.Justify
+                    )
+                }
+            }
         }
 
         item {
@@ -225,7 +241,7 @@ private fun ProfileScreenWithState(
                     }
                 }
 
-                if (profile.homepage.toString().isNotEmpty()) {
+                profile.homepage?.let { homepage ->
                     Row(
                         modifier = modifier
                             .fillMaxWidth()
@@ -240,17 +256,19 @@ private fun ProfileScreenWithState(
                         )
                     ) {
                         Text(
-                            text = "Homepage", style = MaterialTheme.typography.bodyMedium
+                            text = "Homepage:", style = MaterialTheme.typography.bodyMedium
                         )
                         Text(
-                            text = profile.homepage.toString(),
+                            text = homepage.toString(),
+                            maxLines = 1,
+                            textDecoration = TextDecoration.Underline,
+                            overflow = TextOverflow.Ellipsis,
                             style = MaterialTheme.typography.labelMedium.copy(
                                 color = Color.Blue.copy(alpha = 0.8f)
                             ),
                         )
                     }
                 }
-
             }
         }
 
