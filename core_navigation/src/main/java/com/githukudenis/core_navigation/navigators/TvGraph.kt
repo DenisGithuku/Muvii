@@ -29,6 +29,15 @@ fun NavGraphBuilder.tvGraph(
             composable(route = Screen.TvDetails.routeId + "/{tvId}") {
                 TvDetailsScreen(
                     snackbarHostState = snackbarHostState,
+                    onOpenProfile = { castId ->
+                          navHostController.navigate(Screen.Profile.routeId + "/${castId}")  {
+                              popUpTo(Screen.Profile.routeId) {
+                                  inclusive = true
+                                  saveState = true
+                              }
+                              restoreState = true
+                          }
+                    },
                     onNavigateUp = {
                         navHostController.navigateUp()
                     }
