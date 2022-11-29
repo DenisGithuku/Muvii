@@ -27,9 +27,9 @@ fun NavGraphBuilder.moviesGraph(
             MoviesListScreen(
                 snackbarHostState = snackbarHostState,
                 onToggleTheme = onToggleTheme, onOpenDetails = { movieId ->
-                    navHostController.navigate(route = "movie_details" + "/${movieId}") {
+                    navHostController.navigate(route = Screen.MovieDetails.routeId + "/${movieId}") {
 //                    launchSingleTop = true
-                        popUpTo(route = "movie_details") {
+                        popUpTo(route = Screen.MovieDetails.routeId) {
                             inclusive = true
                             saveState = true
                         }
@@ -39,12 +39,12 @@ fun NavGraphBuilder.moviesGraph(
             )
         }
 
-        composable(route = "movie_details" + "/{movieId}") {
+        composable(route = Screen.MovieDetails.routeId + "/{movieId}") {
             MovieDetailsScreen(
                 onOpenMovieDetails = { movieId ->
-                    navHostController.navigate(route = "movie_details" + "/${movieId}") {
+                    navHostController.navigate(route = Screen.MovieDetails.routeId + "/${movieId}") {
 //                    launchSingleTop = true
-                        popUpTo(route = "movie_details") {
+                        popUpTo(route = Screen.MovieDetails.routeId) {
                             inclusive = true
                             saveState = true
                         }
@@ -69,9 +69,9 @@ fun NavGraphBuilder.moviesGraph(
             FavouritesScreen(
                 snackbarHostState = snackbarHostState,
                 onOpenDetails = { movieId ->
-                    navHostController.navigate(route = "movie_details" + "/${movieId}") {
+                    navHostController.navigate(route = Screen.MovieDetails.routeId + "/${movieId}") {
 //                    launchSingleTop = true
-                        popUpTo(route = "movie_details") {
+                        popUpTo(route = Screen.MovieDetails.routeId) {
                             inclusive = true
                             saveState = true
                         }

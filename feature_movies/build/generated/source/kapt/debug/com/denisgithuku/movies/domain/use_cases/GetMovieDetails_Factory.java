@@ -2,6 +2,7 @@
 package com.denisgithuku.movies.domain.use_cases;
 
 import com.denisgithuku.core_data.domain.repository.FavouriteMoviesRepository;
+import com.denisgithuku.core_data.domain.use_cases.CoreMuviiUseCases;
 import com.denisgithuku.core_data.providers.DispatcherProvider;
 import com.denisgithuku.movies.domain.repository.MoviesRepository;
 import dagger.internal.DaggerGenerated;
@@ -22,35 +23,35 @@ public final class GetMovieDetails_Factory implements Factory<GetMovieDetails> {
 
   private final Provider<FavouriteMoviesRepository> favouriteMoviesRepositoryProvider;
 
-  private final Provider<FormatDateUseCase> formatDateUseCaseProvider;
+  private final Provider<CoreMuviiUseCases> coreMuviiUseCasesProvider;
 
   private final Provider<DispatcherProvider> dispatcherProvider;
 
   public GetMovieDetails_Factory(Provider<MoviesRepository> movieRepositoryProvider,
       Provider<FavouriteMoviesRepository> favouriteMoviesRepositoryProvider,
-      Provider<FormatDateUseCase> formatDateUseCaseProvider,
+      Provider<CoreMuviiUseCases> coreMuviiUseCasesProvider,
       Provider<DispatcherProvider> dispatcherProvider) {
     this.movieRepositoryProvider = movieRepositoryProvider;
     this.favouriteMoviesRepositoryProvider = favouriteMoviesRepositoryProvider;
-    this.formatDateUseCaseProvider = formatDateUseCaseProvider;
+    this.coreMuviiUseCasesProvider = coreMuviiUseCasesProvider;
     this.dispatcherProvider = dispatcherProvider;
   }
 
   @Override
   public GetMovieDetails get() {
-    return newInstance(movieRepositoryProvider.get(), favouriteMoviesRepositoryProvider.get(), formatDateUseCaseProvider.get(), dispatcherProvider.get());
+    return newInstance(movieRepositoryProvider.get(), favouriteMoviesRepositoryProvider.get(), coreMuviiUseCasesProvider.get(), dispatcherProvider.get());
   }
 
   public static GetMovieDetails_Factory create(Provider<MoviesRepository> movieRepositoryProvider,
       Provider<FavouriteMoviesRepository> favouriteMoviesRepositoryProvider,
-      Provider<FormatDateUseCase> formatDateUseCaseProvider,
+      Provider<CoreMuviiUseCases> coreMuviiUseCasesProvider,
       Provider<DispatcherProvider> dispatcherProvider) {
-    return new GetMovieDetails_Factory(movieRepositoryProvider, favouriteMoviesRepositoryProvider, formatDateUseCaseProvider, dispatcherProvider);
+    return new GetMovieDetails_Factory(movieRepositoryProvider, favouriteMoviesRepositoryProvider, coreMuviiUseCasesProvider, dispatcherProvider);
   }
 
   public static GetMovieDetails newInstance(MoviesRepository movieRepository,
-      FavouriteMoviesRepository favouriteMoviesRepository, FormatDateUseCase formatDateUseCase,
+      FavouriteMoviesRepository favouriteMoviesRepository, CoreMuviiUseCases coreMuviiUseCases,
       DispatcherProvider dispatcherProvider) {
-    return new GetMovieDetails(movieRepository, favouriteMoviesRepository, formatDateUseCase, dispatcherProvider);
+    return new GetMovieDetails(movieRepository, favouriteMoviesRepository, coreMuviiUseCases, dispatcherProvider);
   }
 }

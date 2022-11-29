@@ -2,7 +2,7 @@ package com.denisgithuku.core_data;
 
 import java.lang.System;
 
-@kotlin.Metadata(mv = {1, 7, 1}, k = 1, d1 = {"\u0000\u0014\n\u0002\u0018\u0002\n\u0002\u0010\u0000\n\u0002\b\u0002\n\u0002\u0010\u000e\n\u0002\b\u0005\b\u00c6\u0002\u0018\u00002\u00020\u0001B\u0007\b\u0002\u00a2\u0006\u0002\u0010\u0002R\u000e\u0010\u0003\u001a\u00020\u0004X\u0086T\u00a2\u0006\u0002\n\u0000R\u000e\u0010\u0005\u001a\u00020\u0004X\u0086T\u00a2\u0006\u0002\n\u0000R\u000e\u0010\u0006\u001a\u00020\u0004X\u0086T\u00a2\u0006\u0002\n\u0000R\u000e\u0010\u0007\u001a\u00020\u0004X\u0086T\u00a2\u0006\u0002\n\u0000R\u000e\u0010\b\u001a\u00020\u0004X\u0086T\u00a2\u0006\u0002\n\u0000\u00a8\u0006\t"}, d2 = {"Lcom/denisgithuku/core_data/Constants;", "", "()V", "ADULT_CONTENT_ENABLED_KEY", "", "BASE_URL", "UI_THEME_KEY", "imageSize", "movieId", "core_data_debug"})
+@kotlin.Metadata(mv = {1, 7, 1}, k = 1, d1 = {"\u0000\u0014\n\u0002\u0018\u0002\n\u0002\u0010\u0000\n\u0002\b\u0002\n\u0002\u0010\u000e\n\u0002\b\b\b\u00c6\u0002\u0018\u00002\u00020\u0001B\u0007\b\u0002\u00a2\u0006\u0002\u0010\u0002R\u000e\u0010\u0003\u001a\u00020\u0004X\u0086T\u00a2\u0006\u0002\n\u0000R\u000e\u0010\u0005\u001a\u00020\u0004X\u0086T\u00a2\u0006\u0002\n\u0000R\u000e\u0010\u0006\u001a\u00020\u0004X\u0086T\u00a2\u0006\u0002\n\u0000R\u000e\u0010\u0007\u001a\u00020\u0004X\u0086T\u00a2\u0006\u0002\n\u0000R\u000e\u0010\b\u001a\u00020\u0004X\u0086T\u00a2\u0006\u0002\n\u0000R\u000e\u0010\t\u001a\u00020\u0004X\u0086T\u00a2\u0006\u0002\n\u0000R\u000e\u0010\n\u001a\u00020\u0004X\u0086T\u00a2\u0006\u0002\n\u0000R\u000e\u0010\u000b\u001a\u00020\u0004X\u0086T\u00a2\u0006\u0002\n\u0000\u00a8\u0006\f"}, d2 = {"Lcom/denisgithuku/core_data/Constants;", "", "()V", "ADULT_CONTENT_ENABLED_KEY", "", "BASE_URL", "UI_THEME_KEY", "imageSize", "movieId", "moviesRoute", "peopleRoute", "tvShowsRoute", "core_data_debug"})
 public final class Constants {
     @org.jetbrains.annotations.NotNull()
     public static final com.denisgithuku.core_data.Constants INSTANCE = null;
@@ -16,6 +16,12 @@ public final class Constants {
     public static final java.lang.String movieId = "movieId";
     @org.jetbrains.annotations.NotNull()
     public static final java.lang.String imageSize = "original";
+    @org.jetbrains.annotations.NotNull()
+    public static final java.lang.String moviesRoute = "movies";
+    @org.jetbrains.annotations.NotNull()
+    public static final java.lang.String tvShowsRoute = "tv";
+    @org.jetbrains.annotations.NotNull()
+    public static final java.lang.String peopleRoute = "people";
     
     private Constants() {
         super();
