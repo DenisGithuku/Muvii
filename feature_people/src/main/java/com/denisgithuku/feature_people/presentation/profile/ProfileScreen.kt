@@ -70,7 +70,9 @@ fun ProfileScreen(
 
     uiState.profile?.let { profile ->
         ProfileScreenWithState(
-            onNavigateUp = onNavigateUp, onToggleFollow = {}, profile = profile
+            onNavigateUp = onNavigateUp,
+            onToggleFollow = { profileViewModel.onEvent(ProfileEvent.ToggleFollowPerson) },
+            profile = profile
         )
     }
 
@@ -135,9 +137,14 @@ private fun ProfileScreenWithState(
                         .crossfade(true).build(),
                     contentScale = ContentScale.Crop,
                     contentDescription = "Profile",
-                    modifier = modifier.sizeIn(
-                        minWidth = 150.dp, minHeight = 150.dp, maxHeight = 150.dp, maxWidth = 150.dp
-                    ).clip(CircleShape)
+                    modifier = modifier
+                        .sizeIn(
+                            minWidth = 150.dp,
+                            minHeight = 150.dp,
+                            maxHeight = 150.dp,
+                            maxWidth = 150.dp
+                        )
+                        .clip(CircleShape)
                 )
                 RoundedRectangleChip(
                     label = following.value
@@ -147,11 +154,9 @@ private fun ProfileScreenWithState(
         item {
             if (profile.also_known_as.isNotEmpty()) {
                 Column(
-                    modifier = modifier.fillMaxWidth(),
-                    verticalArrangement = Arrangement.spacedBy(
+                    modifier = modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(
                         LocalAppDimens.current.medium
-                    ),
-                    horizontalAlignment = Alignment.CenterHorizontally
+                    ), horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
                         text = "Also known as", style = MaterialTheme.typography.bodyMedium
@@ -165,8 +170,7 @@ private fun ProfileScreenWithState(
                     ) {
                         items(profile.also_known_as) { also_known_as ->
                             RoundedRectangleChip(
-                                modifier = modifier,
-                                label = also_known_as
+                                modifier = modifier, label = also_known_as
                             )
                         }
                     }
@@ -176,13 +180,13 @@ private fun ProfileScreenWithState(
         item {
             if (profile.biography.isNotEmpty()) {
                 Column(
-                    modifier = modifier.fillMaxWidth().padding(
-                        LocalAppDimens.current.extra_large
-                    ),
-                    verticalArrangement = Arrangement.spacedBy(
+                    modifier = modifier
+                        .fillMaxWidth()
+                        .padding(
+                            LocalAppDimens.current.extra_large
+                        ), verticalArrangement = Arrangement.spacedBy(
                         LocalAppDimens.current.large
-                    ),
-                    horizontalAlignment = Alignment.CenterHorizontally
+                    ), horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
                         text = "Biography",

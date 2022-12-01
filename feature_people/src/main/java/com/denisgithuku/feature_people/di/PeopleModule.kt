@@ -1,6 +1,7 @@
 package com.denisgithuku.feature_people.di
 
 import com.denisgithuku.core_data.Constants
+import com.denisgithuku.core_data.data.local.PersonsDao
 import com.denisgithuku.core_data.providers.DispatcherProvider
 import com.denisgithuku.feature_people.data.remote.PeopleApiInterface
 import com.denisgithuku.feature_people.data.repository_impl.CastRepositoryImpl
@@ -41,8 +42,11 @@ object PeopleModule {
 
     @Provides
     @Singleton
-    fun providePersonRepository(peopleApiInterface: PeopleApiInterface): PersonRepository =
-        PersonRepositoryImpl(peopleApiInterface)
+    fun providePersonRepository(
+        peopleApiInterface: PeopleApiInterface,
+        personsDao: PersonsDao
+    ): PersonRepository =
+        PersonRepositoryImpl(peopleApiInterface, personsDao)
 
     @Provides
     @Singleton

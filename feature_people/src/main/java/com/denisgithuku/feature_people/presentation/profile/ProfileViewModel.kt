@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.denisgithuku.core_data.Resource
 import com.denisgithuku.core_data.UserMessage
+import com.denisgithuku.feature_people.domain.repository.PersonRepository
 import com.denisgithuku.feature_people.domain.use_cases.PeopleUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,6 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
     private val peopleUseCases: PeopleUseCases,
+    private val personsRepository: PersonRepository,
     savedStateHandle: SavedStateHandle
 ): ViewModel() {
 
@@ -67,7 +69,7 @@ class ProfileViewModel @Inject constructor(
 
     fun onEvent(profileEvent: ProfileEvent) {
         when (profileEvent) {
-            is ProfileEvent.DismissUserMessage ->  {
+            is ProfileEvent.DismissUserMessage -> {
                 val userMessages = _uiState.value.userMessages
                 userMessages.filterNot { userMessage ->
                     userMessage.id == profileEvent.messageId
@@ -76,6 +78,17 @@ class ProfileViewModel @Inject constructor(
                 _uiState.update { profileUiState ->
                     profileUiState.copy(userMessages = userMessages)
                 }
+            }
+            is ProfileEvent.ToggleFollowPerson -> {
+                toggleFollowPerson()
+            }
+        }
+    }
+
+    private fun toggleFollowPerson() {
+        viewModelScope.launch {
+            personsRepository.toggleFollowPerson(_uiState.value.profile?.id ?: return@launch).also {
+                getProfile(personId = _uiState.value.profile?.id ?: return@also)
             }
         }
     }

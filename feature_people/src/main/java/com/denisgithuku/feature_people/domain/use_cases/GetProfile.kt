@@ -10,12 +10,15 @@ import java.io.IOException
 import javax.inject.Inject
 
 class GetProfile @Inject constructor(
-    private val personRepository: PersonRepository
+    private val personRepository: PersonRepository,
 ) {
     suspend operator fun invoke(personId: Int): Flow<Resource<Profile?>> = flow {
         try {
             emit(Resource.Loading())
-            val profile = personRepository.getPersonDetails(personId = personId)?.toPerson()
+            val profile = personRepository.getPersonDetails(personId = personId)?.toPerson()?.copy(
+                following = personRepository.getFollowedPersonsFromDB()
+                    .any { personEntity -> personEntity.personId == personId }
+            )
             emit(Resource.Success(profile))
         } catch (e: IOException) {
             emit(Resource.Error(e))

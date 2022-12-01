@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.denisgithuku.core_data.Constants
 import com.denisgithuku.core_data.data.local.FavouriteMoviesDao
 import com.denisgithuku.core_data.data.local.MoviesDatabase
+import com.denisgithuku.core_data.data.local.PersonsDao
 import com.denisgithuku.core_data.data.remote.CoreInterface
 import com.denisgithuku.core_data.data.remote.repository_impl.FavouriteMoviesRepositoryImpl
 import com.denisgithuku.core_data.domain.repository.FavouriteMoviesRepository
@@ -74,6 +75,12 @@ object CoreModule {
             context = context
         )
     }
+
+    @Provides
+    @Singleton
+    fun providePersonsDao(
+        moviesDatabase: MoviesDatabase
+    ): PersonsDao = moviesDatabase.personsDao()
 
     @Provides
     @Singleton

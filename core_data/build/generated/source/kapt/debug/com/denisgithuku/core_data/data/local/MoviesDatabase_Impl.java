@@ -32,19 +32,23 @@ import java.util.Set;
 public final class MoviesDatabase_Impl extends MoviesDatabase {
   private volatile FavouriteMoviesDao _favouriteMoviesDao;
 
+  private volatile PersonsDao _personsDao;
+
   @Override
   protected SupportSQLiteOpenHelper createOpenHelper(DatabaseConfiguration configuration) {
     final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(configuration, new RoomOpenHelper.Delegate(1) {
       @Override
       public void createAllTables(SupportSQLiteDatabase _db) {
         _db.execSQL("CREATE TABLE IF NOT EXISTS `favourite_movies_table` (`movie_id` INTEGER NOT NULL, PRIMARY KEY(`movie_id`))");
+        _db.execSQL("CREATE TABLE IF NOT EXISTS `followed_persons_table` (`personId` INTEGER NOT NULL, PRIMARY KEY(`personId`))");
         _db.execSQL("CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)");
-        _db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '9158f778e29e6531406a82d61870927b')");
+        _db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'dc2e64c9e63ccb4b051acd3d06e1d2b8')");
       }
 
       @Override
       public void dropAllTables(SupportSQLiteDatabase _db) {
         _db.execSQL("DROP TABLE IF EXISTS `favourite_movies_table`");
+        _db.execSQL("DROP TABLE IF EXISTS `followed_persons_table`");
         if (mCallbacks != null) {
           for (int _i = 0, _size = mCallbacks.size(); _i < _size; _i++) {
             mCallbacks.get(_i).onDestructiveMigration(_db);
@@ -94,9 +98,20 @@ public final class MoviesDatabase_Impl extends MoviesDatabase {
                   + " Expected:\n" + _infoFavouriteMoviesTable + "\n"
                   + " Found:\n" + _existingFavouriteMoviesTable);
         }
+        final HashMap<String, TableInfo.Column> _columnsFollowedPersonsTable = new HashMap<String, TableInfo.Column>(1);
+        _columnsFollowedPersonsTable.put("personId", new TableInfo.Column("personId", "INTEGER", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
+        final HashSet<TableInfo.ForeignKey> _foreignKeysFollowedPersonsTable = new HashSet<TableInfo.ForeignKey>(0);
+        final HashSet<TableInfo.Index> _indicesFollowedPersonsTable = new HashSet<TableInfo.Index>(0);
+        final TableInfo _infoFollowedPersonsTable = new TableInfo("followed_persons_table", _columnsFollowedPersonsTable, _foreignKeysFollowedPersonsTable, _indicesFollowedPersonsTable);
+        final TableInfo _existingFollowedPersonsTable = TableInfo.read(_db, "followed_persons_table");
+        if (! _infoFollowedPersonsTable.equals(_existingFollowedPersonsTable)) {
+          return new RoomOpenHelper.ValidationResult(false, "followed_persons_table(com.denisgithuku.core_data.data.local.PersonEntity).\n"
+                  + " Expected:\n" + _infoFollowedPersonsTable + "\n"
+                  + " Found:\n" + _existingFollowedPersonsTable);
+        }
         return new RoomOpenHelper.ValidationResult(true, null);
       }
-    }, "9158f778e29e6531406a82d61870927b", "c4f25363b50def1ea9d91684184786eb");
+    }, "dc2e64c9e63ccb4b051acd3d06e1d2b8", "39244e79f03fe7d22606775bf3fd8908");
     final SupportSQLiteOpenHelper.Configuration _sqliteConfig = SupportSQLiteOpenHelper.Configuration.builder(configuration.context)
         .name(configuration.name)
         .callback(_openCallback)
@@ -109,7 +124,7 @@ public final class MoviesDatabase_Impl extends MoviesDatabase {
   protected InvalidationTracker createInvalidationTracker() {
     final HashMap<String, String> _shadowTablesMap = new HashMap<String, String>(0);
     HashMap<String, Set<String>> _viewTables = new HashMap<String, Set<String>>(0);
-    return new InvalidationTracker(this, _shadowTablesMap, _viewTables, "favourite_movies_table");
+    return new InvalidationTracker(this, _shadowTablesMap, _viewTables, "favourite_movies_table","followed_persons_table");
   }
 
   @Override
@@ -119,6 +134,7 @@ public final class MoviesDatabase_Impl extends MoviesDatabase {
     try {
       super.beginTransaction();
       _db.execSQL("DELETE FROM `favourite_movies_table`");
+      _db.execSQL("DELETE FROM `followed_persons_table`");
       super.setTransactionSuccessful();
     } finally {
       super.endTransaction();
@@ -133,6 +149,7 @@ public final class MoviesDatabase_Impl extends MoviesDatabase {
   protected Map<Class<?>, List<Class<?>>> getRequiredTypeConverters() {
     final HashMap<Class<?>, List<Class<?>>> _typeConvertersMap = new HashMap<Class<?>, List<Class<?>>>();
     _typeConvertersMap.put(FavouriteMoviesDao.class, FavouriteMoviesDao_Impl.getRequiredConverters());
+    _typeConvertersMap.put(PersonsDao.class, PersonsDao_Impl.getRequiredConverters());
     return _typeConvertersMap;
   }
 
@@ -158,6 +175,20 @@ public final class MoviesDatabase_Impl extends MoviesDatabase {
           _favouriteMoviesDao = new FavouriteMoviesDao_Impl(this);
         }
         return _favouriteMoviesDao;
+      }
+    }
+  }
+
+  @Override
+  public PersonsDao personsDao() {
+    if (_personsDao != null) {
+      return _personsDao;
+    } else {
+      synchronized(this) {
+        if(_personsDao == null) {
+          _personsDao = new PersonsDao_Impl(this);
+        }
+        return _personsDao;
       }
     }
   }
