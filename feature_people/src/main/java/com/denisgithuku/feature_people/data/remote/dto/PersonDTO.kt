@@ -18,7 +18,7 @@ data class PersonDTO(
     val popularity: Double,
     val profile_path: String
 ) {
-    fun toPerson(): Profile {
+    fun toProfile(): Profile {
         return Profile(
             adult,
             also_known_as,

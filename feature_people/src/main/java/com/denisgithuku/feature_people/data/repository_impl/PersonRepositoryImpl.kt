@@ -35,7 +35,7 @@ class PersonRepositoryImpl @Inject constructor(
         if (followed) {
             personsDao.deletePerson(personEntity = PersonEntity(personId = personId))
         } else {
-            personsDao.deletePerson(personEntity = PersonEntity(personId = personId))
+            personsDao.insertPerson(personEntity = PersonEntity(personId = personId))
         }
     }
 }

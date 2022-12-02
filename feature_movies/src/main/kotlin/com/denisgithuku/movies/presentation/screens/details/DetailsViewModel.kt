@@ -9,6 +9,7 @@ import com.denisgithuku.core_data.UserMessage
 import com.denisgithuku.core_data.data.local.FavouriteMovieDBO
 import com.denisgithuku.core_data.domain.use_cases.CoreMuviiUseCases
 import com.denisgithuku.core_data.providers.DispatcherProvider
+import com.denisgithuku.feature_people.domain.repository.PersonRepository
 import com.denisgithuku.feature_people.domain.use_cases.PeopleUseCases
 import com.denisgithuku.movies.domain.use_cases.MovieUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -26,6 +27,7 @@ class DetailsViewModel @Inject constructor(
     private val coreMuviiUseCases: CoreMuviiUseCases,
     private val peopleUseCases: PeopleUseCases,
     private val dispatcherProvider: DispatcherProvider,
+    private val personRepository: PersonRepository,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -66,6 +68,12 @@ class DetailsViewModel @Inject constructor(
                     it.copy(
                         showConfirmationDialog = false
                     )
+                }
+            }
+            is DetailsUiEvent.ToggleFollowPerson -> {
+                toggleFollowPerson(event.profileId)
+                _uiState.value.movieDetails?.let{ details ->
+                    getCast(details.id)
                 }
             }
         }
@@ -203,6 +211,13 @@ class DetailsViewModel @Inject constructor(
                     }
                 }
             }
+        }
+    }
+
+    private fun toggleFollowPerson(castId: Int) {
+        viewModelScope.launch {
+            val cast = _uiState.value.cast.filter { cast -> cast.id == castId }[0]
+            personRepository.toggleFollowPerson(cast.id)
         }
     }
 }

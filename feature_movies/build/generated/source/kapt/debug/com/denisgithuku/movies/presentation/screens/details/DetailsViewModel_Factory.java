@@ -4,6 +4,7 @@ package com.denisgithuku.movies.presentation.screens.details;
 import androidx.lifecycle.SavedStateHandle;
 import com.denisgithuku.core_data.domain.use_cases.CoreMuviiUseCases;
 import com.denisgithuku.core_data.providers.DispatcherProvider;
+import com.denisgithuku.feature_people.domain.repository.PersonRepository;
 import com.denisgithuku.feature_people.domain.use_cases.PeopleUseCases;
 import com.denisgithuku.movies.domain.use_cases.MovieUseCases;
 import dagger.internal.DaggerGenerated;
@@ -28,36 +29,42 @@ public final class DetailsViewModel_Factory implements Factory<DetailsViewModel>
 
   private final Provider<DispatcherProvider> dispatcherProvider;
 
+  private final Provider<PersonRepository> personRepositoryProvider;
+
   private final Provider<SavedStateHandle> savedStateHandleProvider;
 
   public DetailsViewModel_Factory(Provider<MovieUseCases> movieUseCasesProvider,
       Provider<CoreMuviiUseCases> coreMuviiUseCasesProvider,
       Provider<PeopleUseCases> peopleUseCasesProvider,
       Provider<DispatcherProvider> dispatcherProvider,
+      Provider<PersonRepository> personRepositoryProvider,
       Provider<SavedStateHandle> savedStateHandleProvider) {
     this.movieUseCasesProvider = movieUseCasesProvider;
     this.coreMuviiUseCasesProvider = coreMuviiUseCasesProvider;
     this.peopleUseCasesProvider = peopleUseCasesProvider;
     this.dispatcherProvider = dispatcherProvider;
+    this.personRepositoryProvider = personRepositoryProvider;
     this.savedStateHandleProvider = savedStateHandleProvider;
   }
 
   @Override
   public DetailsViewModel get() {
-    return newInstance(movieUseCasesProvider.get(), coreMuviiUseCasesProvider.get(), peopleUseCasesProvider.get(), dispatcherProvider.get(), savedStateHandleProvider.get());
+    return newInstance(movieUseCasesProvider.get(), coreMuviiUseCasesProvider.get(), peopleUseCasesProvider.get(), dispatcherProvider.get(), personRepositoryProvider.get(), savedStateHandleProvider.get());
   }
 
   public static DetailsViewModel_Factory create(Provider<MovieUseCases> movieUseCasesProvider,
       Provider<CoreMuviiUseCases> coreMuviiUseCasesProvider,
       Provider<PeopleUseCases> peopleUseCasesProvider,
       Provider<DispatcherProvider> dispatcherProvider,
+      Provider<PersonRepository> personRepositoryProvider,
       Provider<SavedStateHandle> savedStateHandleProvider) {
-    return new DetailsViewModel_Factory(movieUseCasesProvider, coreMuviiUseCasesProvider, peopleUseCasesProvider, dispatcherProvider, savedStateHandleProvider);
+    return new DetailsViewModel_Factory(movieUseCasesProvider, coreMuviiUseCasesProvider, peopleUseCasesProvider, dispatcherProvider, personRepositoryProvider, savedStateHandleProvider);
   }
 
   public static DetailsViewModel newInstance(MovieUseCases movieUseCases,
       CoreMuviiUseCases coreMuviiUseCases, PeopleUseCases peopleUseCases,
-      DispatcherProvider dispatcherProvider, SavedStateHandle savedStateHandle) {
-    return new DetailsViewModel(movieUseCases, coreMuviiUseCases, peopleUseCases, dispatcherProvider, savedStateHandle);
+      DispatcherProvider dispatcherProvider, PersonRepository personRepository,
+      SavedStateHandle savedStateHandle) {
+    return new DetailsViewModel(movieUseCases, coreMuviiUseCases, peopleUseCases, dispatcherProvider, personRepository, savedStateHandle);
   }
 }
