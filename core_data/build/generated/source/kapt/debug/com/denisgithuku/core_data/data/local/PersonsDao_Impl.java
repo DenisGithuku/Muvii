@@ -59,7 +59,7 @@ public final class PersonsDao_Impl implements PersonsDao {
 
   @Override
   public Object insertPerson(final PersonEntity personEntity,
-      final Continuation<? super Unit> continuation) {
+      final Continuation<? super Unit> arg1) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       public Unit call() throws Exception {
@@ -72,12 +72,12 @@ public final class PersonsDao_Impl implements PersonsDao {
           __db.endTransaction();
         }
       }
-    }, continuation);
+    }, arg1);
   }
 
   @Override
   public Object deletePerson(final PersonEntity personEntity,
-      final Continuation<? super Unit> continuation) {
+      final Continuation<? super Unit> arg1) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       public Unit call() throws Exception {
@@ -90,12 +90,11 @@ public final class PersonsDao_Impl implements PersonsDao {
           __db.endTransaction();
         }
       }
-    }, continuation);
+    }, arg1);
   }
 
   @Override
-  public Object getFollowedPersonsList(
-      final Continuation<? super List<PersonEntity>> continuation) {
+  public Object getFollowedPersonsList(final Continuation<? super List<PersonEntity>> arg0) {
     final String _sql = "SELECT * FROM followed_persons_table";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
     final CancellationSignal _cancellationSignal = DBUtil.createCancellationSignal();
@@ -119,12 +118,12 @@ public final class PersonsDao_Impl implements PersonsDao {
           _statement.release();
         }
       }
-    }, continuation);
+    }, arg0);
   }
 
   @Override
   public Object getFollowedPerson(final int personId,
-      final Continuation<? super PersonEntity> continuation) {
+      final Continuation<? super PersonEntity> arg1) {
     final String _sql = "SELECT * FROM followed_persons_table WHERE personId like ?";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
     int _argIndex = 1;
@@ -150,7 +149,7 @@ public final class PersonsDao_Impl implements PersonsDao {
           _statement.release();
         }
       }
-    }, continuation);
+    }, arg1);
   }
 
   public static List<Class<?>> getRequiredConverters() {

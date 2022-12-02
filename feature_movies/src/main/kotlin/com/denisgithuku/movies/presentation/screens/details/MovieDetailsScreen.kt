@@ -108,8 +108,8 @@ fun MovieDetailsScreen(
             castLoading = uiState.castLoading,
             castList = uiState.cast,
             onOpenProfile = onOpenProfile,
-            onToggleFollow = {
-
+            onToggleFollow = { profileId ->
+                detailsViewModel.onEvent(DetailsUiEvent.ToggleFollowPerson(profileId = profileId))
             })
     }
 }

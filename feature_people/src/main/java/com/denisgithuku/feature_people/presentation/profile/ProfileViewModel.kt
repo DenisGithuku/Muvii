@@ -87,8 +87,8 @@ class ProfileViewModel @Inject constructor(
 
     private fun toggleFollowPerson() {
         viewModelScope.launch {
-            personsRepository.toggleFollowPerson(_uiState.value.profile?.id ?: return@launch).also {
-                getProfile(personId = _uiState.value.profile?.id ?: return@also)
+            personsRepository.toggleFollowPerson(_uiState.value.profile?.id!!).also {
+                getProfile(personId = _uiState.value.profile?.id!!)
             }
         }
     }

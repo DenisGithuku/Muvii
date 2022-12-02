@@ -68,8 +68,7 @@ public final class FavouriteMoviesDao_Impl implements FavouriteMoviesDao {
   }
 
   @Override
-  public Object insertMovie(final FavouriteMovieDBO movie,
-      final Continuation<? super Unit> continuation) {
+  public Object insertMovie(final FavouriteMovieDBO movie, final Continuation<? super Unit> arg1) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       public Unit call() throws Exception {
@@ -82,12 +81,11 @@ public final class FavouriteMoviesDao_Impl implements FavouriteMoviesDao {
           __db.endTransaction();
         }
       }
-    }, continuation);
+    }, arg1);
   }
 
   @Override
-  public Object deleteMovie(final FavouriteMovieDBO movie,
-      final Continuation<? super Unit> continuation) {
+  public Object deleteMovie(final FavouriteMovieDBO movie, final Continuation<? super Unit> arg1) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       public Unit call() throws Exception {
@@ -100,11 +98,11 @@ public final class FavouriteMoviesDao_Impl implements FavouriteMoviesDao {
           __db.endTransaction();
         }
       }
-    }, continuation);
+    }, arg1);
   }
 
   @Override
-  public Object deleteAllFavouriteMovies(final Continuation<? super Unit> continuation) {
+  public Object deleteAllFavouriteMovies(final Continuation<? super Unit> arg0) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
       public Unit call() throws Exception {
@@ -119,12 +117,11 @@ public final class FavouriteMoviesDao_Impl implements FavouriteMoviesDao {
           __preparedStmtOfDeleteAllFavouriteMovies.release(_stmt);
         }
       }
-    }, continuation);
+    }, arg0);
   }
 
   @Override
-  public Object getFavouriteMovies(
-      final Continuation<? super List<FavouriteMovieDBO>> continuation) {
+  public Object getFavouriteMovies(final Continuation<? super List<FavouriteMovieDBO>> arg0) {
     final String _sql = "SELECT * FROM favourite_movies_table";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
     final CancellationSignal _cancellationSignal = DBUtil.createCancellationSignal();
@@ -148,7 +145,7 @@ public final class FavouriteMoviesDao_Impl implements FavouriteMoviesDao {
           _statement.release();
         }
       }
-    }, continuation);
+    }, arg0);
   }
 
   public static List<Class<?>> getRequiredConverters() {

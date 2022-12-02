@@ -58,10 +58,12 @@ object PeopleModule {
         return PeopleUseCases(
             getCast = GetCast(
                 castRepository = castRepository,
-                dispatcherProvider = dispatcherProvider
+                dispatcherProvider = dispatcherProvider,
+                personRepository = personRepository
             ),
             getProfile = GetProfile(
-                personRepository = personRepository
+                personRepository = personRepository,
+                dispatcherProvider = dispatcherProvider
             )
         )
     }
