@@ -4,16 +4,18 @@
 
 ### Screenshots
 ##### Discover movies
-<img src = "https://user-images.githubusercontent.com/47632042/210357626-a9f5ff7c-fc31-4050-8e81-b577e76f41da.png" width = "50%" height = "50%">
+<img src = "https://user-images.githubusercontent.com/47632042/210357626-a9f5ff7c-fc31-4050-8e81-b577e76f41da.png" width = "30%" height = "30%">
 
 #### Movie Details
-![Muvii_details_google-pixel4-clearlywhite-portrait](https://user-images.githubusercontent.com/47632042/210357651-f7787b18-2b48-48f3-9b70-4fd8462f2c7c.png)
+<img src = "https://user-images.githubusercontent.com/47632042/210357651-f7787b18-2b48-48f3-9b70-4fd8462f2c7c.png" width = "30%" height = "30%">
 
 #### Dark mode
-![dark_mode_google-pixel4-clearlywhite-portrait](https://user-images.githubusercontent.com/47632042/210357666-9b4a7f1e-50d6-4aa0-b28a-9cecbebcc18a.png)
+<img src = "https://user-images.githubusercontent.com/47632042/210357666-9b4a7f1e-50d6-4aa0-b28a-9cecbebcc18a.png" width = "30%" height = "30%">
+
 
 #### Similar movies
-![similar_movies_google-pixel4-clearlywhite-portrait](https://user-images.githubusercontent.com/47632042/210357682-c47eaa63-48ac-4951-b1a6-027aafe96bf2.png)
+<img src = "https://user-images.githubusercontent.com/47632042/210357682-c47eaa63-48ac-4951-b1a6-027aafe96bf2.png" width = "30%" height = "30%">
+
 
 ## Overview
 The app is online with an offline first strategy. 
