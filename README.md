@@ -4,15 +4,16 @@
 
 ### Screenshots
 ##### Discover movies
-![movies](https://user-images.githubusercontent.com/47632042/197456275-83d9d057-fb30-427e-9d1b-1b8f37763d5d.png)
-#### Movie Details
-![details](https://user-images.githubusercontent.com/47632042/197456269-67197370-adc7-43c1-96f0-f840c9ce1700.png)
+![muvii_list_google-pixel4-clearlywhite-portrait](https://user-images.githubusercontent.com/47632042/210357626-a9f5ff7c-fc31-4050-8e81-b577e76f41da.png)
 
+#### Movie Details
+![Muvii_details_google-pixel4-clearlywhite-portrait](https://user-images.githubusercontent.com/47632042/210357651-f7787b18-2b48-48f3-9b70-4fd8462f2c7c.png)
 
 #### Dark mode
-![dark_theme](https://user-images.githubusercontent.com/47632042/197456263-6e1c79ab-7388-4751-8a8a-5fc0b4ec8ab9.png)
+![dark_mode_google-pixel4-clearlywhite-portrait](https://user-images.githubusercontent.com/47632042/210357666-9b4a7f1e-50d6-4aa0-b28a-9cecbebcc18a.png)
 
-
+#### Similar movies
+![similar_movies_google-pixel4-clearlywhite-portrait](https://user-images.githubusercontent.com/47632042/210357682-c47eaa63-48ac-4951-b1a6-027aafe96bf2.png)
 
 ## Overview
 The app is online with an offline first strategy. 
