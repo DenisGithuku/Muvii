@@ -4,7 +4,7 @@
 
 ### Screenshots
 ##### Discover movies
-![muvii_list_google-pixel4-clearlywhite-portrait](https://user-images.githubusercontent.com/47632042/210357626-a9f5ff7c-fc31-4050-8e81-b577e76f41da.png)
+<img src = "https://user-images.githubusercontent.com/47632042/210357626-a9f5ff7c-fc31-4050-8e81-b577e76f41da.png" width = "50%" height = "50%">
 
 #### Movie Details
 ![Muvii_details_google-pixel4-clearlywhite-portrait](https://user-images.githubusercontent.com/47632042/210357651-f7787b18-2b48-48f3-9b70-4fd8462f2c7c.png)
